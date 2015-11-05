@@ -1,0 +1,7 @@
+rails new baseuser --skip-test-unit
+create database dev and test
+update gemfile
+bundle install
+bundle update
+update config/database.yml
+rails generate rspec:install
