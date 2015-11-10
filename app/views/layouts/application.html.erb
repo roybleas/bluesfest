@@ -7,8 +7,44 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<nav role="navigation" >
+<ul class="nav nav-pills">
+  <li role="presentation" > <%= link_to "Home", root_path %>  </li>
+  <% if logged_in? %>
+	  <li role="presentation" class="dropdown">
+	    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="true">
+	      User:           
+	        <%= current_user.screen_name %> <span class="caret"></span>
+	    </a>
+	    <ul class="dropdown-menu" role="menu" id="usermenu">
+	    	<li role="presentation"> <%= link_to "Profile", current_user %> </li>
+	    	<li role="presentation"> <%= link_to "Settings", edit_user_path(current_user) %> </li>
+	    	<li class="divider"></li>
+	    	<li role="presentation"><%= link_to "Log out", logout_path, method: :delete %></li>
+	 		</ul>
+	  </li>
+		
+		<% if admin_user? %>
+			<li role="presentation" class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+		      Admin <span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu" role="menu">
+		    	<li role="presentation"> <%= link_to "All Users", users_path %> </li>
+		  	</li>
+				</ul>
+			<% end %>
+	<% else %>
+		<li role="presentation"> <%= link_to "Log in", login_path %> </li>
+	<% end %>
+</ul>
+</nav>
+<% flash.each do |key, value| %>
+	<%= content_tag(:div, value, class: "alert alert-#{key}" ) %>
+<% end %>
 <%= yield %>
+
+<%= debug(params) if Rails.env.development? %>
 
 </body>
 </html>

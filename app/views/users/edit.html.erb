@@ -1,0 +1,15 @@
+<div class="login ">
+	<% @action_header = "Update Profile" %>
+	<% @button_title = "Update Account" %>
+	<%= render "layouts/user" , locals: {user: @user, action_header: @action_header, button_title: @button_title} %>
+	<div class="login_footer">
+	<p class="login_footer">
+	User Login:
+   <%=
+   link_to("Delete", @user, class:"btn btn-info", method: :delete, data: { confirm: "You sure?" } )
+   %>
+
+   </p>
+   </div>
+</div>
+

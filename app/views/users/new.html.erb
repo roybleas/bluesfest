@@ -1,0 +1,6 @@
+<div class="login">
+	<% @action_header = "Sign Up" %>
+	<% @button_title = "Create account" %>
+	<%= render "layouts/user" , locals: {user: @user, action_header: @action_header, button_title: @button_title} %>
+</div>
+<p> Already have an account. <%= link_to "Log in now", login_path %></p>

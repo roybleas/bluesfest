@@ -5,3 +5,47 @@ bundle install
 bundle update
 update config/database.yml
 rails generate rspec:install
+create app/assets/stylesheets/custom.css.scss
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+	@import "bootstrap-sprockets";
+	@import "bootstrap";
+
+--- Users ----
+>> git branch user
+>> git checkout user
+
+>> rails generate controller users new
+User:
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  screen_name     :string(255)
+#  password_digest :string(255)
+#  remember_digest :string(255)
+#  admin           :boolean
+#  created_at      :datetime
+#  updated_at      :datetime
+
+>> rails generate model User name:string screen_name:string password_digest:string remember_digest:string admin:boolean
+Add password using "has_secure_password" to user.rb
+>>bundle exec rake db:migrate
+>>bundle exec rake db:migrate RAILS_ENV=test
+>>bundle exec annotate --position before
+rails create Sessions new
+Add rspec for controller Session
+Add Fixtures users.yml to test Session
+Add controller code for Session
+Add Session helper
+include SessionsHelper in application_controller
+Add a home page
+
+Add routes for Session
+
+Add to spec/rails_helper.rb
+ # Include FactoryGirl syntax 
+  config.include FactoryGirl::Syntax::Methods
+rspec for users controller
+rails generate controller Sessions new
+rails generate controller StaticPages home
+Add menu to application.html.erb
+Add views for users and new session
+Add bootstrap in assests/javascripts/application.js

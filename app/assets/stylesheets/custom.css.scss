@@ -1,0 +1,130 @@
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* forms */
+
+
+/* error messges */
+#error_explanation {
+	color: red;
+	ul {
+		color: red;
+		margin: 0 0 30px 0;
+	}
+}
+
+/* Form login */
+.login fieldset, .login div {
+	background-color: #f1f1f1;
+	border: none;
+	border-radius: 2px;
+	margin: 30px 0px 12px 30px;
+	overflow: hidden;
+	width: 600px;
+	padding: 0,50px,20px,20px;
+}
+
+
+ul.login {
+	background-color: #fff;
+	border: 1px solid #eaeaea;
+	list-style: none;
+	margin: 20px;
+	padding: 12px;
+}
+.login ul li {
+	margin: 0.5em 0;
+}
+.login li input {
+	font-size: 100%;
+}
+.login label {
+	/* display: inline-block; */
+	padding: 3px 6px;
+	text-align: right;
+	width: 150px;
+	vertical-align: top;
+	
+}
+
+input.loginwidth {
+	width:25em;
+	display: inline;
+}
+
+.login li label + input {
+	width:15em;
+	font-size: 100%;
+}
+
+div.login_footer {
+	width: 600px;
+	background-color: #f1f1f1;
+}
+
+.login_footer a {
+	display: block;
+	float: right;
+	margin-bottom: 20px;
+}
+
+p.login_footer {
+	margin: 20px;
+	padding: 30px;
+	background-color: #fff;
+}
+
+
+.login h2 {
+	background-color: #008080;
+	color: #fff;
+	padding: 10px 15px;
+	margin: 0;
+}
+
+.field_with_errors label {
+  display: inline-block;
+	padding: 3px 6px;
+	text-align: right;
+	width: 150px;
+	vertical-align: top;
+}
+
+.field_with_errors input[type="text"]{
+	/*display: inline; */
+  border: 2px solid red;
+  width:15em;width:15em;
+}
+.field_with_errors input[type="password"] {
+	display: inline;
+  border: 2px solid red;
+  width:15em;
+}
+
+ div.field_with_errors {
+	display: inline;
+} 
+
+
+	
+
+@mixin box_sizing {
+	-moz-box-sizing:		border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:					border-box;
+}
+
+
+
+
+
+/* miscellaneous */
+.debug_dump {
+	clear: both;
+	float:left;
+	width: 100%;
+	margin-top: 45px;
+	@include box-sizing;
+}
+

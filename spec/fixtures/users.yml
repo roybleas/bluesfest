@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  screen_name     :string(255)
+#  password_digest :string(255)
+#  remember_digest :string(255)
+#  admin           :boolean
+#
+
+roy:
+  name: Roy Example
+  screen_name: Roy 1
+  password_digest: <%= User.digest('password') %>
+  
+archer:
+  name: Joe Grundy
+  screen_name: Joe
+  password_digest: <%= User.digest('password') %>
+
+

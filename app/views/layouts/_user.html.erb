@@ -1,0 +1,28 @@
+<%= form_for(@user)  do |f| %>
+	<fieldset class="login" >
+	<h2 class="login" ><%= @action_header %></h2>
+	<%= render 'shared/error_messages', object: f.object %>
+	<ul class="login">
+	
+		<li>
+			<%= f.label :name %>
+			<%= f.text_field :name, class: "loginwidth" %>
+		</li>
+		<li>	
+			<%= f.label :screen_name %>
+			<%= f.text_field :screen_name %>
+		</li>			
+		<li>
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+		</li>
+		<li>
+			<%= f.label :password_confirmation, "Confirm password" %>
+			<%= f.password_field :password_confirmation,  class: "loginwidth" %>
+		</li>			
+		<li>
+			<%= f.submit @button_title, class: "btn btn-primary" %>
+		</li>		
+	</ul>	
+	</fieldset>
+<% end %>
