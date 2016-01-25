@@ -21,6 +21,7 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
     admin false
+    tester false
   end
   factory :admin_user, class: User do
     name "Mr Rubble"
@@ -28,6 +29,7 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
     admin true
+    tester false
   end
   
   factory :test_user, class: User do
@@ -35,7 +37,8 @@ FactoryGirl.define do
     screen_name "Wilma"
     password "password"
     password_confirmation "password"
-    admin true
+    admin false
+    tester true
   end
   
 end
