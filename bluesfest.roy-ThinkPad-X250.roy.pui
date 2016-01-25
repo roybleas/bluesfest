@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<!DOCTYPE PRJ SYSTEM "bluesfest.roy-ThinkPad-X250.roy.dtd">
+<PRJ>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/">
+    <Expand>1</Expand>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/extract/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/extract/">
+      <Expand>1</Expand>
+    </Folder>
+  </Folder>
+  <Project_Information>
+    <Working_Time>14055</Working_Time>
+    <Project_Start>140000002B0000000E000000190000000000000074000000010000001800000001000000FD7F0000B09A000000000000A0FA00040000000058</Project_Start>
+  </Project_Information>
+  <Active_Settings>
+    <Active_File_Display_Mode>-1</Active_File_Display_Mode>
+  </Active_Settings>
+</PRJ>
