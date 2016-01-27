@@ -54,7 +54,9 @@
     </Folder>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/">
-    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/"/>
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/initializers/"/>
+    </Folder>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/controllers/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/controllers/"/>

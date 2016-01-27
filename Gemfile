@@ -28,6 +28,7 @@ group :development, :test do
   gem 'factory_girl_rails', "~> 4.4.1"
   
 	gem 'nokogiri'
+	
 	  
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 	#gem 'tzinfo' 
@@ -52,11 +53,13 @@ end
 group :production do
 	
   gem 'rails_12factor'
-  #gem 'unicorn',  			'4.8.3'
+  
+end
+
+group :production, :development do
   gem 'puma'
   gem 'rack-timeout'
 end
-
 
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'sass-rails', '>= 3.2'
