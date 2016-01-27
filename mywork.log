@@ -37,8 +37,6 @@ Add controller code for Session
 Add Session helper
 include SessionsHelper in application_controller
 Add a home page
-Add parseids2.rb
-Add tester field to user model
 Add routes for Session
 
 Add to spec/rails_helper.rb
@@ -50,3 +48,6 @@ rails generate controller StaticPages home
 Add menu to application.html.erb
 Add views for users and new session
 Add bootstrap in assests/javascripts/application.js
+Add parseids2.rb
+Add tester field to user model
+Rename to bluesfest
