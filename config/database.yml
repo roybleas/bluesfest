@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode	
-  database: baseuser_dev
+  database: bluesfest_dev
   pool: 5
   username: rubydeveloper
   password: rubydeveloper
@@ -12,7 +12,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: baseuser_test
+  database: bluesfest_test
   pool: 5
   username: rubydeveloper
   password: rubydeveloper
