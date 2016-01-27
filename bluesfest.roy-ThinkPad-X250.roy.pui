@@ -29,8 +29,8 @@
     </Folder>
   </Folder>
   <Project_Information>
-    <Working_Time>50950826</Working_Time>
-    <Project_Start>0A0000002B0000000E0000001B0000000000000074000000030000001A00000001000000FF7F0000B09A000000000000A0FABE030000000013</Project_Start>
+    <Working_Time>660323247747389</Working_Time>
+    <Project_Start>3800000015000000150000001B0000000000000074000000030000001A00000000000000FC7F00000000000000000000A0A9003C197F0000A6</Project_Start>
   </Project_Information>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/db/ - /home/roy/projects/ruby/dev/bluesfest/db/migrate/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/db/ - /home/roy/projects/ruby/dev/bluesfest/db/migrate/">
@@ -53,6 +53,16 @@
       <Expand>1</Expand>
     </Folder>
   </Folder>
+  <Open_Files>
+    <File>/home/roy/projects/ruby/dev/bluesfest/puma.rb</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/Gemfile</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/config/database.yml</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/config.ru</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/config/initializers/timeout.rb</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/mywork.log</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/spec/models/user_spec.rb</File>
+    <File>/home/roy/projects/ruby/dev/bluesfest/Procfile</File>
+  </Open_Files>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/">
       <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/initializers/"/>
