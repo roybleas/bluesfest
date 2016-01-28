@@ -51,5 +51,8 @@ Add bootstrap in assests/javascripts/application.js
 Add parseids2.rb
 Add tester field to user model
 Rename to bluesfest
-
-web: bundle exec puma -C config/puma.rb
+Replace
+	web: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
+	by
+	web: bundle exec puma -C config/puma.rb
+	in Procfile
