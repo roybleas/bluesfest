@@ -80,4 +80,16 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 			assert_select 'li', {:text=> "All Users", :count=> 0 }
 		end
 	end
+	context "festival title" do
+		it "has no title set" do
+			render
+			expect(rendered).to match /Festival not set/
+		end
+		it "has a title" do
+			festival = create(:festival)
+			render
+			expect(rendered).to match /#{festival.title} #{festival.year}/
+		end
+	end
+			
 end

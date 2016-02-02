@@ -3,13 +3,14 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  name            :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  screen_name     :string(255)
-#  password_digest :string(255)
-#  remember_digest :string(255)
+#  name            :string
+#  screen_name     :string
+#  password_digest :string
+#  remember_digest :string
 #  admin           :boolean
+#  tester          :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 roy:

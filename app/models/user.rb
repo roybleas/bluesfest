@@ -8,6 +8,7 @@
 #  password_digest :string
 #  remember_digest :string
 #  admin           :boolean
+#  tester          :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
   	SecureRandom.urlsafe_base64
   end
   
-  # Stores the remember tioken used to persit the session
+  # Stores the remember token used to persit the session
   def remember
   	self.remember_token = User.new_token
   	update_attribute(:remember_digest, User.digest(remember_token))

@@ -39,6 +39,7 @@
 	<% end %>
 </ul>
 </nav>
+<h1> <%= festival_title %> </h1>
 <% flash.each do |key, value| %>
 	<%= content_tag(:div, value, class: "alert alert-#{key}" ) %>
 <% end %>

@@ -48,6 +48,7 @@ rails generate controller StaticPages home
 Add menu to application.html.erb
 Add views for users and new session
 Add bootstrap in assests/javascripts/application.js
+<<<<<<< HEAD
 Add parseids2.rb
 Add tester field to user model
 Rename to bluesfest
@@ -56,3 +57,10 @@ Replace
 	by
 	web: bundle exec puma -C config/puma.rb
 	in Procfile
+=======
+
+generate model festival days:integer scheduledate:date year:string title:string major:integer minor:integer
+generate controller HomePages home plan now next
+generate task uploads festival artists
+generate task delete festival artists
+>>>>>>> festival

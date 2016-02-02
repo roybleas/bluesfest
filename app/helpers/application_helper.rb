@@ -9,4 +9,9 @@ module ApplicationHelper
   	end
   end
 
+	def festival_title
+		festival = Festival.current_active.take
+		title = festival.nil? ? "Festival not set" : "#{festival.title} #{festival.year}"
+		return title
+	end
 end

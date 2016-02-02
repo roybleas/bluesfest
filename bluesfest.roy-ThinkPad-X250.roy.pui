@@ -4,14 +4,53 @@
   <Folder Name="">
     <Expand>0</Expand>
   </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/ - /home/roy/projects/ruby/dev/bluesfest/app/views/layouts/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/ - /home/roy/projects/ruby/dev/bluesfest/app/views/layouts/"/>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/lib/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/lib/">
+      <Expand>1</Expand>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/lib/ - /home/roy/projects/ruby/dev/bluesfest/lib/tasks/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/lib/ - /home/roy/projects/ruby/dev/bluesfest/lib/tasks/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/lib/tasks/"/>
+    </Folder>
+  </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/">
     <Expand>1</Expand>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/features/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/features/"/>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/views/"/>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/views/"/>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/services/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/services/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/services/"/>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/files/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/files/"/>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/models/ - /home/roy/projects/ruby/dev/bluesfest/app/models/concerns/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/models/ - /home/roy/projects/ruby/dev/bluesfest/app/models/concerns/"/>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/models/">
-    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/models/"/>
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/models/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/models/"/>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/helpers/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/helpers/"/>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/">
@@ -28,10 +67,23 @@
       <Expand>1</Expand>
     </Folder>
   </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/ - /home/roy/projects/ruby/dev/bluesfest/app/views/home_pages/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/ - /home/roy/projects/ruby/dev/bluesfest/app/views/home_pages/"/>
+  </Folder>
   <Project_Information>
-    <Working_Time>660323247747389</Working_Time>
-    <Project_Start>3800000015000000150000001B0000000000000074000000030000001A00000000000000FC7F00000000000000000000A0A9003C197F0000A6</Project_Start>
+    <Working_Time>-6040035896538799</Working_Time>
+    <Project_Start>320000000100000009000000030000000100000074000000030000002100000001000000FF7F0000B09A000000000000A00AAA0400000000F9</Project_Start>
   </Project_Information>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/services/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/services/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/services/"/>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/db/ - /home/roy/projects/ruby/dev/bluesfest/db/dbloadfiles/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/db/ - /home/roy/projects/ruby/dev/bluesfest/db/dbloadfiles/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/db/dbloadfiles/"/>
+    </Folder>
+  </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/db/ - /home/roy/projects/ruby/dev/bluesfest/db/migrate/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/db/ - /home/roy/projects/ruby/dev/bluesfest/db/migrate/">
       <Folder Name="/home/roy/projects/ruby/dev/bluesfest/db/migrate/"/>
@@ -42,8 +94,16 @@
       <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/models/"/>
     </Folder>
   </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/static_pages/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/static_pages/"/>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/ - /home/roy/projects/ruby/dev/bluesfest/app/views/static_pages/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/views/ - /home/roy/projects/ruby/dev/bluesfest/app/views/static_pages/"/>
+  </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/factories/">
-    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/factories/"/>
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/factories/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/factories/"/>
+    </Folder>
   </Folder>
   <Active_Settings>
     <Active_File_Display_Mode>-1</Active_File_Display_Mode>
@@ -53,27 +113,34 @@
       <Expand>1</Expand>
     </Folder>
   </Folder>
-  <Open_Files>
-    <File>/home/roy/projects/ruby/dev/bluesfest/puma.rb</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/Gemfile</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/config/database.yml</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/config.ru</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/config/initializers/timeout.rb</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/mywork.log</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/spec/models/user_spec.rb</File>
-    <File>/home/roy/projects/ruby/dev/bluesfest/Procfile</File>
-  </Open_Files>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/layouts/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/layouts/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/views/ - /home/roy/projects/ruby/dev/bluesfest/spec/views/layouts/">
+        <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/views/layouts/"/>
+      </Folder>
+    </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/controllers/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/controllers/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/controllers/"/>
+    </Folder>
+  </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/ - /home/roy/projects/ruby/dev/bluesfest/config/initializers/">
       <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/initializers/"/>
     </Folder>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/controllers/">
-    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/controllers/"/>
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/ - /home/roy/projects/ruby/dev/bluesfest/spec/controllers/">
+      <Folder Name="/home/roy/projects/ruby/dev/bluesfest/spec/controllers/"/>
+    </Folder>
   </Folder>
   <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/config/">
     <Folder Name="/home/roy/projects/ruby/dev/bluesfest/config/">
       <Expand>1</Expand>
     </Folder>
+  </Folder>
+  <Folder Name="/home/roy/projects/ruby/dev/bluesfest/ - /home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/helpers/">
+    <Folder Name="/home/roy/projects/ruby/dev/bluesfest/app/ - /home/roy/projects/ruby/dev/bluesfest/app/helpers/"/>
   </Folder>
 </PRJ>
