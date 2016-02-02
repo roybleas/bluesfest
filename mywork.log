@@ -50,3 +50,8 @@ rails generate controller StaticPages home
 Add menu to application.html.erb
 Add views for users and new session
 Add bootstrap in assests/javascripts/application.js
+
+generate model festival days:integer scheduledate:date year:string title:string major:integer minor:integer
+generate controller HomePages home plan now next
+generate task uploads festival artists
+generate task delete festival artists
