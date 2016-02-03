@@ -7,12 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<nav role="navigation" >
-<ul class="nav nav-pills">
+<nav class="navbar navbar-default" role="navigation" >
+<div class="container-fluid">
+<ul class="nav navbar-nav">
   <li class="navbarlarger" role="presentation" > <%= link_to "Home", root_path %>  </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
   <% if logged_in? %>
 	  <li role="presentation" class="dropdown">
 	    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="true">
+	    	<span class="glyphicon glyphicon-user"></span>
 	      User:           
 	        <%= current_user.screen_name %> <span class="caret"></span>
 	    </a>
@@ -35,9 +39,11 @@
 				</ul>
 			<% end %>
 	<% else %>
-		<li role="presentation"> <%= link_to "Log in", login_path %> </li>
+		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-user\"></span> Sign up".html_safe ,signup_path %> </li>
+		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-log-in\"></span> Log in".html_safe, login_path %> </li>
 	<% end %>
 </ul>
+</div>
 </nav>
 <div class="container" >
 <h1> <%= festival_title %> </h1>
