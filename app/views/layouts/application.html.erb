@@ -11,6 +11,7 @@
 <div class="container-fluid">
 <ul class="nav navbar-nav">
   <li class="navbarlarger" role="presentation" > <%= link_to "Home", root_path %>  </li>
+  <li role="presentation" > <%= link_to "About", about_path %>  </li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
   <% if logged_in? %>
@@ -39,7 +40,7 @@
 				</ul>
 			<% end %>
 	<% else %>
-		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-user\"></span> Sign up".html_safe ,signup_path %> </li>
+		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-user\"></span> Sign up".html_safe , signup_path %> </li>
 		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-log-in\"></span> Log in".html_safe, login_path %> </li>
 	<% end %>
 </ul>
