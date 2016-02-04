@@ -7,7 +7,7 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 			
 		it "has a Home tab" do
 			render
-			assert_select 'li', "Home"
+			assert_select 'a', "Home"
 			assert_select "a[href=?]", "/"
 		end
 		it "has an About tab" do

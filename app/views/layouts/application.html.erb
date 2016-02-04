@@ -9,45 +9,52 @@
   <meta name="viewport" content="width=device-width, intial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation" >
-<div class="container-fluid">
-<ul class="nav navbar-nav">
-  <li class="navbarlarger" role="presentation" > <%= link_to "Home", root_path %>  </li>
-  <li role="presentation" class=hidden-xs hidden-md> <%= link_to "About", about_path %>  </li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-  <% if logged_in? %>
-	  <li role="presentation" class="dropdown">
-	    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="true">
-	    	<span class="glyphicon glyphicon-user"></span>
-	      User:           
-	        <%= current_user.screen_name %> <span class="caret"></span>
-	    </a>
-	    <ul class="dropdown-menu" role="menu" id="usermenu">
-	    	<li role="presentation"> <%= link_to "Profile", current_user %> </li>
-	    	<li role="presentation"> <%= link_to "Settings", edit_user_path(current_user) %> </li>
-	    	<li class="divider"></li>
-	    	<li role="presentation"><%= link_to "Log out", logout_path, method: :delete %></li>
-	 		</ul>
-	  </li>
+	<nav class="navbar navbar-default " role="navigation" >
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<%= link_to "Home", root_path, class: "navbar-brand" %>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+  				<li role="presentation"> <%= link_to "About", about_path %>  </li>
+  					<% if logged_in? %>
+	  					<li role="presentation" class="dropdown">
+	    					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="true">
+	    						<span class="glyphicon glyphicon-user"></span>
+	      					User:           
+	        				<%= current_user.screen_name %> <span class="caret"></span>
+	    					</a>	
+	    				<ul class="dropdown-menu" role="menu" id="usermenu">
+	    					<li role="presentation"> <%= link_to "Profile", current_user %> </li>
+	    					<li role="presentation"> <%= link_to "Settings", edit_user_path(current_user) %> </li>
+	    					<li class="divider"></li>
+	    					<li role="presentation"><%= link_to "Log out", logout_path, method: :delete %></li>
+	 						</ul>
+	  				</li>
 		
-		<% if admin_user? %>
-			<li role="presentation" class="dropdown">
-		    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-		      Admin <span class="caret"></span>
-		    </a>
-		    <ul class="dropdown-menu" role="menu">
-		    	<li role="presentation"> <%= link_to "All Users", users_path %> </li>
-		  	</li>
-				</ul>
-			<% end %>
-	<% else %>
-		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-user\"></span> Sign up".html_safe , signup_path %> </li>
-		<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-log-in\"></span> Log in".html_safe, login_path %> </li>
-	<% end %>
-</ul>
-</div>
-</nav>
+						<% if admin_user? %>
+							<li role="presentation" class="dropdown">
+		    				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+		      				Admin <span class="caret"></span>
+		    				</a>
+		    				<ul class="dropdown-menu" role="menu">
+		    					<li role="presentation"> <%= link_to "All Users", users_path %> </li>
+		  						</li>
+								</ul>
+							<% end %>
+						<% else %>
+							<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-user\"></span> Sign up".html_safe , signup_path %> </li>
+							<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-log-in\"></span> Log in".html_safe, login_path %> </li>
+						<% end %>
+					</ul>
+			</div>	
+	</nav>
 <div class="container" >
 <h1> <%= festival_title %> </h1>
 </div>
