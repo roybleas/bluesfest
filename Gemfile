@@ -61,7 +61,7 @@ group :production, :development do
   gem 'rack-timeout'
 end
 
-gem 'bootstrap-sass', '~> 3.3.1'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
 gem 'sprockets', '3.4' 
 # autoprefixer recommended for bootstrap

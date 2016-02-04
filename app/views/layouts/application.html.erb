@@ -5,13 +5,15 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, intial-scale=1">
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation" >
 <div class="container-fluid">
 <ul class="nav navbar-nav">
   <li class="navbarlarger" role="presentation" > <%= link_to "Home", root_path %>  </li>
-  <li role="presentation" > <%= link_to "About", about_path %>  </li>
+  <li role="presentation" class=hidden-xs hidden-md> <%= link_to "About", about_path %>  </li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
   <% if logged_in? %>
