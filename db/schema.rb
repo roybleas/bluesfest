@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128024005) do
+ActiveRecord::Schema.define(version: 20160208013810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artists", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.boolean  "active",      default: false
+    t.date     "extractdate"
+    t.integer  "festival_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "artists", ["festival_id"], name: "index_artists_on_festival_id", using: :btree
 
   create_table "festivals", force: :cascade do |t|
     t.date     "startdate"
@@ -40,4 +52,5 @@ ActiveRecord::Schema.define(version: 20160128024005) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "artists", "festivals"
 end

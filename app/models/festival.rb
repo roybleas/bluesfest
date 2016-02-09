@@ -16,6 +16,7 @@
 #
 
 class Festival < ActiveRecord::Base
+	has_many :artists
 	
 	def self.current_active
 		where('festivals.active = true').order(startdate: :desc)

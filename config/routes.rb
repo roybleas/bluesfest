@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :artists, only: [:show, :index]
+
   root 'home_pages#home'
   get 'plan4today' => 'home_pages#plan'
   get 'now'  			 => 'home_pages#now'

@@ -63,4 +63,6 @@ generate model festival days:integer scheduledate:date year:string title:string 
 generate controller HomePages home plan now next
 generate task uploads festival artists
 generate task delete festival artists
->>>>>>> festival
+generate model artist name:string code:string active:boolean extractdate:date festival:references
+annotate --position before
+generate controller Artists index show
