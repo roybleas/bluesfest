@@ -3,6 +3,7 @@
 # Table name: festivals
 #
 #  id           :integer          not null, primary key
+#  startdate    :date
 #  days         :integer
 #  scheduledate :date
 #  year         :string
@@ -26,5 +27,10 @@ FactoryGirl.define do
     major 1
     minor 2
     active true
+    
+  	factory :festival_inactive, class: Festival do
+  		active false
+  	end
   end
+  
 end

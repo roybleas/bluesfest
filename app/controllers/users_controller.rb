@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  screen_name     :string
+#  password_digest :string
+#  remember_digest :string
+#  admin           :boolean
+#  tester          :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class UsersController < ApplicationController
 	include Userlogin
   before_action :logged_in_user, only: [:edit, :update, :show, :destroy, :index]

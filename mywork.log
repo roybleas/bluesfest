@@ -50,14 +50,13 @@ Add views for users and new session
 Add bootstrap in assests/javascripts/application.js
 <<<<<<< HEAD
 Add parseids2.rb
-Add tester field to user model
+Add tester field to user model          
 Rename to bluesfest
 Replace
 	web: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
 	by
 	web: bundle exec puma -C config/puma.rb
 	in Procfile
-=======
 
 generate model festival days:integer scheduledate:date year:string title:string major:integer minor:integer
 generate controller HomePages home plan now next
@@ -65,4 +64,8 @@ generate task uploads festival artists
 generate task delete festival artists
 
 bundle exec rails s -b 192.168.0.19 -p 3000
+
+generate model artist name:string code:string active:boolean extractdate:date festival:references
+annotate --position before
+generate controller Artists index show
 
