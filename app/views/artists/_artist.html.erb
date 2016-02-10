@@ -1,6 +1,6 @@
 <li class="list-group-item">
 	<%= link_to artist.name, artist %>
-	<%= render partial: "shared/bluelink", locals: {artist_code: artist.code} %>
+	<%= render partial: "shared/bluelink", locals: {artist_code: artist.linkid} %>
 	<% if ((artist_counter + 1 ) % backtotop) == 0  %>
 		<%= link_to "Back to Top","#", class: "backtotop"  %>
 	<% end %>
