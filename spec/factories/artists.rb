@@ -5,7 +5,8 @@
 #  id          :integer          not null, primary key
 #  name        :string
 #  code        :string
-#  active      :boolean
+#  linkid      :string
+#  active      :boolean          default(FALSE)
 #  extractdate :date
 #  festival_id :integer
 #  created_at  :datetime         not null

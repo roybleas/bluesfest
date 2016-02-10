@@ -3,6 +3,7 @@ class CreateArtists < ActiveRecord::Migration
     create_table :artists do |t|
       t.string :name
       t.string :code
+      t.string :linkid
       t.boolean :active, default: false
       t.date :extractdate
       t.references :festival, index: true

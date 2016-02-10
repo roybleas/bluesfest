@@ -48,7 +48,6 @@ rails generate controller StaticPages home
 Add menu to application.html.erb
 Add views for users and new session
 Add bootstrap in assests/javascripts/application.js
-<<<<<<< HEAD
 Add parseids2.rb
 Add tester field to user model          
 Rename to bluesfest
@@ -68,4 +67,5 @@ bundle exec rails s -b 192.168.0.19 -p 3000
 generate model artist name:string code:string active:boolean extractdate:date festival:references
 annotate --position before
 generate controller Artists index show
+add extract artists file
 
