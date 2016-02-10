@@ -18,9 +18,24 @@ namespace :uploads do
   	end
   end
 
-  desc "TODO"
+  desc "Upload artists data to database"
   task artists: :environment do
   	puts "upload artists"
+  	filename = 'artists.csv'
+  	file = Rails.root.join('db','dbloadfiles',filename)
+  	
+		filename = 'festival.yml'
+  	fileCurrentFestival = Rails.root.join('db','dbloadfiles',filename)
+
+		currentFestival = CurrentFestival.new(fileCurrentFestival)  	
+  	
+  	
+  	puts "file found - uploading..."
+  	loader = LoadArtists.new(file, currentFestival)
+  		
+  	loader.load
+  	
+  	
   end
 
 end

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160208013810) do
   create_table "artists", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
+    t.string   "linkid"
     t.boolean  "active",      default: false
     t.date     "extractdate"
     t.integer  "festival_id"

@@ -1,0 +1,2 @@
+ pdftotext /home/roy/projects/ruby/dev/bluesfest/extract/Bluesfest16SCHEDULE090216.PDF /home/roy/projects/ruby/dev/bluesfest/extract/Bluesfest16SCHEDULE090216.txt -layout
+           

@@ -10,6 +10,10 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 			assert_select 'li', "Home"
 			assert_select "a[href=?]", "/"
 		end
+		it "has a Artists tab" do
+			render
+			assert_select 'li',"Artists"
+		end
 	end
 	context "navigate when not logged in" do
 		before(:each) do
