@@ -16,7 +16,7 @@
 class ArtistsController < ApplicationController
 
   def index
-  	@artists = Artist.current_active_festival.order(name: :desc).all
+  	@artists = Artist.current_active_festival.order(name: :asc).all
   end
 
   def show

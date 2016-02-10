@@ -27,10 +27,11 @@ namespace :uploads do
 		filename = 'festival.yml'
   	fileCurrentFestival = Rails.root.join('db','dbloadfiles',filename)
 
-		currentFestival = CurrentFestival.new(fileCurrentFestival)  	
+		currentFestival = CurrentFestival.new(fileCurrentFestival)  
+		currentFestival.load	
   	
   	
-  	puts "file found - uploading..."
+  	puts "uploading..."
   	loader = LoadArtists.new(file, currentFestival)
   		
   	loader.load
