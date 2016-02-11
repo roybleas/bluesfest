@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'stages/show/:id/:dayindex' => 'stages#show' 
+	resources :stages, only: [:index]
   resources :artists, only: [:show, :index]
 
   root 'home_pages#home'

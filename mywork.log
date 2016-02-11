@@ -69,3 +69,5 @@ annotate --position before
 generate controller Artists index show
 add extract artists file
 
+generate model stage title:string code:string{2} seq:integer festival:references
+generate controller Stages index show
