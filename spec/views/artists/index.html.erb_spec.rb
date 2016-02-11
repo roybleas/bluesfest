@@ -19,7 +19,7 @@ RSpec.describe "artists/index.html.erb", :type => :view do
   	expect(rendered).to match /#{artist.name}/
   end
   it "shows a link to artist web page" do
-  	artist = create(:artist,code: "755")
+  	artist = create(:artist,linkid: "755")
   	artists = [artist]
   	assign(:artists,artists)
   	render
