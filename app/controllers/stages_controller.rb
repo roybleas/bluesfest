@@ -15,13 +15,7 @@ class StagesController < ApplicationController
   def index
   	
   	festival = Festival.current_active.take
-  	if festival.nil?
-  		@stages = []
-  		@days = 0
-  	else
-  		@days = festival.days
-  		@stages = Stage.current_active_festival.order(seq: :asc).all
-  	end
+  	getStageSelectValues(festival)
   end
 
   def show
@@ -31,12 +25,15 @@ class StagesController < ApplicationController
   	Time.zone ="Sydney"
   	
   	festival = Festival.current_active.take
+  	getStageSelectValues(festival)
   	
   	if festival.nil?
   		@dayindex = 0 
+  		@days = 0
   	else
   		@dayindex = dayindex > festival.days ? festival.days : dayindex
   		@dayindex = 1 if dayindex < 1
+  		@days = festival.days
   		if !festival.startdate.nil?
   			startdate = festival.startdate + (@dayindex - 1)
   			@dayofweek = startdate.strftime("%a %d %b") 
@@ -45,4 +42,15 @@ class StagesController < ApplicationController
   	
   	@stage = Stage.current_active_festival.find_by_id(stage_id)
   end
+  
+  private
+  def getStageSelectValues(festival)
+  	if festival.nil?
+  		@stages = []
+  		@days = 0
+  	else
+  		@days = festival.days
+  		@stages = Stage.current_active_festival.order(seq: :asc).all
+  	end
+	end  
 end

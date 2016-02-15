@@ -1,2 +1,11 @@
-<h1>Stages#show</h1>
-<p>Find me in app/views/stages/show.html.erb</p>
+<div class="container" >
+<% if @stage.nil? %>
+	<h2> Unknown Stage</h2>
+<% else %>
+	<h2><%= @stage.title %></h2>
+	<% if @dayindex > 0 %>
+		<h3>  <%= "Day: #{@dayindex} ( #{@dayofweek} ) " %> </h3>
+	<% end %> 
+	<%= render partial: "stageselect", locals: {days: @days, stages: @stages} %>
+<% end %>
+</div>

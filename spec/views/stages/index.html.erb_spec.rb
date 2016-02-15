@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "stages/index.html.erb", :type => :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "shows no stages message when empty list" do
+  	assign(:stages,[])
+  	render
+  	expect(rendered).to match /No stages set/
+  end
+  
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'stages/show/:id/:dayindex' => 'stages#show' 
+  get 'stages/:id/:dayindex' => 'stages#show', as: :stage 
 	resources :stages, only: [:index]
   resources :artists, only: [:show, :index]
 

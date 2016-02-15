@@ -15,6 +15,10 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 			assert_select 'li', "About"
 			assert_select "a[href=?]", "/"
 		end
+		it "has a Stages tab" do
+			render
+			assert_select 'li',"Stages"
+		end
 		it "has a Artists tab" do
 			render
 			assert_select 'li',"Artists"

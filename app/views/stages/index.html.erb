@@ -1,2 +1,9 @@
-<h1>Stages#index</h1>
-<p>Find me in app/views/stages/index.html.erb</p>
+<div class="container">
+<% if @stages.length == 0 %>
+	<p> No stages setup for this festival yet</p>
+<% else %>
+	<%= render partial: "stageselect", locals: {days: @days, stages: @stages} %>
+<% end %>
+
+
+</div>

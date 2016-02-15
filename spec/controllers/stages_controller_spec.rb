@@ -134,7 +134,22 @@ RSpec.describe StagesController, :type => :controller do
 				get :show, id: @stage, dayindex: 32
 				expect(assigns(:dayofweek)).to eq Date.parse('2016-04-01').strftime("%a %d %b")
 			end
-
+		end
+		describe 'number of festival days' do
+			it "assigns 0 to days when no festival records" do
+				get :show, id: 1, dayindex: 3
+				expect(assigns(:days)).to eq 0
+			end
+			it "assigns 0 to days when no current festival" do
+				festival = create(:festival_inactive)
+				get :show, id: 1, dayindex: 3
+				expect(assigns(:days)).to eq 0
+			end
+			it "assigns festival.days to days for current festival" do
+				festival = create(:festival)
+				get :show, id: 1, dayindex: 3
+				expect(assigns(:days)).to eq festival.days
+			end
 		end
 	end
 end

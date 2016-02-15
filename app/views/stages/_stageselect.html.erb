@@ -1,0 +1,14 @@
+<table class="table table-bordered">
+	<tr>
+		<th>Stage</th>
+		<th colspan="<%= days %>">Days</th>
+	</tr>
+	<% stages.each do |stage| %>
+	<tr>
+		<td id="color-<%= stage.class %>"> <%=stage.title%> </td>
+		<% (1..days).each do |x| %>
+			<td> <%= link_to "Day #{x}", stage_path(stage.id,x) ,class: "select" %> </td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>
