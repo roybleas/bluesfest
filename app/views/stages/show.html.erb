@@ -7,7 +7,7 @@
 		<h3>  <%= "Day: #{@dayindex} ( #{@dayofweek} ) " %> </h3>
 	<% end %> 
 	<div class="panel">
-	<div class="panel-heading" id="color-<%= @stage.code %>" ><h4><%= @stage.title %></h4></div>
+	<div class="panel-heading" id="color-<%= @stage.code %>" ><h4><%= @stage.title %></h></div>
 	<div class="panel-body">
 	</div>
 	<%= render partial: "stageselect", locals: {days: @days, stages: @stages} %>
