@@ -24,3 +24,94 @@ a.backtotop  {
 	margin-bottom:0.5em;
 	color: blue;
 }
+
+/* table stage favourites */
+.favlist th{
+ color: WHITE;
+ background: BLACK;
+ text-align: center;
+}
+
+
+/* Stage colours */
+.crossroads a {
+		background-color:#82B581;
+	}
+td.cr ,th.cr {
+	color: white;
+	background-color:#82B581;
+	border-right-style:solid;
+	}
+
+#color-cr {
+	color: white;
+	background-color:#82B581;
+	}	
+	
+.delta a {
+	background-color: #5895CC;
+	
+}
+
+td.de, th.de {
+	color: white;
+	background-color: #5895CC;
+	border-right-style:solid;
+}
+
+#color-de {
+	color: white;
+	background-color: #5895CC;
+}
+
+.jambalaya a {
+		background-color:#D8598F;
+	}
+td.ja, th.ja {
+	color: white;
+	background-color:#D8598F;
+	border-right-style:solid;
+	}
+	
+#color-ja {
+	color: white;
+		background-color:#D8598F;
+	}
+
+.juke a {
+		background-color:#EC8C70;
+	}
+td.ju, th.ju {
+	color: white;
+	background-color:#EC8C70;
+	border-right-style:solid;
+	}
+#color-ju  {
+	color: white;
+		background-color:#EC8C70;
+	}
+
+.mojo a {
+		background-color:#AD7799;
+	}	
+	
+td.mo , th.mo{
+	color: white;
+	background-color:#AD7799;
+	border-right-style:solid;
+	}
+	
+#color-mo {
+	color: white;
+		background-color:#AD7799;
+	}
+	
+a.select {
+	color: white; 
+	
+}
+
+a:hover.select {
+	color: aqua;
+	text-deceroration: underline;
+}
