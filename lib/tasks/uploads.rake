@@ -36,7 +36,26 @@ namespace :uploads do
   		
   	loader.load
   	
+  end
+
+  desc "Upload stage data to database"
+  task stages: :environment do
+  	puts "upload stages"
+  	filename = 'stages.csv'
+  	file = Rails.root.join('db','dbloadfiles',filename)
+  	
+		filename = 'festival.yml'
+  	fileCurrentFestival = Rails.root.join('db','dbloadfiles',filename)
+
+		currentFestival = CurrentFestival.new(fileCurrentFestival)  
+		currentFestival.load	
+  	
+  	puts "uploading..."
+  	loader = LoadStages.new(file, currentFestival)
+  		
+  	loader.load
   	
   end
+
 
 end

@@ -61,6 +61,29 @@ private
 	end	
 end
 
+class RecordCounter
+	def initialize(type_of_records)
+		@total_add = 0
+		@total_update = 0
+		@type_of_records = type_of_records.pluralize
+	end
+	def add_record
+		@total_add += 1
+	end
+	def update_record
+		@total_update += 1
+	end
+	def total_added
+		return @total_add
+	end
+	def total_updated
+		return @total_update
+	end
+	def print_totals
+		return "Added: #{@total_add} and updated: #{@total_update} #{@type_of_records}"
+	end
+end
+
 class ArtistCode
 	class << self
 		def extract(artistname)
@@ -68,6 +91,7 @@ class ArtistCode
 		end
 	end
 end
+
 
 class LoadArtistError < StandardError
 end
@@ -78,11 +102,11 @@ class LoadArtists
 	def initialize(filename, currentfestival)
 			@file_pathname = filename
 			@currentfestival = currentfestival
+			puts 
 	end
-	
+
 	def load
-		artist_add_count = 0
-		artist_update_count = 0
+		record_counter = RecordCounter.new('Artist')
 		
 		festival = @currentfestival.festival
 		raise LoadArtistError,  "Festival database record not found" if festival.nil?
@@ -104,9 +128,10 @@ class LoadArtists
 				
 				artist.code = artist_code
 				artist.festival_id = festival.id
-				artist_add_count += 1
+				
+				record_counter.add_record
 			else
-				artist_update_count += 1
+				record_counter.update_record
 			end
 			artist.name = artist_name
 			artist.linkid = artist_linkid
@@ -115,7 +140,9 @@ class LoadArtists
 			
 			artist.save
 		end
-		puts "Added: #{artist_add_count} and updated: #{artist_update_count} artists"
+		
+		puts record_counter.print_totals
+		#puts "Added: #{artist_add_count} and updated: #{artist_update_count} artists"
 		
 	end
 	 
@@ -141,4 +168,47 @@ class LoadArtists
 	end
 			
 
+end
+
+class LoadStageError < StandardError
+end
+
+class LoadStages
+	
+	def initialize(filename, currentfestival)
+			@file_pathname = filename
+			@currentfestival = currentfestival
+	end
+	
+	def load
+		add_count = 0
+		update_count = 0
+	
+		festival = @currentfestival.festival
+		raise LoadStageError,  "Festival database record not found" if festival.nil?
+
+		CSV.foreach(@file_pathname, {col_sep: "\t", headers: :true}) do |row|
+
+			title = row["title"].strip
+			seq = row["seq"].strip.to_i
+			stage_code = row["code"].strip
+			
+			stage = Stage.by_code_and_festival_id(stage_code,festival.id).take		
+			if stage.nil?
+				stage = Stage.new
+				stage.code = stage_code
+				stage.festival_id = festival.id
+				add_count += 1
+			else
+				update_count += 1
+			end
+			stage.title = title
+			stage.seq = seq
+			
+			stage.save
+		end
+			
+		puts "Added: #{add_count} and updated: #{update_count} Stages"
+		
+	end
 end
