@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211003821) do
+ActiveRecord::Schema.define(version: 20160216224922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,22 @@ ActiveRecord::Schema.define(version: 20160211003821) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "performances", force: :cascade do |t|
+    t.integer  "daynumber"
+    t.string   "duration"
+    t.time     "starttime"
+    t.string   "scheduleversion"
+    t.integer  "festival_id"
+    t.integer  "artist_id"
+    t.integer  "stage_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "performances", ["artist_id"], name: "index_performances_on_artist_id", using: :btree
+  add_index "performances", ["festival_id"], name: "index_performances_on_festival_id", using: :btree
+  add_index "performances", ["stage_id"], name: "index_performances_on_stage_id", using: :btree
+
   create_table "stages", force: :cascade do |t|
     t.string   "title"
     t.string   "code",        limit: 2
@@ -65,5 +81,8 @@ ActiveRecord::Schema.define(version: 20160211003821) do
   end
 
   add_foreign_key "artists", "festivals"
+  add_foreign_key "performances", "artists"
+  add_foreign_key "performances", "festivals"
+  add_foreign_key "performances", "stages"
   add_foreign_key "stages", "festivals"
 end

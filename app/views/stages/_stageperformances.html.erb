@@ -1,0 +1,9 @@
+<% performances.each do |performance| %>
+<tr>
+	<td> <%= performance.starttime.strftime("%H:%M") %> </td>
+	<td> 	<%= link_to performance.artist.name, artist_path(performance.artist.id)%> 
+				<%= render partial: "shared/bluelink", locals: {artist_code: performance.artist.linkid} %>
+				(<%= performance.duration %>)
+	</td>
+</tr>
+<% end %>

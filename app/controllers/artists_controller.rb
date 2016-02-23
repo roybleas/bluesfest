@@ -21,6 +21,9 @@ class ArtistsController < ApplicationController
 
   def show
   	artist_id = params[:id].to_i
-  	@artist = Artist.current_active_festival.find_by_id(artist_id)
+  	@artist = Artist.find_by_id(artist_id)
+  	@performances = Performance.for_artist(artist_id).includes(:stage).all
+  	festival = Festival.find_by_id(@artist.festival_id)
+  	@startdate_minus_one = (festival.startdate - 1) unless festival.nil?
   end
 end

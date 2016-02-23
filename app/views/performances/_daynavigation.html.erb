@@ -1,0 +1,18 @@
+<nav>
+	<ul class="pagination" >
+	
+		<li <% if dayindex == 1 %> class="disabled" <% end %>  >	
+			<%= link_to '<span aria-hidden="true">&laquo;</span>'.html_safe, showbyday_path(dayindex - 1), 'aria-label' => "Previous" %>
+		</li>
+		
+		<% (1..festivaldays).each do |day| %>
+			<li <% if dayindex == day %> class="active" <% end %>
+				> <%= link_to "Day #{day}", showbyday_path(day) %> </li>
+		<% end %>
+		
+		<li <% if dayindex >= @festivaldays %> class="disabled" <% end %>  >
+			<%= link_to '<span aria-hidden="true">&raquo;</span>'.html_safe, showbyday_path(dayindex + 1), 'aria-label' => "Next" %>
+		</li>
+
+	</ul>		
+</nav>

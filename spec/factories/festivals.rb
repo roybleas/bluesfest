@@ -31,6 +31,7 @@ FactoryGirl.define do
   	factory :festival_inactive, class: Festival do
   		active false
   	end
+  	
   end
   
 end

@@ -1,0 +1,41 @@
+ x = Performance.where('starttime in (?)',t1)
+
+2.2.1 :017 > p = Performance.select('stage_id,min(starttime) as start_time').where('starttime <= ?' , '18:45').group('stage_id').order(stage_id: :asc)
+
+
+ p = Performance.select('id,stage_id,min(starttime) as start_time').where('starttime > ?' , '18:45').group('stage_id,id').order(stage_id: :asc)
+
+p = Performance.select('stage_id,max(starttime) as start_time').where('starttime <= ?' , '20:40').group('stage_id').order(stage_id: :asc)
+
+
+38 5 2000-01-01 19:00:00 UTC
+39 6 2000-01-01 19:00:00 UTC
+40 6 2000-01-01 20:00:00 UTC
+41 6 2000-01-01 18:30:00 UTC
+42 5 2000-01-01 18:40:00 UTC
+43 4 2000-01-01 18:40:00 UTC
+
+p = Performance.select('stage_id,min(starttime) as start_time').where('starttime > ?' , '18:45').group('stage_id').order(stage_id: :asc)
+
+5 2000-01-01 19:00:00 UTC
+6 2000-01-01 19:00:00 UTC
+
+
+p = Performance.select('stage_id,max(starttime) as start_time').where('starttime <= ?' , '18:45').group('stage_id').order(stage_id: :asc)
+
+ 4 2000-01-01 18:40:00 UTC
+ 5 2000-01-01 18:40:00 UTC
+ 6 2000-01-01 18:30:00 UTC
+
+t1.each {|p| a << Performance.where("starttime = '#{p.start_time}' and stage_id = #{p.stage_id}").first }
+
+45 4 2000-01-01 18:53:00 UTC
+46 4 2000-01-01 19:30:00 UTC
+47 4 2000-01-01 18:30:00 UTC
+48 5 2000-01-01 18:30:00 UTC
+49 5 2000-01-01 19:15:00 UTC
+50 6 2000-01-01 19:05:00 UTC
+51 6 2000-01-01 18:05:00 UTC
+52 6 2000-01-01 18:05:00 UTC
+
+select("stages.code,stages.seq,performances.starttime")

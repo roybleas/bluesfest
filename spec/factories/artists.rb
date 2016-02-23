@@ -18,7 +18,8 @@
 FactoryGirl.define do
   factory :artist do
     name "Tom Jones"
-    code "123"
+    code "tomjones"
+    linkid "123"
     active false
     extractdate "2016-02-08"
     festival nil
@@ -26,6 +27,11 @@ FactoryGirl.define do
     factory :artist_with_festival, class: Artist do
     	active true
   		festival
+  	end
+  	factory :artist_sequence, class: Artist do
+  		sequence(:name) { |n| "artist_%02d" % n }
+  		sequence(:linkid) { |n| "link id #{n}"}
+  		active = true
   	end
   end
 end

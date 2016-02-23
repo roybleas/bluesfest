@@ -71,3 +71,8 @@ add extract artists file
 
 generate model stage title:string code:string{2} seq:integer festival:references
 generate controller Stages index show
+
+generate model performance daynumber:integer duration:string starttime:time scheduleversion:string festival:references artist:references stage:references
+generate controller Performances showbyday
+
+Note: use puts @rendered to view rendered in view specs

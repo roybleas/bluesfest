@@ -89,50 +89,17 @@ RSpec.describe StagesController, :type => :controller do
 			end
 		end
 		describe 'day_index parameter' do
-			before(:each) do
-				festival = create(:festival,days: 3)
-				@stage = create(:stage, festival_id: festival.id)
-			end				
 			it 'has the first valid day index ' do
-				get :show, id: @stage, dayindex: 1
-				expect(assigns(:dayindex)).to eq 1
-			end
-			it 'has the last valid day index ' do
-				get :show, id: @stage, dayindex: 3
-				expect(assigns(:dayindex)).to eq 3
-			end
-			it 'resets index to first if less than minimum' do
-				get :show, id: @stage, dayindex: 0
+				stage = create(:stage_with_festival)
+				get :show, id: stage, dayindex: 1
 				expect(assigns(:dayindex)).to eq 1
 			end
 		end
-		describe 'day of the week without festival record' do
-			it "retuns nil day of the week" do
-				get :show, id: 1, dayindex: 1
-				expect(assigns(:dayofweek)).to be_nil
-			end
-		end
-		describe 'actual date of day index' do			
-			before(:each) do
-				@festival = create(:festival,days: 3, startdate: '2016-03-1')
-				@stage = create(:stage, festival_id: @festival.id)
-			end				
-			it 'returns date of first day of festival' do
-				get :show, id: @stage, dayindex: 1
-				expect(assigns(:dayofweek)).to eq Date.parse('2016-03-01').strftime("%a %d %b")
-			end
-			it 'returns date of third day of festival' do
-				get :show, id: @stage, dayindex: 3
-				expect(assigns(:dayofweek)).to eq Date.parse('2016-03-03').strftime("%a %d %b")
-			end
-			it 'returns date of last day of festival when invalid day index' do
-				get :show, id: @stage, dayindex: 31
-				expect(assigns(:dayofweek)).to eq Date.parse('2016-03-03').strftime("%a %d %b")
-			end
-			it 'returns date of festival in following month with invalid day index' do
-				@festival.update(days: 40)
-				get :show, id: @stage, dayindex: 32
-				expect(assigns(:dayofweek)).to eq Date.parse('2016-04-01').strftime("%a %d %b")
+		describe 'day of the week ' do
+			it "retuns first day of festival as formated date" do
+				stage = create(:stage_with_festival)
+				get :show, id: stage, dayindex: 1
+				expect(assigns(:dayofweek)).to eq Date.parse('2016-03-24').strftime("%a %d %b")
 			end
 		end
 		describe 'number of festival days' do
@@ -150,6 +117,41 @@ RSpec.describe StagesController, :type => :controller do
 				get :show, id: 1, dayindex: 3
 				expect(assigns(:days)).to eq festival.days
 			end
+		end
+	end
+	context "performances" do
+		it "returns performances" do
+			f = create(:festival_with_stages_and_performances, stage_count: 1, performance_count: 1)
+			performances = Performance.all
+			s = Stage.first
+			get :show, id: s.id, dayindex: 1
+			expect(assigns(:performances)).to match_array(performances)
+		end
+		it "returns performances by stage" do
+			f = create(:festival_with_stages_and_performances, stage_count: 2, performance_count: 1)
+			s = Stage.last
+			performances = Performance.where("stage_id = ",s.id).all
+			get :show, id: s.id, dayindex: 1
+			expect(assigns(:performances).count).to eq 1
+		end
+		it "returns performances by stage and day number" do
+			f = create(:festival_with_stages_and_performances, stage_count: 2, performance_count: 1, day_count: 2)
+			s = Stage.last
+			performances = Performance.where("stage_id = ",s.id).all
+			get :show, id: s.id, dayindex: 2
+			expect(assigns(:performances).count).to eq 1
+		end
+		it "returns performances in descending starttime" do
+			f = create(:festival_with_stages_and_performances, stage_count: 1, performance_count: 4)
+			p = Performance.first(4)
+			p[0].update(starttime: '10:00')
+			p[1].update(starttime: '19:16')
+			p[2].update(starttime: '18:15')
+			p[3].update(starttime: '19:00')
+			performances_desc = [p[1],p[3],p[2],p[0]]
+			s = Stage.first
+			get :show, id: s.id, dayindex: 1
+			expect(assigns(:performances)).to eq(performances_desc)
 		end
 	end
 end

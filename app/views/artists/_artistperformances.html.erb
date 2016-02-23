@@ -1,0 +1,9 @@
+<% performances.each do |performance| %>
+<tr>
+	<td> Day: <%= performance.daynumber %> </td>
+	<td> <%=  (startdate_minus_one + performance.daynumber).strftime("%a") unless startdate_minus_one.nil? %></td>
+	<td> <%= performance.starttime.strftime("%H:%M") %> </td>
+	<td> (<%= performance.duration %>) </td>
+	<td class="color-<%= performance.stage.code %>"> <%= performance.stage.title %> </td>
+</tr>
+<% end %>

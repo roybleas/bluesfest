@@ -1,7 +1,18 @@
 <div class="container" >
+<%= link_to "Artists", artists_path %>
 <% if @artist.nil? %>
 	<h2> Unknown Artist</h2>
 <% else %>
-	<h2><%= @artist.name %></h2>
+	<h2><%= @artist.name%> 
+			<%= render partial: "shared/bluelink", locals: {artist_code: @artist.linkid}  %>
+	</h2>
+			<table class="table table-striped">
+			<tbody>
+				
+				 <%= render partial: "artistperformances", locals: { performances: @performances , startdate_minus_one: @startdate_minus_one } %>
+				
+			</tbody>
+		</table>
+
 <% end %>
 </div>

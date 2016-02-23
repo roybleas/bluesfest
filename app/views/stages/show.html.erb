@@ -9,6 +9,11 @@
 	<div class="panel">
 	<div class="panel-heading" id="color-<%= @stage.code %>" ><h4><%= @stage.title %></h></div>
 	<div class="panel-body">
+		<table class="table table-striped">
+			<tbody>
+				 <%= render partial: "stageperformances", locals: { performances: @performances } %>
+			</tbody>
+		</table>
 	</div>
 	<%= render partial: "stageselect", locals: {days: @days, stages: @stages} %>
 <% end %>

@@ -1,0 +1,7 @@
+<div class="container">
+<% if @performances.length == 0 %>
+	<p> No performances for day <%= @dayindex %></p>
+<% else %>
+	<%= render partial: "daynavigation", locals: {dayindex: @dayindex, festivaldays: @festivaldays} %>
+<% end %>
+</div>

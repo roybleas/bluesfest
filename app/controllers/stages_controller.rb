@@ -12,6 +12,8 @@
 #
 
 class StagesController < ApplicationController
+	include Validations
+	
   def index
   	
   	festival = Festival.current_active.take
@@ -27,20 +29,11 @@ class StagesController < ApplicationController
   	festival = Festival.current_active.take
   	getStageSelectValues(festival)
   	
-  	if festival.nil?
-  		@dayindex = 0 
-  		@days = 0
-  	else
-  		@dayindex = dayindex > festival.days ? festival.days : dayindex
-  		@dayindex = 1 if dayindex < 1
-  		@days = festival.days
-  		if !festival.startdate.nil?
-  			startdate = festival.startdate + (@dayindex - 1)
-  			@dayofweek = startdate.strftime("%a %d %b") 
-  		end
-  	end
+  	@dayindex = valid_dayindex(festival,dayindex)
+  	@dayofweek = valid_dayofweek(festival,@dayindex)
   	
   	@stage = Stage.current_active_festival.find_by_id(stage_id)
+  	@performances = Performance.for_stage(stage_id).for_day(dayindex).includes(:artist).order(starttime: :desc).all
   end
   
   private

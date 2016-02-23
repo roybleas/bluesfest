@@ -13,12 +13,16 @@
 
 class Stage < ActiveRecord::Base
   belongs_to :festival
+  has_many :performances
   
  	def self.current_active_festival
 		joins(:festival).where('festivals.active = true')
 	end
 	def self.by_code_and_festival_id(stage_code,festival_id)
 		where("stages.code = ? and stages.festival_id = ?",stage_code,festival_id)
+	end
+	def self.by_festival(festival)
+		where("festival_id = ?",festival.id)
 	end
 
 

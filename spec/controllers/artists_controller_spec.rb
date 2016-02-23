@@ -82,6 +82,39 @@ RSpec.describe ArtistsController, :type => :controller do
     		expect(assigns(:artist)).to eq @artist
     	end
     end
+    it "shows nil when no artist" do
+    	expect(assigns(:artist)).to be_nil
+    end
+
+    context "performances"do
+    	before(:each) do
+    		performance = create(:performance_with_festival)
+    		@performances = [performance]
+    		@stage = Stage.first
+    		@artist = Artist.first
+			end    	
+    	it "shows a performance" do
+    		get :show, id: @artist
+    		expect(assigns(:performances)).to match_array(@performances)
+    	end
+			it "shows a stage for a performance" do
+				get :show, id: @artist
+				expect(assigns(:performances)[0].stage.title).to eq @stage.title
+			end
+    end
+    context "festival " do
+    	it "shows startdate" do
+    		artist = create(:artist_with_festival) 
+    		festival = Festival.find(artist.festival_id)
+    		get :show, id: artist
+    		expect(assigns(:startdate_minus_one)).to eq festival.startdate - 1
+    	end 
+    	it "shows nil if no festival" do
+    		artist = create(:artist) 
+    		get :show, id: artist
+    		expect(assigns(:startdate_minus_one)).to be_nil
+    	end
+    end
   end
 
 end
