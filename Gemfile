@@ -29,6 +29,7 @@ group :development, :test do
   
 	gem 'nokogiri'
 	
+	gem 'htmlentities'
 	  
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 	#gem 'tzinfo' 

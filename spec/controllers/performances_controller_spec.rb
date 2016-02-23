@@ -115,4 +115,11 @@ RSpec.describe PerformancesController, :type => :controller do
 			end
 		end
 	end
+	context "header" do
+		it "assigns a peformance date" do
+			festival = create(:festival, startdate: '2016-3-25')
+			get :showbyday, dayindex: 2
+			expect(assigns(:performancedate)).to eq "( Sat 26 March 2016 )"
+		end
+	end
 end

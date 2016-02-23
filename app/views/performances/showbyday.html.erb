@@ -3,5 +3,8 @@
 	<p> No performances for day <%= @dayindex %></p>
 <% else %>
 	<%= render partial: "daynavigation", locals: {dayindex: @dayindex, festivaldays: @festivaldays} %>
+		<div class="panel-body panel-default">
+			Performances for Day: <%= @dayindex %> <%= @performancedate %> 
+		</div>
 <% end %>
 </div>

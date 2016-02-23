@@ -1,6 +1,11 @@
 require 'rails_helper'
+require 'htmlentities'
+
 
 RSpec.describe "performances/showbyday.html.erb", :type => :view do
+	htmlcoder = HTMLEntities.new
+
+	
   it "shows no performances message" do
   	assign(:performances,[])
   	assign(:dayindex, 2)
@@ -47,6 +52,32 @@ RSpec.describe "performances/showbyday.html.erb", :type => :view do
   		render
   		assert_select "li a[href=?]", "/showbyday/1"
 		end
+		it "has disabled First link when first day index" do
+			assign(:dayindex, 1)
+  		assign(:festivaldays, 2)
+  		render
+  		assert_select "li.disabled", {:count => 1}
+  		assert_select "li.disabled a span", htmlcoder.decode("&laquo;")  		
+  	end
+		it "has disabled last link when last day index" do
+			assign(:dayindex, 2)
+  		assign(:festivaldays, 2)
+  		render
+  		assert_select "li.disabled", {:count => 1}
+  		assert_select "li.disabled a span", htmlcoder.decode("&raquo;")
+  	end
   end
-
+	context "header" do
+  	before(:each) do
+  		p = build(:performance)
+  		assign(:performances,[p])
+  	end
+		it "shows performances for Day: number" do
+			assign(:dayindex, 2)
+			assign(:performancedate, "Sun 4 April 2016")
+			assign(:festivaldays, 3)
+			render
+			expect(rendered).to match /Performances for Day: 2 (Sun 4 April 2016)/
+		end
+	end
 end

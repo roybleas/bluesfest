@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
 
-  get 'showbyday/:dayindex', to: 'perfomances#showbyday', as: :showbyday
+  get 'showbyday/:dayindex', to: 'performances#showbyday', as: :showbyday
 
   get 'stages/:id/:dayindex' => 'stages#show', as: :stage 
 	resources :stages, only: [:index]
