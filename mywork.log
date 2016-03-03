@@ -76,3 +76,7 @@ generate model performance daynumber:integer duration:string starttime:time sche
 generate controller Performances showbyday
 
 Note: use puts @rendered to view rendered in view specs
+
+rails g task extract performances
+rake -T | grep my_namespace eg rake -T | grep extract
+

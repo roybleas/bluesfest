@@ -96,6 +96,16 @@ RSpec.describe PerformancesController, :type => :controller do
 			expect(assigns(:performances)[0].artist).to eq artist
 		end
 	end
+	context "stage" do
+		it "has a stage for each peformance" do
+			f = create(:festival_with_stages_and_performances, stage_count: 1 )
+			p = Performance.first
+			stage = p.stage
+			get :showbyday, dayindex: 1
+			expect(assigns(:performances)[0].stage).to eq stage
+		end
+	end
+
 	context "stages" do
 		it "has empty stages when no current festival" do
 			get :showbyday, dayindex: 1

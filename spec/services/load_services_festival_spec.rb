@@ -54,7 +54,8 @@ RSpec.describe "load services" do
 		it "outputs a message to show current festival record" do
 			filename = './spec/files/festival.yml'
 			cCurrentFestival = CurrentFestival.new(filename)
-			expect{ cCurrentFestival.load}.to output(/Loading for Bluesfest at 2016-03-24/).to_stdout
+			cCurrentFestival.load
+			expect{ cCurrentFestival.output_festival_message}.to output(/Loading for Bluesfest at 2016-03-24/).to_stdout
 		end
 		it "has correct attributes set" do
 			filename = './spec/files/festival.yml'

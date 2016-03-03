@@ -81,16 +81,25 @@ FactoryGirl.define do
 	    	stage_count  5
 	    	performance_count 1
 	    	day_count 1
+	    	time_difference_mins 0
 	    end
 	    
 	    after(:create) do |festival, evaluator|
-	    	
+	    	count = 0
 	    	evaluator.stages.first(evaluator.stage_count).each do |s|
+	    		
+	    		time_start = Time.now.utc.change({hour: 14}) + (count * evaluator.time_difference_mins).minutes
+	    		count += 1
 	    		s = create(:stage, festival: festival, title: s[:title], code: s[:code], seq: s[:seq])
 	    		(1..evaluator.day_count).each do |count| 
 		    		(1..evaluator.performance_count).each do 
 		    			a = create(:artist_sequence,festival: festival)
-		    			p = create(:performance,festival: festival, artist_id: a.id, stage_id: s.id, daynumber: count)
+		    			if evaluator.time_difference_mins == 0
+		    				p = create(:performance,festival: festival, artist_id: a.id, stage_id: s.id, daynumber: count)
+		    			else
+		    				p = create(:performance,festival: festival, artist_id: a.id, stage_id: s.id, daynumber: count, starttime: time_start)
+		    				time_start = time_start + evaluator.time_difference_mins.minutes
+		    			end
 		    		end
 		    	end
 				end

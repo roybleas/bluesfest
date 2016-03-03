@@ -13,7 +13,7 @@ class PerformancesController < ApplicationController
   		@performanceday = ""
   	else
   		@days = festival.days
-  		@performances = Performance.for_day(@dayindex).includes(:artist).for_festival(festival).order(starttime: :asc).all
+  		@performances = Performance.for_day(@dayindex).includes(:artist, :stage).for_festival(festival).order(starttime: :asc).all
   		@stages = Stage.by_festival(festival).order(seq: :asc).all
   		@performancedate = (festival.startdate + @dayindex - 1).strftime("( %a %d %B %Y )")
   	end

@@ -13,6 +13,10 @@ RSpec.describe "stages/show.html.erb", :type => :view do
 	  	stage = create(:stage)
 	  	assign(:stage, stage)
 	  	assign(:dayindex, 1)
+	  	assign(:previousdayindex,1)
+	  	assign(:nextdayindex,3)
+			assign(:previousstage,stage)
+			assign(:nextstage,stage)
 	  	assign(:stages, [stage])
 	  	assign(:performances,[])
 	  	render
@@ -26,6 +30,11 @@ RSpec.describe "stages/show.html.erb", :type => :view do
   		assign(:stages, [stage])
   		assign(:performances,[])
   		assign(:days, 5)
+  		assign(:previousdayindex,5)
+  		assign(:nextdayindex,2)
+			assign(:previousstage,stage)
+			assign(:nextstage,stage)
+
   	end
   	it "shows the day number" do
   		assign(:dayindex, 1)
@@ -33,12 +42,69 @@ RSpec.describe "stages/show.html.erb", :type => :view do
   		expect(rendered).to match /Day: 1/
   	end
   	it "shows the day of week" do
-  		assign(:dayofweek, "Fri 25 Mar")
-  		assign(:dayindex, 1)
+  		assign(:dayofweek, "Fri")
+  		assign(:dayindex, 1) 			
   		render
-  		expect(rendered).to match /\( Fri 25 Mar \)/
+  		expect(rendered).to match /\( Fri \)/
   	end
 	end	
+	context "navigate to previous/next day of week" do
+  	before(:each) do
+  		@stage = create(:stage)
+  		assign(:stage, @stage)
+  		assign(:stages, [@stage])
+  		assign(:performances,[])
+  		assign(:days, 5)
+			assign(:previousdayindex,1)
+			assign(:nextdayindex,3)
+			assign(:previousstage,@stage)
+			assign(:nextstage,@stage)
+			assign(:dayindex,2)
+  	end
+
+		it " shows arrows " do
+			render
+			assert_select "a span.glyphicon-circle-arrow-left", 2
+			assert_select "a span.glyphicon-circle-arrow-right", 2
+		end
+		it "has previous day link" do
+			render
+			assert_select "a[href=?]",  "/stages/#{@stage.id}/1"
+		end
+		it "has next day link" do
+			render
+			assert_select "a[href=?]",  "/stages/#{@stage.id}/3"
+		end
+
+	end
+	context "navigate to previous/next stage" do
+  	before(:each) do
+  		
+  		@stage0 = create(:stage)
+  		@stage1 = create(:stage, title: 'stage 2', seq: 2)
+  		@stage2 = create(:stage, title: 'stage 3', seq: 3)
+  		assign(:stage, @stage1)
+  		assign(:stages, [@stage0,@stage1,@stage2])
+  		assign(:performances,[])
+  		assign(:days, 5)
+			assign(:previousdayindex,1)
+			assign(:nextdayindex,3)
+			assign(:previousstage,@stage0)
+			assign(:nextstage,@stage2)
+			assign(:dayindex,2)
+  	end
+
+		it "has previous stage link" do
+			render
+			assert_select "a[href=?]",  "/stages/#{@stage0.id}/2" , {count: 2}
+		end
+		it "has next day link" do
+			render
+			assert_select "a[href=?]",  "/stages/#{@stage2.id}/2", {count: 2}
+		end
+
+	end
+	
 	context "performance" do
 		before(:each) do
 			@performance = create(:performance_with_festival)
@@ -49,6 +115,10 @@ RSpec.describe "stages/show.html.erb", :type => :view do
 			assign(:stages,Stage.all)
 			assign(:days,5)
 			assign(:dayindex,1)
+			assign(:previousdayindex,5)
+			assign(:nextdayindex,2)
+			assign(:previousstage,stage)
+			assign(:nextstage,stage)
 			assign(:performances, performances) 
 		end
 		it "shows start time" do

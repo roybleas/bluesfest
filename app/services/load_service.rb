@@ -42,7 +42,6 @@ class CurrentFestival
   		festival = YAML.load(File.open(@file_pathname))
   		@title = festival[0]['title']
   		@startdate = festival[0]['startdate']
-  		output_festival_message
 		end
 	end
 	
@@ -55,7 +54,6 @@ class CurrentFestival
 		end
 	end
 
-private
 	def output_festival_message
 		puts "Loading for #{@title} at #{@startdate} ..."
 	end	
@@ -102,7 +100,6 @@ class LoadArtists
 	def initialize(filename, currentfestival)
 			@file_pathname = filename
 			@currentfestival = currentfestival
-			puts 
 	end
 
 	def load
@@ -115,7 +112,7 @@ class LoadArtists
 
 		CSV.foreach(@file_pathname, {col_sep: "\t", headers: :true}) do |row|
 			
-			artist_linkid = row["id"].strip
+			artist_linkid = row["id"].strip unless row["id"].nil? 
 			artist_name = row["artist"].strip
 			artist_code = ArtistCode.extract(artist_name)
 			

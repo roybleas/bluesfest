@@ -34,7 +34,13 @@ FactoryGirl.define do
 		factory :performance_with_just_festival, class: Performance do
 			festival
 		end
-		
+		factory :performance_with_artist, class: Performance do
+			artist
+		end
+		factory :performance_with_artist_and_stage, class: Performance do
+			artist
+			stage
+		end
   end
   
 end

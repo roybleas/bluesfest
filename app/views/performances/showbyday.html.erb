@@ -1,10 +1,21 @@
 <div class="container">
 <% if @performances.length == 0 %>
 	<p> No performances for day <%= @dayindex %></p>
+<% elsif @stages.length == 0 %>
+	<p> No stage information available</p>
 <% else %>
 	<%= render partial: "daynavigation", locals: {dayindex: @dayindex, festivaldays: @festivaldays} %>
 		<div class="panel-body panel-default">
 			Performances for Day: <%= @dayindex %> <%= @performancedate %> 
 		</div>
+	<table class="table" >
+		<thead>
+			<%= render partial: "scheduledayheader", locals: {stages: @stages} %>
+		</thead>
+		<tbody>
+			<%= render partial: "scheduledaybody", locals: {stages: @stages,performances: @performances} %>
+		</tbody>
+		
+	</table>
 <% end %>
 </div>

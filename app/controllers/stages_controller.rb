@@ -30,9 +30,13 @@ class StagesController < ApplicationController
   	getStageSelectValues(festival)
   	
   	@dayindex = valid_dayindex(festival,dayindex)
+  	@previousdayindex = previous_dayindex(festival,dayindex)
+  	@nextdayindex = next_dayindex(festival,dayindex)
   	@dayofweek = valid_dayofweek(festival,@dayindex)
-  	
+  
   	@stage = Stage.current_active_festival.find_by_id(stage_id)
+  	@previousstage = previous_stage(@stages,@stage)
+  	@nextstage = next_stage(@stages,@stage)
   	@performances = Performance.for_stage(stage_id).for_day(dayindex).includes(:artist).order(starttime: :desc).all
   end
   
@@ -43,7 +47,7 @@ class StagesController < ApplicationController
   		@days = 0
   	else
   		@days = festival.days
-  		@stages = Stage.current_active_festival.order(seq: :asc).all
+  		@stages = Stage.by_festival(festival).order(seq: :asc).all
   	end
 	end  
 end

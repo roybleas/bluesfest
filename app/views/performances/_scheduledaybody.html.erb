@@ -1,0 +1,26 @@
+<tr>
+  <% stage_index = 0 %>
+  <% stage_count = stages.count %>
+  <% save_starttime = performances[0].starttime %>
+  <td><%= save_starttime.strftime("%H:%M") %></td>
+  
+  <% performances.each do |p| %>
+    <% if save_starttime != p.starttime %>
+        <%# New row on change of start time %>
+      <%= outstanding_stage_cells(stage_index,stage_count) %>
+      </tr><tr>
+      <td><%= p.starttime.strftime("%H:%M") %></td>
+      <% save_starttime = p.starttime %>
+      <% stage_index = 0 %>
+    <% end %>
+
+    <% index = find_matching_stage_index(stage_index,stage_count,p,stages) %>
+    <%= preceding_stage_cells(stage_index, index) %>
+    <td class="<%= p.stage.code %>"><%= link_to p.artist.name, artist_path(p.artist) %></td>
+    <% stage_index = index + 1 %>
+
+  <% end %>
+
+  <%= outstanding_stage_cells(stage_index,stage_count) %>         
+
+</tr>

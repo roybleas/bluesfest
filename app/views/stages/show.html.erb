@@ -2,12 +2,16 @@
 <% if @stage.nil? %>
 	<h2> Unknown Stage</h2>
 <% else %>
-	
-	<% if @dayindex > 0 %>
-		<h3>  <%= "Day: #{@dayindex} ( #{@dayofweek} ) " %> </h3>
-	<% end %> 
-	<div class="panel">
-	<div class="panel-heading" id="color-<%= @stage.code %>" ><h4><%= @stage.title %></h></div>
+<div class="panel">
+	<div class="container-fluid" >
+		<%= render partial: "dayindexheader", locals: {dayindex: @dayindex,dayofweek: @dayofweek, 
+																									stage: @stage, previousdayindex: @previousdayindex, nextdayindex: @nextdayindex } %>
+
+		<%= render partial: "stageheader", locals: {dayindex: @dayindex, stage: @stage, 
+																								previousstage: @previousstage, nextstage: @nextstage } %>
+
+	</div>
+		
 	<div class="panel-body">
 		<table class="table table-striped">
 			<tbody>

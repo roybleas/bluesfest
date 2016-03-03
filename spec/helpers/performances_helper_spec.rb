@@ -11,5 +11,9 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe PerformancesHelper, :type => :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "outstanding_stage_cells" do
+  	it "returns empty string when index passed last stage" do
+  		expect(helper.outstanding_stage_cells(5,5)).to eq ""
+  	end
+  end
 end

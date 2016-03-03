@@ -29,6 +29,7 @@ namespace :uploads do
 
 		currentFestival = CurrentFestival.new(fileCurrentFestival)  
 		currentFestival.load	
+		currentFestival.output_festival_message
   	
   	
   	puts "uploading..."
@@ -49,6 +50,7 @@ namespace :uploads do
 
 		currentFestival = CurrentFestival.new(fileCurrentFestival)  
 		currentFestival.load	
+		currentFestival.output_festival_message
   	
   	puts "uploading..."
   	loader = LoadStages.new(file, currentFestival)

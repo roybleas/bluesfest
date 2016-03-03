@@ -99,7 +99,7 @@ RSpec.describe StagesController, :type => :controller do
 			it "retuns first day of festival as formated date" do
 				stage = create(:stage_with_festival)
 				get :show, id: stage, dayindex: 1
-				expect(assigns(:dayofweek)).to eq Date.parse('2016-03-24').strftime("%a %d %b")
+				expect(assigns(:dayofweek)).to eq Date.parse('2016-03-24').strftime("%a")
 			end
 		end
 		describe 'number of festival days' do
@@ -118,6 +118,34 @@ RSpec.describe StagesController, :type => :controller do
 				expect(assigns(:days)).to eq festival.days
 			end
 		end
+	end
+	context "navigate to other days" do
+		it "has previous day index as 1 less than current day index" do
+			festival = create(:festival)
+			get :show, id: 1, dayindex: 3
+			expect(assigns(:previousdayindex)).to eq 2
+		end
+		it "has next day index as 1 greater than current day index" do
+			festival = create(:festival)
+			get :show, id: 1, dayindex: 1
+			expect(assigns(:nextdayindex)).to eq 2
+		end
+	end
+	context "navigate to other months" do
+		before(:each) do
+			festival = create(:festival_with_stages)
+			@stages = Stage.order(seq: :asc).all
+			@stage = @stages[1]
+		end		
+		it "has previous stage in sequence to current stage" do
+			get :show, id: @stage, dayindex: 3
+			expect(assigns(:previousstage)).to eq @stages[0]
+		end
+		it "has next stage in sequence to current stage" do
+			get :show, id: @stage, dayindex: 3
+			expect(assigns(:nextstage)).to eq @stages[2]
+		end
+
 	end
 	context "performances" do
 		it "returns performances" do

@@ -5,15 +5,16 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 	
 	context "navigation menu" do
 			
-		it "has a Home tab" do
+		it "has a Brand tab" do
+			create(:festival , title: "Bluesfest", year: 2016)
 			render
-			assert_select 'a', "Home"
+			assert_select 'a', "Bluesfest 2016"
 			assert_select "a[href=?]", "/"
 		end
 		it "has an About tab" do
 			render
 			assert_select 'li', "About"
-			assert_select "a[href=?]", "/"
+			assert_select "a[href=?]", "/about"
 		end
 		it "has a Stages tab" do
 			render

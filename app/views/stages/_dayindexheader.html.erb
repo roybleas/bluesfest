@@ -1,0 +1,20 @@
+<% if dayindex > 0 %>
+		
+	<div class="row">
+		<div class="col-xs-2 col-sm-1">
+			 <%= link_to '<span class="glyphicon glyphicon-circle-arrow-left" ></span>'.html_safe,
+			  						stage_path(id: stage.id, dayindex: previousdayindex),
+			   						class: "btn btn-lg", "role" => "button" %>
+		</div>
+		<div class="col-xs-4 col-sm-2"> 
+			<p class="vcentre lead" ><%= "Day: #{dayindex} ( #{dayofweek} ) " %></p>
+		</div>
+		<div class="col-xs-2 col-sm-1">
+			 <%= link_to '<span class="glyphicon glyphicon-circle-arrow-right" ></span>'.html_safe,
+			  						stage_path(id: stage.id, dayindex: nextdayindex),
+			   						class: "btn btn-lg", "role" => "button" %> 
+		</div>
+		<div class="col-xs-4 col-sm-8"> </div>
+	</div>
+			
+<% end %> 
