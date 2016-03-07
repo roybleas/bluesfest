@@ -270,8 +270,17 @@ RSpec.describe "extract performances services" do
 			expect(PerformLine.new("22.45            KENDRICK LAMAR 75  min ").valid?).to be_falsey
 		end
 		it "returns a data hash " do
-			expect(PerformLine.new("22.45            KENDRICK LAMAR 75 min ").data).to eq({starttime: "22:45",artist: "KENDRICK LAMAR", duration: "75 min"})
+			expect(PerformLine.new("22.45            KENDRICK LAMAR 75 min ").data).to \
+			 													eq({starttime: "22:45",artist: "KENDRICK LAMAR", duration: "75 min", caption: "KENDRICK LAMAR" })
 		end
+		it "returns valid with caption after duration" do
+			expect(PerformLine.new("20.50       JEFF MARTIN  60 min  JEFF MARTIN (THE TEA PARTY)     ").valid?).to be_truthy
+		end
+		it "returns a data hash" do
+			expect(PerformLine.new("20.50       JEFF MARTIN  60 min  JEFF MARTIN (THE TEA PARTY)     ").data).to \
+												eq({starttime: "20:50",artist: "JEFF MARTIN", duration: "60 min", caption:"JEFF MARTIN (THE TEA PARTY)"})
+		end
+
 	end
 
 end

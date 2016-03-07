@@ -213,12 +213,12 @@ RSpec.describe "extract performances services" do
 		it "updates Performline object with code" do
 			line = PerformLine.new("22.45    KENDRICK & LAMAR  75 min")
 			PerformData.new(@festival).verify(line)
-			expect(line.data).to eq ({starttime: "22:45",artist: "KENDRICK & LAMAR", duration: "75 min", code: "kendricklamar"})  
+			expect(line.data).to eq ({starttime: "22:45",artist: "KENDRICK & LAMAR", duration: "75 min", caption: "KENDRICK & LAMAR", code: "kendricklamar"})  
 		end		
 	end
 	context "Header Row" do
 		it "returns default array" do
-			expect(HeaderRow.new().array).to match_array(["day","stagecode","artistcode","starttime","duration","headercode"])
+			expect(HeaderRow.new().array).to match_array(["day","stagecode","artistcode","starttime","duration","caption","headercode"])
 		end
 	end
 	context "MergeLines" do
@@ -283,17 +283,17 @@ RSpec.describe "extract performances services" do
 				@merge.add(performline)
 			end
 			it " adds a row" do
-				expect(@merge.merged_lines_array).to match_array([[2,"xy","kendricklamar","22:45","75 min","testdata"]])
+				expect(@merge.merged_lines_array).to match_array([[2,"xy","kendricklamar","22:45","75 min","KENDRICK LAMAR", "testdata"]])
 			end
 			it "updates stage and adds a performance" do
 				sl = StageLine.new("Time someotherdata")
 				sl.data.update({code: "ab"})
 				@merge.add(sl)
-				inputline = "18.45    TWEEDY 100 min"
+				inputline = "18.45       THE WAILERS 100 min THE WAILERS PRESENT LEGEND"
 				pl = PerformLine.new(inputline)
-				pl.data.update({code: "tweedy"})
+				pl.data.update({code: "thewailers"})
 				@merge.add(pl)
-				expect(@merge.merged_lines_array).to include([2,"ab","tweedy","18:45","100 min","testdata"])
+				expect(@merge.merged_lines_array).to include([2,"ab","thewailers","18:45","100 min","THE WAILERS PRESENT LEGEND","testdata"])
 			end
 			it "updates day number and adds a performance" do
 				dl = DayLine.new("Day 3 ")
@@ -302,7 +302,7 @@ RSpec.describe "extract performances services" do
 				pl = PerformLine.new(inputline)
 				pl.data.update({code: "kamasiwashington"})
 				@merge.add(pl)
-				expect(@merge.merged_lines_array).to include([3,"xy","kamasiwashington","19:00","60 min","testdata"])
+				expect(@merge.merged_lines_array).to include([3,"xy","kamasiwashington","19:00","60 min","KAMASI WASHINGTON","testdata"])
 			end
 		end		
 	end

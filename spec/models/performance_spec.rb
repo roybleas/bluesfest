@@ -6,6 +6,7 @@
 #  daynumber       :integer
 #  duration        :string
 #  starttime       :time
+#  title           :string
 #  scheduleversion :string
 #  festival_id     :integer
 #  artist_id       :integer

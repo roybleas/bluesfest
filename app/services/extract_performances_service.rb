@@ -98,8 +98,8 @@ class MergeLines
 		 	
 		 	has_row_requirments(line)
 			
-			#["day","stagecode","artistcode","starttime","duration","headercode"]
-		 	row = [@day_number, @stage_code, line.data[:code], line.data[:starttime],line.data[:duration],@header_code]
+			#["day","stagecode","artistcode","starttime","duration","caption","headercode"]
+		 	row = [@day_number, @stage_code, line.data[:code], line.data[:starttime],line.data[:duration], line.data[:caption], @header_code]
 
 		 	@array << row
 						
@@ -226,6 +226,6 @@ end
 
 class HeaderRow
 	def array
-		["day","stagecode","artistcode","starttime","duration","headercode"]
+		["day","stagecode","artistcode","starttime","duration","caption","headercode"]
 	end
 end

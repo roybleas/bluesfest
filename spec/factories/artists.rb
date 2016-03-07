@@ -32,6 +32,13 @@ FactoryGirl.define do
   		sequence(:name) { |n| "artist_%02d" % n }
   		sequence(:linkid) { |n| "link id #{n}"}
   		active = true
+  	end	
+  	factory :artist_first_schedule, class: Artist do 
+    	name "KENDRICK Lamar"
+    	code "kendricklamar"
+    	linkid "123"
+    	active false
+    	extractdate "2016-02-08"
   	end
   end
 end

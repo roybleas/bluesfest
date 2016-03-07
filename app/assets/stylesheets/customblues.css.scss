@@ -95,6 +95,7 @@ td.ju, th.ju {
 	background-color:#EC8C70;
 	border-right-style:solid;
 	}
+
 #color-ju  {
 	color: white;
 		background-color:#EC8C70;
@@ -123,4 +124,21 @@ a.select {
 a:hover.select {
 	color: aqua;
 	text-deceroration: underline;
+}
+
+
+.artists a:hover {
+	color: aqua;
+	text-deceroration: underline;
+}
+
+a.stagelink
+{
+  color: white;
+	font-weight:bold;
+}
+a:visited.stagelink {color:white;
+	}
+a:hover.stagelink {
+		color: black;
 }

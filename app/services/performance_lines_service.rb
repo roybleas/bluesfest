@@ -151,7 +151,7 @@ class PerformLine
 	def initialize(input_line)
 		@line_number = 0
 		#time , artist, duration
-		@performance_line_match = /(\d{2}\.\d{2})([\s+\S+]+)(\s\d+\smin)/
+		@performance_line_match = /(\d{2}\.\d{2})([\s+\S+]+)(\s\d+\smin)([\s*\S*]*)/
 		
 		@inputline = input_line
 		@content = :perform
@@ -171,10 +171,13 @@ class PerformLine
 	def format_data(line)
 		datamatch = @performance_line_match.match(@inputline.strip)
 		starttime = datamatch[1]
-		artist = datamatch[2]
-		duration = datamatch[3]
+		artist = datamatch[2].strip
+		duration = datamatch[3].strip
+		caption = datamatch[4].strip
+		caption = artist if caption == ""
 		starttime_formated = starttime.strip.sub(".",":")
-		return {starttime: starttime_formated, artist: artist.strip, duration: duration.strip}
+		
+		return {starttime: starttime_formated, artist: artist, duration: duration, caption: caption}
 	end
 
 end

@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: performances
+#
+#  id              :integer          not null, primary key
+#  daynumber       :integer
+#  duration        :string
+#  starttime       :time
+#  title           :string
+#  scheduleversion :string
+#  festival_id     :integer
+#  artist_id       :integer
+#  stage_id        :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 module PerformancesHelper
 	def outstanding_stage_cells(stage_index,stage_count)
 		cell_count = (stage_count - stage_index)

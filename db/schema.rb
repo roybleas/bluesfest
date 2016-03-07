@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160216224922) do
     t.integer  "daynumber"
     t.string   "duration"
     t.time     "starttime"
+    t.string   "title"
     t.string   "scheduleversion"
     t.integer  "festival_id"
     t.integer  "artist_id"

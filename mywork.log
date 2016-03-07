@@ -80,3 +80,4 @@ Note: use puts @rendered to view rendered in view specs
 rails g task extract performances
 rake -T | grep my_namespace eg rake -T | grep extract
 
+bundle exec rake db:rollback and add title to Performance

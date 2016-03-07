@@ -25,11 +25,18 @@ RSpec.describe "artists/show.html.erb", :type => :view do
   		render
   		expect(rendered).to match /#{stage.title}/
   	end
+  	it "shows link to stage" do
+  		stage = Stage.first
+  		assign(:stage,stage)
+  		@performances[0].daynumber = 2
+  		render
+  		expect(rendered).to match /<a class="stagelink" href="\/stages\/#{stage.id}\/2">Mojo<\/a>/
+  	end
   	it "shows stage class set to stage code" do
   		stage = Stage.first
   		assign(:stage,stage)
   		render
-  		expect(rendered).to match /class="color-#{stage.code}"/
+  		expect(rendered).to match /id="color-#{stage.code}"/
   	end
   	it "shows day number" do
   		@performances[0].daynumber = 2

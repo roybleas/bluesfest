@@ -4,6 +4,7 @@
 	<td> <%=  (startdate_minus_one + performance.daynumber).strftime("%a") unless startdate_minus_one.nil? %></td>
 	<td> <%= performance.starttime.strftime("%H:%M") %> </td>
 	<td> (<%= performance.duration %>) </td>
-	<td class="color-<%= performance.stage.code %>"> <%= performance.stage.title %> </td>
+	<td id="color-<%= performance.stage.code %>">
+	<%= link_to performance.stage.title, stage_path(performance.stage_id,performance.daynumber) , class: "stagelink" %> </td>
 </tr>
 <% end %>

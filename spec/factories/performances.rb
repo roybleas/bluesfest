@@ -6,6 +6,7 @@
 #  daynumber       :integer
 #  duration        :string
 #  starttime       :time
+#  title           :string
 #  scheduleversion :string
 #  festival_id     :integer
 #  artist_id       :integer
@@ -23,6 +24,7 @@ FactoryGirl.define do
     duration "60 mins"
     starttime "19:15"
     scheduleversion "20160216B"
+    title "performance caption"
     festival nil
     artist nil
     stage nil
@@ -40,6 +42,16 @@ FactoryGirl.define do
 		factory :performance_with_artist_and_stage, class: Performance do
 			artist
 			stage
+		end
+		factory :peformance_first_schedulefile, class: Performance do
+			starttime '22:45'
+			daynumber 1
+			scheduleversion 'testdata'
+			duration '10 min'
+			festival
+			stage
+			association :artist, factory: :artist, name: "KENDRICK Lamar", code: "kendricklamar"
+   		
 		end
   end
   

@@ -4,6 +4,7 @@ class CreatePerformances < ActiveRecord::Migration
       t.integer :daynumber
       t.string :duration
       t.time :starttime
+      t.string :title
       t.string :scheduleversion
       t.references :festival, index: true
       t.references :artist, index: true

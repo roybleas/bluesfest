@@ -59,5 +59,44 @@ namespace :uploads do
   	
   end
 
+  desc "Upload artists data to database"
+  task performances: :environment do
+  	puts "upload performances"
+  	suffix = "160304"
+  	filename = "schedule#{suffix}.csv"
+  	file = Rails.root.join('db','dbloadfiles',filename)
+  	
+		filename = 'festival.yml'
+  	fileCurrentFestival = Rails.root.join('db','dbloadfiles',filename)
+
+		currentFestival = CurrentFestival.new(fileCurrentFestival)  
+		currentFestival.load	
+		currentFestival.output_festival_message
+
+		performance_array = CSV.read(file,{headers: true})
+  	
+		validateCodes = ValidateCodes.new(currentFestival.festival)  
+  	artistcodelist = validateCodes.artist_code_list(performance_array)
+  	if validateCodes.artists(artistcodelist)
+  		puts "All artist codes pre-loaded"
+			
+	  	stagecodelist = validateCodes.stage_code_list(performance_array)
+	  	if validateCodes.stages(stagecodelist)
+	  		puts "All stage codes pre-loaded"
+  			
+  				loader = LoadPerformances.new(file,currentFestival.festival)
+  				schedulecode = loader.load
+  				puts "Loaded performances"
+  				if not schedulecode.nil?
+  					loader.remove_old_performances(schedulecode)
+  					loader.update_artists_to_active
+  					puts "Updated performances and artists"
+  				end
+  				
+  		end
+  	end
+  	
+  end
+
 
 end

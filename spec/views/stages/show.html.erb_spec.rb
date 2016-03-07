@@ -127,9 +127,9 @@ RSpec.describe "stages/show.html.erb", :type => :view do
 		end
 		it "shows artist" do
 			render
-			artist_name = @artist.name
+			performance_title = @performance.title
 			artist_id = @performance.artist_id
-			expect(rendered).to match /<a href="\/artists\/#{artist_id}">#{artist_name}<\/a>/
+			expect(rendered).to match /<a href="\/artists\/#{artist_id}">#{performance_title}<\/a>/
 		end
 		it "shows link to external website" do
 			link_id = @artist.linkid

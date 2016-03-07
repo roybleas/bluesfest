@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: performances
+#
+#  id              :integer          not null, primary key
+#  daynumber       :integer
+#  duration        :string
+#  starttime       :time
+#  title           :string
+#  scheduleversion :string
+#  festival_id     :integer
+#  artist_id       :integer
+#  stage_id        :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class PerformancesController < ApplicationController
 	include Validations
   def showbyday

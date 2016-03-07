@@ -209,3 +209,140 @@ class LoadStages
 		
 	end
 end
+
+class ValidateCodesError < StandardError
+end
+
+class ValidateCodes
+	def initialize(festival)
+		@festival = festival
+	end
+	
+	def artists(array)	
+		
+		artistcodes = Artist.select('code').where('festival_id = ? and code in (?)' , @festival.id, array).all.to_a
+
+		return true if array.count == artistcodes.count
+		
+		artistcodelist = artistcodes.map {|c| c.code }
+		missingcodes = array - artistcodelist
+		
+		raise ValidateCodesError,  "Artist codes [ #{missingcodes.join(', ')} ] not pre-loaded"
+	end
+
+	def stages(array)	
+		
+		stagecodes = Stage.select('code').where('festival_id = ? and code in (?)' , @festival.id, array).all.to_a
+
+		return true if array.count == stagecodes.count
+	
+		stagecodelist = stagecodes.map {|c| c.code }
+		missingcodes = array - stagecodelist
+		
+		raise ValidateCodesError,  "Stage codes [ #{missingcodes.join(', ')} ] not pre-loaded"
+	end
+
+	
+	def artist_code_list(array)
+		
+		return code_list('artistcode',array)
+		
+	end
+	
+	def stage_code_list(array)
+		return code_list('stagecode',array)
+	end
+	
+	private
+	
+	def code_list(codetype, array)
+		code_list = Array.new()
+			
+		array.each {|row| code_list << row[codetype] }
+		
+		code_list.uniq!
+		
+		return code_list
+	end	
+end
+
+class LoadPerformanceError < StandardError
+end
+
+class LoadPerformances
+	
+	def initialize(filename, currentfestival)
+			@file_pathname = filename
+			@festival = currentfestival
+	end
+	
+	def load
+		add_count = 0
+		update_count = 0
+
+		stages = Stage.by_festival(@festival).all
+		raise LoadPerformanceError,  "No stage database records found" if stages.empty?
+		
+		save_headercode = ""
+		
+		CSV.foreach(@file_pathname, { headers: :true}) do |row|
+			#day,stagecode,artistcode,starttime,duration,caption,headercode
+			daynumber 		= row["day"].strip.to_i
+			stage_code 		= row["stagecode"].strip
+			artist_code 	= row["artistcode"].strip
+			starttime 		= row["starttime"].strip
+			duration 			= row["duration"].strip
+			title 				= row["caption"].strip
+			headercode 		= row["headercode"].strip
+			
+			save_headercode = headercode
+			
+			stage = Stage.by_code_and_festival_id(stage_code,@festival.id).take		
+			raise LoadPerformanceError,  "No stage database records found with code #{stage_code}" if stage.nil?
+			
+			artist = Artist.by_code_and_festival_id(artist_code,@festival.id).take		
+			raise LoadPerformanceError,  "No artist database records found with code #{artist_code}" if artist.nil?
+			
+			performance = Performance.by_artist_stage_day_starttime_and_festival(artist.id,stage.id,daynumber,starttime,@festival.id).take
+			if performance.nil?
+				performance = Performance.new				
+				
+				performance.daynumber     = daynumber
+				performance.starttime     = starttime
+				performance.festival_id   = @festival.id
+				performance.artist_id     = artist.id
+				performance.stage_id      = stage.id								
+
+				add_count += 1
+			else
+				update_count += 1
+								
+			end
+			
+			performance.duration        = duration
+			performance.scheduleversion = headercode
+			performance.title 					= title
+
+			performance.save
+				
+		end
+		puts "Added: #{add_count} and updated: #{update_count} Performances"
+		
+		return save_headercode unless (add_count + update_count) == 0
+		return nil
+	end
+	
+	def remove_old_performances(headercode)
+		
+		performance_ids = Performance.where('festival_id = ? and scheduleversion <> ?',@festival.id,headercode).ids
+		Performance.destroy(performance_ids)
+	end
+	
+	def update_artists_to_active
+		artist_ids = Performance.select('artist_id').distinct.where('festival_id = ?',@festival.id).all
+		ids = artist_ids.map {|a| a.artist_id }
+		Artist.where('festival_id = ?',@festival.id).update_all(active: false)
+		Artist.where('id in(?)',ids).update_all(active: true)
+	end
+	
+end

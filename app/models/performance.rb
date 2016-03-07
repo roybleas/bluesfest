@@ -6,6 +6,7 @@
 #  daynumber       :integer
 #  duration        :string
 #  starttime       :time
+#  title           :string
 #  scheduleversion :string
 #  festival_id     :integer
 #  artist_id       :integer
@@ -31,5 +32,7 @@ class Performance < ActiveRecord::Base
 	def self.for_artist(artist_id)
 		where('artist_id = ?',artist_id)
 	end
-	
+	def self.by_artist_stage_day_starttime_and_festival(artist_id, stage_id, daynumber, starttime, festival_id)
+		where('artist_id = ? and stage_id = ? and daynumber = ? and starttime = ? and festival_id = ?',artist_id, stage_id, daynumber, starttime, festival_id)
+	end
 end
