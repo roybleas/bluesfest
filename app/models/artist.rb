@@ -28,7 +28,12 @@ class Artist < ActiveRecord::Base
 	def self.by_festival(festival)
 		where('festival_id = ?', festival.id)
 	end
-
+  def self.by_letter_range(letterstart, letterend)
+  	where('name >= ? and name < ? and artists.active = true', letterstart, letterend)
+  end
+  def self.starting_with_letter(letterstart)
+  	where('name >= ? and artists.active = true', letterstart)
+  end
 	
 	def self.by_code_and_festival_id(artist_code,festival_id)
 		where("artists.code = ? and artists.festival_id = ?",artist_code,festival_id)

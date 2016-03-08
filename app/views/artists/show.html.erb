@@ -1,5 +1,5 @@
 <div class="container" >
-<%= link_to "Artists", artists_path %>
+<%= link_to_artist_artistpage(@artist) %>
 <% if @artist.nil? %>
 	<h2> Unknown Artist</h2>
 <% else %>

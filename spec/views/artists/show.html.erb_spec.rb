@@ -13,6 +13,20 @@ RSpec.describe "artists/show.html.erb", :type => :view do
   	render
   	expect(rendered).to match /Unknown Artist/
   end
+  it "shows link to default artists index ie by 'a'" do
+  	render
+  	assert_select "a[href=?]", "/artists/bypage/a"
+  	assert_select "a", "Artists"
+  end
+  it "shows link to artists page " do
+  	artist = create(:artist)
+  	assign(:artist, artist)
+  	assign(:performances,[])
+  	render
+  	assert_select "a[href=?]", "/artists/bypage/t"
+  	assert_select "a", "Artists"
+  end
+
   context "performances" do
   	before(:each) do
   		performance = create(:performance_with_festival)
@@ -50,5 +64,6 @@ RSpec.describe "artists/show.html.erb", :type => :view do
 			expect(rendered).to match /Sun/
 		end
   end
+  
 end
 

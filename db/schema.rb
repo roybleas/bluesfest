@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216224922) do
+ActiveRecord::Schema.define(version: 20160307110505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artistpages", force: :cascade do |t|
+    t.string   "letterstart"
+    t.string   "letterend"
+    t.string   "title"
+    t.integer  "seq"
+    t.integer  "festival_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "artistpages", ["festival_id"], name: "index_artistpages_on_festival_id", using: :btree
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -81,6 +93,7 @@ ActiveRecord::Schema.define(version: 20160216224922) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "artistpages", "festivals"
   add_foreign_key "artists", "festivals"
   add_foreign_key "performances", "artists"
   add_foreign_key "performances", "festivals"

@@ -97,6 +97,27 @@ namespace :uploads do
   	end
   	
   end
+	
+	desc "Upload artists data to database"
+  task artistpages: :environment do
+  	puts "upload artist pages"
+  	filename = 'artistpages.csv'
+  	file = Rails.root.join('db','dbloadfiles',filename)
+  	
+		filename = 'festival.yml'
+  	fileCurrentFestival = Rails.root.join('db','dbloadfiles',filename)
+
+		currentFestival = CurrentFestival.new(fileCurrentFestival)  
+		currentFestival.load	
+		currentFestival.output_festival_message
+  	
+  	
+  	puts "uploading..."
+  	loader = LoadArtistPages.new(file, currentFestival.festival)
+  		
+  	loader.load
+  	
+  end
 
 
 end

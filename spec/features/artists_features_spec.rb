@@ -7,15 +7,15 @@ feature 'show artists' do
 		visit root_path
 		click_link 'Artists'
 		
-		expect(current_path).to eq artists_path
+		expect(current_path).to eq artistsbypage_path('a')
 		
 	end
 	scenario 'with active festival and artist' do
-		festival = create(:artist_with_festival)
+		festival = create(:festival_with_artist_and_page)
 		visit root_path
 		click_link 'Artists'
 		
-		expect(current_path).to eq artists_path
+		expect(current_path).to eq artistsbypage_path('a')
 		expect(page).to have_content("Tom Jones")
 	end
 end

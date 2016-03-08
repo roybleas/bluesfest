@@ -1,0 +1,23 @@
+<div class="container">
+<h2>Artists</h2>
+<% if @artists.length == 0 %>
+	<p> No artists added for this festival yet</p>
+<% else %>
+	<% if not @pages.nil? %>
+		<ul class="pagination">
+		
+			<% @pages.each do |page| %> 
+			
+  		<li <%= is_active_page(page,@page) %> > <%= link_to page.title, artistsbypage_path(page.letterstart) %> </li>
+  		
+  		<% end %>
+  	</ul>
+	<% end %>
+	
+	<ul class="list-group">
+		<%= render partial: "artist", collection: @artists %>
+	</ul>
+	
+	
+<% end %>
+</div>

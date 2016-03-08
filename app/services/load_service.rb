@@ -1,3 +1,4 @@
+require_relative 'load_artist_pages_service'
 require 'csv'
 require 'date'
 require 'yaml'

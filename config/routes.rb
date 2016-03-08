@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'stages/:id/:dayindex' => 'stages#show', as: :stage 
 	resources :stages, only: [:index]
   resources :artists, only: [:show, :index]
+  get 'artists/bypage/:letter', to: 'artists#bypage',  as: 'artistsbypage'
+  
 
   root 'home_pages#home'
   get 'plan4today' => 'home_pages#plan'

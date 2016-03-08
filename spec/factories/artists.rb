@@ -40,5 +40,12 @@ FactoryGirl.define do
     	active false
     	extractdate "2016-02-08"
   	end
+  	factory :artist_firstpage_with_festival, class: Artist do
+    	name "Archie Roach"
+    	code "archieroach"
+    	active true
+  		festival
+  	end
+
   end
 end
