@@ -20,6 +20,10 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 			render
 			assert_select 'li',"Stages"
 		end
+		it "has a Days tab" do
+			render
+			assert_select 'li',"Days"
+		end
 		it "has a Artists tab" do
 			render
 			assert_select 'li',"Artists"
