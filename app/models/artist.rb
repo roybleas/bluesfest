@@ -16,6 +16,7 @@
 class Artist < ActiveRecord::Base
   belongs_to :festival
   has_many :performances
+  has_many :favourites
   
   validates :name, presence: true
   

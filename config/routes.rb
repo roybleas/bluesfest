@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+	resources :favourites, only: [:index, :destroy]
+  get 'favourites/add/:letter', to: 'favourites#add', as: :favadd
+  get 'favourites/day/:dayindex', to: 'favourites#day', as: :favday
+  get 'artists/fav/:id', to: 'artists#fav',  as: 'artistsfav'
 
   get 'showbyday/:dayindex', to: 'performances#showbyday', as: :showbyday
 

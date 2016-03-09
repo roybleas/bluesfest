@@ -83,3 +83,6 @@ rake -T | grep my_namespace eg rake -T | grep extract
 bundle exec rake db:rollback and add title to Performance
 
 rails g model artistpage letterstart:string letterend:string title:string seq:integer festival:references
+
+g model favourite user_id:integer artist:references
+g controller Favourites index delete add day
