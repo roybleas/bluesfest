@@ -16,8 +16,8 @@
 
     <% index = find_matching_stage_index(stage_index,stage_count,p,stages) %>
     <%= preceding_stage_cells(stage_index, index) %>
-    <td class="<%= p.stage.code %>"><%= link_to p.artist.name, artist_path(p.artist) %></td>
-    <% stage_index = index + 1 %>
+    <td class="<%= p.stage.code %>"><%= link_to p.title, artist_path(p.artist), class: "stagelink" %></td>
+    <% stage_index = index + 1 unless index.nil?%>
 
   <% end %>
 

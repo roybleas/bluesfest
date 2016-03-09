@@ -18,7 +18,7 @@ FactoryGirl.define do
     title "Mojo"
     code 'mo'
     seq 1
-    festival nil
+    # festival nil
    	
    	factory :stage_with_festival, class: Stage do
   		festival

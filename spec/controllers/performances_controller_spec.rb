@@ -62,17 +62,17 @@ RSpec.describe PerformancesController, :type => :controller do
 	context 'number of festival days' do
 		it "assigns 0 to days when no festival records" do
 			get :showbyday, dayindex: 2
-			expect(assigns(:days)).to eq 0
+			expect(assigns(:festivaldays)).to eq 0
 		end
 		it "assigns 0 to days when no current festival" do
 			festival = create(:festival_inactive)
 			get :showbyday, dayindex: 2
-			expect(assigns(:days)).to eq 0
+			expect(assigns(:festivaldays)).to eq 0
 		end
 		it "assigns festival.days to days for current festival" do
 			festival = create(:festival)
 			get :showbyday, dayindex: 3
-			expect(assigns(:days)).to eq festival.days
+			expect(assigns(:festivaldays)).to eq festival.days
 		end
 	end
 	context "select by day number" do

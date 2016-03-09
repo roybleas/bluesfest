@@ -22,7 +22,8 @@ module PerformancesHelper
 	end
 	
 	def preceding_stage_cells(stage_index,next_index)
-		cell_count = (next_index - stage_index)
+		cell_count = 0
+		cell_count = (next_index - stage_index) unless stage_index.nil? || next_index.nil?
 		return ("<td></td>" * cell_count).html_safe unless cell_count < 0 
 	end
 	
@@ -33,6 +34,7 @@ module PerformancesHelper
 				return index
 			end
 		end
+		logger.debug "#{stage_index},#{stage_count},#{performance.inspect},#{stages.inspect}"
 		return default_index
 	end
 		

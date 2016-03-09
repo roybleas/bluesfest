@@ -8,7 +8,7 @@
 		<div class="panel-body panel-default">
 			Performances for Day: <%= @dayindex %> <%= @performancedate %> 
 		</div>
-	<table class="table" >
+	<table class="table-condensed table-bordered" >
 		<thead>
 			<%= render partial: "scheduledayheader", locals: {stages: @stages} %>
 		</thead>

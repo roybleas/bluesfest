@@ -137,7 +137,7 @@ RSpec.describe "performances/showbyday.html.erb", :type => :view do
 			it "shows artist for one performance in Mojo" do
 				p = @performances[0]
 				render
-				assert_select "tbody tr td", p.artist.name
+				assert_select "tbody tr td", p.title
 			end
 			it "shows the stage class code for the cell" do
 				render
