@@ -59,7 +59,7 @@ namespace :uploads do
   	
   end
 
-  desc "Upload artists data to database"
+  desc "Upload performances data to database"
   task performances: :environment do
   	puts "upload performances"
   	suffix = "160304"

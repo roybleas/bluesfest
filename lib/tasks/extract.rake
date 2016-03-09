@@ -8,6 +8,7 @@ namespace :extract do
     puts "extract performances"
     
   	filesuffix = "160304"
+
   	filename = "schedule#{filesuffix}.txt"
   	file = Rails.root.join('extract',filename)
   	
