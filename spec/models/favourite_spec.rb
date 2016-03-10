@@ -17,8 +17,9 @@ RSpec.describe Favourite, :type => :model do
   	expect(favourite).to be_valid
   end
   it "has foriegn keys to artist" do
-  	f = create(:favourite_with_artist_and_user)
+  	u = create(:user_for_favourite)
   	favourite = Favourite.includes(:artist, :user).first
   	expect(favourite.artist).to be_valid
+  	expect(favourite.user).to be_valid
 	end
 end

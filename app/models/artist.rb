@@ -40,4 +40,16 @@ class Artist < ActiveRecord::Base
 		where("artists.code = ? and artists.festival_id = ?",artist_code,festival_id)
 	end
 	
+	def self.artists_by_range(page_range)
+		if page_range[:letterend].nil?
+			return self.starting_with_letter(page_range[:letterstart]) 
+		else
+			return self.by_letter_range(page_range[:letterstart], page_range[:letterend])
+		end
+	end	
+	
+	def self.with_user_favourites(user)
+		select('artists.*, favourites.user_id as fav_user_id').joins('artists full join favourites on artists.id = favourites.artist_id').where('favourites.user_id = ? or favourites.user_id is null',user.id)
+		#a = Artist.select('artists.*,user_id as fav_user_id').joins('artists full join favourites on artists.id = favourites.artist_id').where('(favourites.user_id = 4 or favourites.user_id is Null) and artists.active = true').order('artists.id').all
+	end
 end
