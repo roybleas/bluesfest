@@ -13,6 +13,10 @@
 				
 			</tbody>
 		</table>
-
+		<% if logged_in? %>
+		<p> <%= add_or_remove(@favourite_artist,@artist) %>
+		<%= add_or_remove_caption(@favourite_artist, @artist) %>
+		</p>
+		<% end %>
 <% end %>
 </div>

@@ -48,8 +48,8 @@ class Artist < ActiveRecord::Base
 		end
 	end	
 	
-	def self.with_user_favourites(user)
-		select('artists.*, favourites.user_id as fav_user_id').joins('artists full join favourites on artists.id = favourites.artist_id').where('favourites.user_id = ? or favourites.user_id is null',user.id)
-		#a = Artist.select('artists.*,user_id as fav_user_id').joins('artists full join favourites on artists.id = favourites.artist_id').where('(favourites.user_id = 4 or favourites.user_id is Null) and artists.active = true').order('artists.id').all
+	def self.with_user_favourites(user_id)
+		select('artists.*, favourites.user_id as fav_user_id').joins('artists full join favourites on artists.id = favourites.artist_id').where('favourites.user_id = ? or favourites.user_id is null',user_id)
+		
 	end
 end

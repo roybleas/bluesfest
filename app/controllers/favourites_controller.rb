@@ -94,8 +94,8 @@ class FavouritesController < ApplicationController
   
   private
  	def get_artists_by_range(page_range,user,festival)
-		return Artist.with_user_favourites(user).by_festival(festival).order(name: :asc).all if page_range.nil?
-		return Artist.artists_by_range(page_range).with_user_favourites(user).by_festival(festival).order(name: :asc).all 
+		return Artist.with_user_favourites(user.id).by_festival(festival).order(name: :asc).all if page_range.nil?
+		return Artist.artists_by_range(page_range).with_user_favourites(user.id).by_festival(festival).order(name: :asc).all 
 	end	
 
 end
