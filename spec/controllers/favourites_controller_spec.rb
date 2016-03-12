@@ -34,6 +34,10 @@ RSpec.describe FavouritesController, :type => :controller do
 		      post :create, id: 1
 		      expect(response).to redirect_to (login_url)
 		   end
+		   it "has redirect for patch" do
+		      patch :performanceupdate, id: 1
+		      expect(response).to redirect_to (login_url)
+		   end
 
 		end
 		context "with user logged in it response" do
@@ -58,6 +62,12 @@ RSpec.describe FavouritesController, :type => :controller do
 		      post :create, id: artist.id
 		      expect(response).to have_http_status(:redirect)
 		    end
+		    it "has redirect for patch" do
+		    	favperform = create(:favouriteperformance)
+		      patch :performanceupdate, id: favperform.id
+		      expect(response).to have_http_status(:redirect)
+		    end
+
 			end
 	    it "has success for add" do
 	  		festival = create(:festival)
@@ -266,5 +276,27 @@ RSpec.describe FavouritesController, :type => :controller do
 			session[:user_id] = user.id
 			expect{ delete :destroy, id: favourite.id}.to change(Favouriteperformance,:count).by(-3)
 		end
+	end
+	
+	describe "PATCH favourite" do
+		before(:example) do
+			@logged_in_user = create(:user_for_favourites_with_desc_artist_list_name, artist_count:  1)
+			session[:user_id] = @logged_in_user.id
+			request.env["HTTP_REFERER"] = "where_i_came_from"
+		end
+
+		it "changes active status from true to false" do
+			favperform = create(:favouriteperformance, active: true)
+			patch :performanceupdate, id: favperform.id
+			expect(Favouriteperformance.find(favperform.id).active).to be_falsey
+		end
+
+	
+		it "changes active status from false to true" do
+			favperform = create(:favouriteperformance, active: false)
+			patch :performanceupdate, id: favperform.id
+			expect(Favouriteperformance.find(favperform.id).active).to be_truthy
+		end
+		
 	end
 end

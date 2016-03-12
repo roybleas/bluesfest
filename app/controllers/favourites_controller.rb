@@ -14,7 +14,7 @@ class FavouritesController < ApplicationController
 	include Artistpages
 	include Validations
 	
-  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create ]
+  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate ]
 
   def index
   	@favourites = Favourite.for_user(@current_user).includes(:artist).order("artists.name").all
@@ -53,7 +53,17 @@ class FavouritesController < ApplicationController
     redirect_to :back
   	
   end
-  
+	
+	def performanceupdate  
+		favperform_id = params[:id].to_i
+		
+		favouriteperformance = Favouriteperformance.find(favperform_id)
+		
+		favouriteperformance.active = !favouriteperformance.active
+		favouriteperformance.save
+		
+		redirect_to :back
+	end
 
   def add
   	festival = Festival.current_active.take
