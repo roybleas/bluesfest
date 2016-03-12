@@ -1,9 +1,20 @@
+# == Schema Information
+#
+# Table name: favourites
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  artist_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class FavouritesController < ApplicationController
 	include Userlogin
 	include Artistpages
 	include Validations
 	
-  before_action :logged_in_user, only: [:add, :index, :day]
+  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create ]
 
   def index
   	@favourites = Favourite.for_user(@current_user).includes(:artist).order("artists.name").all
@@ -12,8 +23,37 @@ class FavouritesController < ApplicationController
   end
 
   def destroy
-  	redirect_to root_url
+  	favourite = Favourite.find_by_id(params[:id])
+  	if favourite.nil? 
+  		flash[:error] = "Favourite record not found [id: #{params[:id]}"
+  	else
+  		favourite.destroy
+  	end
+  	redirect_to :back
   end
+  
+  def create
+  	artist_id = params[:id].to_i
+  	
+  	artist = Artist.find(artist_id)
+  	performances = Performance.where(artist_id: artist.id)
+  	  	
+  	ActiveRecord::Base.transaction do
+			favourite = artist.favourites.create(user_id: @current_user.id)
+  	
+  		performances.each do |performance| 
+  			fp = favourite.favouriteperformances.create(performance_id: performance.id) 
+  		end
+  	 end
+  
+  	redirect_to :back
+  
+  rescue ActiveRecord::RecordNotUnique
+    flash[:warning] = "Favourite already added."
+    redirect_to :back
+  	
+  end
+  
 
   def add
   	festival = Festival.current_active.take

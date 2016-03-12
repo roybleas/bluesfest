@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: favourites
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  artist_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe FavouritesController, :type => :controller do
@@ -15,6 +26,15 @@ RSpec.describe FavouritesController, :type => :controller do
 		   	get :day, dayindex: 1
 		   	expect(response).to redirect_to (login_url)
 		   end
+		   it "has redirect for destroy" do
+		      delete :destroy, id: 1
+		      expect(response).to redirect_to (login_url)
+		   end
+		   it "has redirect for create" do
+		      post :create, id: 1
+		      expect(response).to redirect_to (login_url)
+		   end
+
 		end
 		context "with user logged in it response" do
 			before(:example) do
@@ -25,10 +45,20 @@ RSpec.describe FavouritesController, :type => :controller do
 	      get :index
 	      expect(response).to have_http_status(:success)
 	    end
-	    it "has redirect for destroy" do
-	      delete :destroy, id: 1
-	      expect(response).to have_http_status(:redirect)
-	    end
+	    context "with return address" do
+	    	before(:example) do
+	    		request.env["HTTP_REFERER"] = "where_i_came_from"
+	    	end
+		    it "has redirect for destroy" do
+		      delete :destroy, id: 1
+		      expect(response).to have_http_status(:redirect)
+		    end
+		   	it "has redirect for create" do
+		   		artist = create(:artist)
+		      post :create, id: artist.id
+		      expect(response).to have_http_status(:redirect)
+		    end
+			end
 	    it "has success for add" do
 	  		festival = create(:festival)
 	      get :add, letter: 'a'
@@ -184,7 +214,57 @@ RSpec.describe FavouritesController, :type => :controller do
 			 get :day, dayindex: 2
 			 expect(assigns(:performancedate)).to eq "( Fri 25 March 2016 )"
 			end
-			
+		end
+	end
+	describe "POST favourite" do
+		before(:example) do
+			@logged_in_user = create(:user)
+			session[:user_id] = @logged_in_user.id
+			@festival = create(:festival_with_stage_artist_performance)
+			@artist = Artist.first
+			request.env["HTTP_REFERER"] = "where_i_came_from"
+		end
+		it "saves  a favourite" do
+			expect{ post :create, id: @artist.id}.to change(Favourite,:count).by(1)
+		end			
+		it "saves favourite performances linked to favourite" do
+			expect{ post :create, id: @artist.id}.to change(Favouriteperformance,:count).by(1)
+		end
+		it "saves multiple favourite performances linked to favourite" do
+			festival = create(:festival_with_stage_artist_multiple_performances, performance_count: 5 )
+			artist = Artist.where(festival_id: festival.id).first
+			expect{ post :create, id: artist.id}.to change(Favouriteperformance,:count).by(5)
+		end
+		it "rejects duplicate favourites" do
+			expect{ post :create, id: @artist.id}.to change(Favourite,:count).by(1)
+			expect{ post :create, id: @artist.id}.to change(Favourite,:count).by(0)
+		end
+		it "does not create favouriteperformances when duplicate favourites" do
+			festival = create(:festival_with_stage_artist_multiple_performances, performance_count: 5 )
+			artist = Artist.where(festival_id: festival.id).first
+			expect{ post :create, id: artist.id}.to change(Favouriteperformance,:count).by(5)
+			expect{ post :create, id: artist.id}.to change(Favouriteperformance,:count).by(0)
+		end
+	end
+	describe "DELETE favourite" do
+		before(:example) do
+			@logged_in_user = create(:user_for_favourites_with_desc_artist_list_name, artist_count:  1)
+			session[:user_id] = @logged_in_user.id
+			request.env["HTTP_REFERER"] = "where_i_came_from"
+		end
+		it "deletes a favourite" do
+			favourite = Favourite.where(user_id: @logged_in_user.id).take
+			expect{ delete :destroy, id: favourite.id}.to change(Favourite,:count).by(-1)
+		end
+		it "has error message when favourite not found" do
+			delete :destroy, id: -1
+			expect(flash[:error]).to be_present 
+		end
+		it "deletes favourite perfomances as well as favourite" do
+			user = create(:user_for_favourites_with_performances)
+			favourite = Favourite.find_by_user_id(user.id)
+			session[:user_id] = user.id
+			expect{ delete :destroy, id: favourite.id}.to change(Favouriteperformance,:count).by(-3)
 		end
 	end
 end

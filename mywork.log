@@ -86,3 +86,5 @@ rails g model artistpage letterstart:string letterend:string title:string seq:in
 
 g model favourite user_id:integer artist:references
 g controller Favourites index delete add day
+
+g model favouriteperformance performance_id:integer active:boolean favourite:references
