@@ -38,17 +38,15 @@ class ArtistsController < ApplicationController
   end
   
   def bypage
-  	@page = range_page(params[:letter])
-  	page_range = verify_range(@page)
-  	@artists = get_artists_by_range(page_range)  	
-  	@pages = Artistpage.current_active_festival.all.order(seq: :asc)
+  	
+  	letter = params[:letter]
+  	user_id = logged_in? ? @current_user.id : 0
+  	
+  	create_artists_list_by_page(letter,user_id)
+  	
 	end
 	
 	private
 
-	def get_artists_by_range(page_range)
-		return Artist.current_active_festival.all if page_range.nil?
-		return Artist.current_active_festival.artists_by_range(page_range).order(name: :asc).all 
-	end	
-
+	
 end

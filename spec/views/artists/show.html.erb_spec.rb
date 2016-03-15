@@ -88,7 +88,6 @@ RSpec.describe "artists/show.html.erb", :type => :view do
   		assert_select "a[href=?]", "/favourites/#{favourite.id}" 
 			assert_select "a[data-method=?]", "delete"
   		expect(rendered).to match /#{@artist.name} from favourites/
-
   	end
 
   end

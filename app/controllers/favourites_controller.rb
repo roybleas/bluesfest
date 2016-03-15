@@ -66,12 +66,11 @@ class FavouritesController < ApplicationController
 	end
 
   def add
-  	festival = Festival.current_active.take
+    letter = params[:letter]
+  	user_id = @current_user.id 
+
+  	create_artists_list_by_page(letter,user_id)
   	
-  	@page = range_page(params[:letter])
-  	page_range = verify_range(@page)
-  	@artists = get_artists_by_range(page_range,@current_user,festival)
-  	@pages = Artistpage.current_active_festival.all.order(seq: :asc)
   end
 
   def day
@@ -92,10 +91,4 @@ class FavouritesController < ApplicationController
   		
   end
   
-  private
- 	def get_artists_by_range(page_range,user,festival)
-		return Artist.with_user_favourites(user.id).by_festival(festival).order(name: :asc).all if page_range.nil?
-		return Artist.artists_by_range(page_range).with_user_favourites(user.id).by_festival(festival).order(name: :asc).all 
-	end	
-
 end

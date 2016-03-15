@@ -182,10 +182,10 @@ RSpec.describe FavouritesController, :type => :controller do
 			it "returns artists linked to favourites and selected by different user" do
 				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
 				other_user = create(:user_in_sequence)
-				favourite = create(:favourite,user_id: @logged_in_user.id, artist_id: artist.id)
-				puts 
+				favourite = create(:favourite,user_id: other_user.id, artist_id: artist.id)
 				get :add, letter: 'a'
 				expect(assigns(:artists)).to include artist
+				expect(assigns(:artists)[0].fav_user_id).to be_nil
 			end
 		end
 

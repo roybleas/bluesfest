@@ -94,7 +94,6 @@ RSpec.describe ArtistsController, :type => :controller do
 			before(:example) do
 				@festival = create(:festival_with_artist_pages)
     	end
-			
 			it "returns artist begining with z" do
 				artist = create(:artist, name: "Zydeco Jump",festival_id: @festival.id, active: true)
 				get :bypage, letter: 'z'
@@ -102,6 +101,25 @@ RSpec.describe ArtistsController, :type => :controller do
 			end
 		end
 		context " user logged in" do
+			before(:example) do
+				@festival = create(:festival_with_artist_pages, page_count: 1)
+				@logged_in_user = create(:user)
+				session[:user_id] = @logged_in_user.id				
+    	end
+			it "returns artist and favourite user_id" do
+				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
+				favourite = create(:favourite, user_id: @logged_in_user.id, artist_id: artist.id)
+				get :bypage, letter: 'a'
+				expect(assigns(:artists)).to match_array(artist)
+				expect(assigns(:artists)[0].fav_user_id ).to eq favourite.user_id
+			end
+			it "returns artist and null favourite user_id" do
+				user = create(:user_in_sequence)
+				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
+				favourite = create(:favourite, user_id: user.id, artist_id: artist.id)
+				get :bypage, letter: 'a'
+				expect(assigns(:artists)[0].fav_user_id ).to be_nil
+			end
 			
 		end
 		context "non active " do
@@ -181,9 +199,10 @@ RSpec.describe ArtistsController, :type => :controller do
 	  
 		context "favourite" do
 			before(:example) do
+				@artist = create(:artist)
 				@logged_in_user = create(:user)
-				session[:user_id] = @logged_in_user.id
-				@artist = create(:artist) 
+				session[:user_id] = @logged_in_user.id				
+
 			end
 		 	it "shows nil for favourite_artist when no favourite artist exists" do
 				get :show, id: @artist.id

@@ -41,7 +41,7 @@ Add routes for Session
 
 Add to spec/rails_helper.rb
  # Include FactoryGirl syntax 
-  config.include FactoryGirl::Syntax::Methods
+  include FactoryGirl::Syntax::Methods
 rspec for users controller
 rails generate controller Sessions new
 rails generate controller StaticPages home
