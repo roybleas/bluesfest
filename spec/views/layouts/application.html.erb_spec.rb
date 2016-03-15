@@ -33,7 +33,10 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 		before(:each) do
 			allow(view).to receive_messages(:logged_in? => false)
 		end
-		
+		it "does not have a Favourites tab" do
+			render
+			assert_select 'li',{ :text => "Favourites", :count => 0 }
+		end
 		it "has a link to log in" do
 			render
 			assert_select 'li', "Log in"
@@ -46,7 +49,11 @@ RSpec.describe "layouts/application.html.erb", :type => :view do
 			@user = create(:user)
 			allow(view).to receive(:current_user).and_return(@user)
 		end
-		
+		it "has a Favourites tab" do
+			render
+			assert_select 'li',{ :text => "Favourites", :count => 1 }
+			assert_select "a[href=?]", "/favourites"
+		end				
 		it "does not have a link to login" do
 			render
 			assert_select 'li', {:text=> "Log in", :count=> 0 }
