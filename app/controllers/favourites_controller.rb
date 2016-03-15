@@ -71,6 +71,7 @@ class FavouritesController < ApplicationController
 
   	create_artists_list_by_page(letter,user_id)
   	
+  	@favourites_style = :as_link
   end
 
   def day

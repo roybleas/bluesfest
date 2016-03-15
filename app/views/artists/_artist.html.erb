@@ -1,5 +1,5 @@
 <li class="list-group-item">	
-	<% if not artist.fav_user_id.nil? %> <span class="glyphicon glyphicon-music"></span> <% end %>
+	<%= favourites_link_or_icon(favourites_style,artist.fav_id,artist)  %>
 	<%= link_to artist.name, artist %>
 	<%= render partial: "shared/bluelink", locals: {artist_code: artist.linkid} %>
 </li>

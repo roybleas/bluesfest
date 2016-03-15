@@ -15,7 +15,7 @@
 	<% end %>
 	
 	<ul class="list-group">
-		<%= render partial: "artist", collection: @artists %>
+		<%= render partial: "artist", collection: @artists, locals: { favourites_style: @favourites_style}  %>
 	</ul>
 	
 	

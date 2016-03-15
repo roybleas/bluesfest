@@ -111,14 +111,14 @@ RSpec.describe ArtistsController, :type => :controller do
 				favourite = create(:favourite, user_id: @logged_in_user.id, artist_id: artist.id)
 				get :bypage, letter: 'a'
 				expect(assigns(:artists)).to match_array(artist)
-				expect(assigns(:artists)[0].fav_user_id ).to eq favourite.user_id
+				expect(assigns(:artists)[0].fav_id ).to eq favourite.id
 			end
 			it "returns artist and null favourite user_id" do
 				user = create(:user_in_sequence)
 				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
 				favourite = create(:favourite, user_id: user.id, artist_id: artist.id)
 				get :bypage, letter: 'a'
-				expect(assigns(:artists)[0].fav_user_id ).to be_nil
+				expect(assigns(:artists)[0].fav_id ).to be_nil
 			end
 			
 		end

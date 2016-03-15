@@ -48,13 +48,10 @@ class Artist < ActiveRecord::Base
 		end
 	end	
 	def self.select_with_fav_user_id
-		select('artists.*, fav.user_id as fav_user_id')
+		select('artists.*, fav.id as fav_id')
 	end
 	def self.joins_favourites
 		joins(" right join artists on fav.artist_id = artists.id ")
-	end
-	def self.with_user_favourites(user_id)
-		joins('full join favourites on artists.id = favourites.artist_id').where('favourites.user_id = ? or favourites.user_id is null',user_id)	
 	end
 	def self.active_artist
 	 where 'artists.active = true'

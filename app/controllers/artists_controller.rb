@@ -41,9 +41,11 @@ class ArtistsController < ApplicationController
   	
   	letter = params[:letter]
   	user_id = logged_in? ? @current_user.id : 0
+
   	
   	create_artists_list_by_page(letter,user_id)
-  	
+		
+		@favourites_style = :as_glypicon
 	end
 	
 	private

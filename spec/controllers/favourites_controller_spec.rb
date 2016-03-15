@@ -171,13 +171,13 @@ RSpec.describe FavouritesController, :type => :controller do
 			it "returns artists linked to favourites but no favourites created " do
 				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
 				get :add, letter: 'a'
-				expect(assigns(:artists)[0].fav_user_id).to be_nil
+				expect(assigns(:artists)[0].fav_id).to be_nil
 			end
 			it "returns artists linked to favourites and selected by user" do
 				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
 				favourite = create(:favourite,user_id: @logged_in_user.id, artist_id: artist.id)
 				get :add, letter: 'a'
-				expect(assigns(:artists)[0].fav_user_id).to eq(@logged_in_user.id)
+				expect(assigns(:artists)[0].fav_id).to eq(favourite.id)
 			end
 			it "returns artists linked to favourites and selected by different user" do
 				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
@@ -185,7 +185,7 @@ RSpec.describe FavouritesController, :type => :controller do
 				favourite = create(:favourite,user_id: other_user.id, artist_id: artist.id)
 				get :add, letter: 'a'
 				expect(assigns(:artists)).to include artist
-				expect(assigns(:artists)[0].fav_user_id).to be_nil
+				expect(assigns(:artists)[0].fav_id).to be_nil
 			end
 		end
 

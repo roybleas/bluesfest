@@ -33,7 +33,9 @@ module ArtistsHelper
 		if favourite.nil?
 			return link_to "Add", favourites_path(:id => artist.id), :method => :post, class: "btn btn-info btn-sm", "role" => "button"
 		else
-			return link_to "Remove", favourite, method: :delete,  class: "btn btn-danger btn-sm", "role" => "button"
+			#depends if called with favourite or artist.fav_id
+			favourite_id =  favourite.kind_of?(Favourite) ? favourite.id : favourite
+			return link_to "Remove", favourite_path(:id => favourite_id), method: :delete,  class: "btn btn-danger btn-sm", "role" => "button"
 		end
 	end
 	
@@ -45,4 +47,14 @@ module ArtistsHelper
 		end
 	end
 
+	def favourites_link_or_icon(favourites_style,favourite_id,artist)
+		return favourite_icon(favourite_id) if favourites_style == :as_glypicon
+		return add_or_remove(favourite_id,artist) if favourites_style == :as_link
+		return "Invalid Favourites Style[#{favourites_style}]"
+	end
+	
+	def favourite_icon(favourite_id)
+		return '<span class="glyphicon glyphicon-music"></span>'.html_safe unless favourite_id.nil?
+		return ""
+	end
 end

@@ -88,3 +88,6 @@ g model favourite user_id:integer artist:references
 g controller Favourites index delete add day
 
 g model favouriteperformance performance_id:integer active:boolean favourite:references
+
+to view schemas (on heroku) 
+	heroku run "bundle exec rake db:schema:dump && cat db/schema.rb"
