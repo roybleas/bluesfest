@@ -27,7 +27,7 @@ class PerformancesController < ApplicationController
   		@festivaldays = 0
   		@performances = []
   		@stages = []
-  		@performanceday = ""
+  		@performancedate = ""
   	else
   		@festivaldays = festival.days
   		@performances = Performance.for_day(@dayindex).includes(:artist, :stage).for_festival(festival).order(starttime: :asc).order("stages.seq").all

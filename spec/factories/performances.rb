@@ -80,5 +80,19 @@ FactoryGirl.define do
 	    	performance = create(:performance,festival_id: festival.id, daynumber: 1, title: 'KENDRICK LAMAR', artist_id: artist.id, stage_id: stage.id)
 			end
 		end
+		
+		factory :festival_with_stage_artist_multiple_performances do
+			ignore do
+				performance_count 3
+			end
+			after(:create) do |festival, evaluator|
+	    	stage = create(:stage, festival_id: festival.id, title: 'Mojo', code: 'mo', seq: 1)
+	    	artist = create(:artist,festival_id: festival.id, name: 'Kendrick Lamar', code: 'kendricklamar')
+	    	(1..evaluator.performance_count).each do |index|
+	    		performance = create(:performance,festival_id: festival.id, daynumber: index, title: "KENDRICK LAMAR #{index}", artist_id: artist.id, stage_id: stage.id)
+	    	end
+
+			end
+		end
 	end
 end

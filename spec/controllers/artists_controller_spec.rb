@@ -22,27 +22,11 @@ RSpec.describe ArtistsController, :type => :controller do
       get :index
       expect(response).to redirect_to artistsbypage_path('a')
     end
-		xcontext "active festival" do
-			it "fetchs artist for active festival" do
-				artist = create(:artist_with_festival)
-				get :index
-				expect(assigns(:artists)).to match_array(artist)
-			end
-			it "returns empty array for non active festival" do
-				festival = create(:festival_inactive)
-				artist = create(:artist, festival_id: festival.id, active: true)
-				get :index
-				expect(assigns(:artists)).to be_empty
-			end
-		end
+
   end
 	
 	describe "Get artistbypage" do
 		context "index artists" do
-			xit "returns http success" do
-				get :bypage, letter: "y"
-				expect(response).to have_http_success(:success )
-			end
 			it "renders bypage" do
 				get :bypage, letter: "y"
 				expect(response).to render_template :bypage
@@ -110,12 +94,33 @@ RSpec.describe ArtistsController, :type => :controller do
 			before(:example) do
 				@festival = create(:festival_with_artist_pages)
     	end
-			
 			it "returns artist begining with z" do
 				artist = create(:artist, name: "Zydeco Jump",festival_id: @festival.id, active: true)
 				get :bypage, letter: 'z'
 				expect(assigns(:artists)).to match_array(artist)
 			end
+		end
+		context " user logged in" do
+			before(:example) do
+				@festival = create(:festival_with_artist_pages, page_count: 1)
+				@logged_in_user = create(:user)
+				session[:user_id] = @logged_in_user.id				
+    	end
+			it "returns artist and favourite user_id" do
+				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
+				favourite = create(:favourite, user_id: @logged_in_user.id, artist_id: artist.id)
+				get :bypage, letter: 'a'
+				expect(assigns(:artists)).to match_array(artist)
+				expect(assigns(:artists)[0].fav_user_id ).to eq favourite.user_id
+			end
+			it "returns artist and null favourite user_id" do
+				user = create(:user_in_sequence)
+				artist = create(:artist, name: "Archie Roach",festival_id: @festival.id, active: true)
+				favourite = create(:favourite, user_id: user.id, artist_id: artist.id)
+				get :bypage, letter: 'a'
+				expect(assigns(:artists)[0].fav_user_id ).to be_nil
+			end
+			
 		end
 		context "non active " do
 			before(:example) do
@@ -191,6 +196,23 @@ RSpec.describe ArtistsController, :type => :controller do
     		expect(assigns(:startdate_minus_one)).to be_nil
     	end
     end
-  end
+	  
+		context "favourite" do
+			before(:example) do
+				@artist = create(:artist)
+				@logged_in_user = create(:user)
+				session[:user_id] = @logged_in_user.id				
 
+			end
+		 	it "shows nil for favourite_artist when no favourite artist exists" do
+				get :show, id: @artist.id
+				expect(assigns(:favourite_artist)).to be_nil
+			end
+		 	it "shows favourite_artist when favourite artist exists" do
+		 		favourite = create(:favourite, artist_id: @artist.id, user_id: @logged_in_user.id)
+				get :show, id: @artist.id
+				expect(assigns(:favourite_artist)).to eq favourite
+			end 
+		end
+	end
 end

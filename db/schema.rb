@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307110505) do
+ActiveRecord::Schema.define(version: 20160311234736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,26 @@ ActiveRecord::Schema.define(version: 20160307110505) do
   end
 
   add_index "artists", ["festival_id"], name: "index_artists_on_festival_id", using: :btree
+
+  create_table "favouriteperformances", force: :cascade do |t|
+    t.integer  "performance_id"
+    t.boolean  "active",         default: true
+    t.integer  "favourite_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "favouriteperformances", ["favourite_id"], name: "index_favouriteperformances_on_favourite_id", using: :btree
+
+  create_table "favourites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "artist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favourites", ["artist_id", "user_id"], name: "index_favourites_on_artist_id_and_user_id", unique: true, using: :btree
+  add_index "favourites", ["artist_id"], name: "index_favourites_on_artist_id", using: :btree
 
   create_table "festivals", force: :cascade do |t|
     t.date     "startdate"
@@ -95,6 +115,8 @@ ActiveRecord::Schema.define(version: 20160307110505) do
 
   add_foreign_key "artistpages", "festivals"
   add_foreign_key "artists", "festivals"
+  add_foreign_key "favouriteperformances", "favourites"
+  add_foreign_key "favourites", "artists"
   add_foreign_key "performances", "artists"
   add_foreign_key "performances", "festivals"
   add_foreign_key "performances", "stages"

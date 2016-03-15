@@ -64,6 +64,32 @@ RSpec.describe "artists/show.html.erb", :type => :view do
 			expect(rendered).to match /Sun/
 		end
   end
-  
+  context "link to favoutes" do
+  	
+  	context "when logged in"
+  	before(:example) do
+			allow(view).to receive_messages(:logged_in? => true)
+  		performance = create(:performance_with_festival)
+  		@performances = [performance]
+  		@artist = create(:artist)  		
+		end
+  	
+  	it "shows post if not already a favourite" do
+  		render
+  		assert_select "a[href=?]", "/favourites?id=#{@artist.id}" 
+			assert_select "a[data-method=?]", "post"
+  		expect(rendered).to match /#{@artist.name} to favourites/
+		end  		
+  	it "shows delete when a favourite" do
+  		user = create(:user)
+  		favourite = create(:favourite, artist_id: @artist.id, user_id: user.id)
+  		assign(:favourite_artist,favourite)
+  		render
+  		assert_select "a[href=?]", "/favourites/#{favourite.id}" 
+			assert_select "a[data-method=?]", "delete"
+  		expect(rendered).to match /#{@artist.name} from favourites/
+  	end
+
+  end
 end
 

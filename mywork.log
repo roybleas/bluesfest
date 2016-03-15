@@ -41,7 +41,7 @@ Add routes for Session
 
 Add to spec/rails_helper.rb
  # Include FactoryGirl syntax 
-  config.include FactoryGirl::Syntax::Methods
+  include FactoryGirl::Syntax::Methods
 rspec for users controller
 rails generate controller Sessions new
 rails generate controller StaticPages home
@@ -83,3 +83,8 @@ rake -T | grep my_namespace eg rake -T | grep extract
 bundle exec rake db:rollback and add title to Performance
 
 rails g model artistpage letterstart:string letterend:string title:string seq:integer festival:references
+
+g model favourite user_id:integer artist:references
+g controller Favourites index delete add day
+
+g model favouriteperformance performance_id:integer active:boolean favourite:references

@@ -28,4 +28,21 @@ module ArtistsHelper
 		return (link_to "Artists", artistsbypage_path(first_letter)).html_safe
 
 	end
+	
+	def add_or_remove(favourite,artist)
+		if favourite.nil?
+			return link_to "Add", favourites_path(:id => artist.id), :method => :post, class: "btn btn-info btn-sm", "role" => "button"
+		else
+			return link_to "Remove", favourite, method: :delete,  class: "btn btn-danger btn-sm", "role" => "button"
+		end
+	end
+	
+	def add_or_remove_caption(favourite, artist)
+		if favourite.nil?
+			return " #{artist.name} to favourites. ".html_safe
+		else
+			return " #{artist.name} from favourites. ".html_safe
+		end
+	end
+
 end

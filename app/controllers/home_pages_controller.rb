@@ -1,5 +1,5 @@
 class HomePagesController < ApplicationController
-    def home
+   def home
   	
   	
   	Time.zone ="Sydney"

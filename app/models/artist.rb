@@ -16,6 +16,7 @@
 class Artist < ActiveRecord::Base
   belongs_to :festival
   has_many :performances
+  has_many :favourites
   
   validates :name, presence: true
   
@@ -39,4 +40,23 @@ class Artist < ActiveRecord::Base
 		where("artists.code = ? and artists.festival_id = ?",artist_code,festival_id)
 	end
 	
+	def self.artists_by_range(page_range)
+		if page_range[:letterend].nil?
+			return self.starting_with_letter(page_range[:letterstart]) 
+		else
+			return self.by_letter_range(page_range[:letterstart], page_range[:letterend])
+		end
+	end	
+	def self.select_with_fav_user_id
+		select('artists.*, fav.user_id as fav_user_id')
+	end
+	def self.joins_favourites
+		joins(" right join artists on fav.artist_id = artists.id ")
+	end
+	def self.with_user_favourites(user_id)
+		joins('full join favourites on artists.id = favourites.artist_id').where('favourites.user_id = ? or favourites.user_id is null',user_id)	
+	end
+	def self.active_artist
+	 where 'artists.active = true'
+	end
 end
