@@ -34,7 +34,6 @@ RSpec.describe FavouritesController, :type => :controller do
 		      delete :clearall, id: 1
 		      expect(response).to redirect_to (login_url)
 		   end
-
 		   it "has redirect for create" do
 		      post :create, id: 1
 		      expect(response).to redirect_to (login_url)
@@ -42,8 +41,12 @@ RSpec.describe FavouritesController, :type => :controller do
 		   it "has redirect for patch" do
 		      patch :performanceupdate, id: 1
 		      expect(response).to redirect_to (login_url)
+		  end
+			it "redirects artist" do
+		   	get :artist, id: 1
+		   	expect(response).to redirect_to (login_url)
 		   end
-
+				
 		end
 		context "with user logged in it has response" do
 			before(:example) do
@@ -329,6 +332,10 @@ RSpec.describe FavouritesController, :type => :controller do
 		end
 	end
 	describe "GET artist" do
+		before(:example) do
+			@logged_in_user =  create(:user)
+			session[:user_id] = @logged_in_user.id
+		end	  	
     context "show artist" do
     	before(:each) do
     		@artist = create(:artist_with_festival)

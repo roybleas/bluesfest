@@ -15,7 +15,7 @@ class FavouritesController < ApplicationController
 	include Validations
 	include Showartist
 	
-  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate, :clearall ]
+  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate, :clearall, :artist ]
 
   def index
   	@favourites = Favourite.for_user(@current_user).includes(:artist).order("artists.name").all
