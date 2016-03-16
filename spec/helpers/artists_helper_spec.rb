@@ -1,16 +1,24 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ArtistsHelper. For example:
-#
-# describe ArtistsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe ArtistsHelper, :type => :helper do
+	describe "link_to_artist_artistpage" do
+		before(:example) do
+			@artist = build(:artist)
+		end
+		it "returns link to artists page with letter" do
+			expect(link_to_artist_artistpage(@artist)).to include("artists/bypage/t")
+		end
+		
+		# cannot find how to set up request.env["HTTP_REFERER"] outside of controller specs
+		# so cannot test for the moment	
+				
+		#request.env["HTTP_REFERER"] = "favourites/add/t"
+			
+		#	it "returns link to favourites add page with letter when called from there" do
+		#		expect(link_to_artist_artistpage(@artist)).to include("favourites/add/t")
+		#	end 
+	
+	end
   describe "add_or_remove" do
   	it "returns add when favourite does not exist" do
   		favourite = nil
@@ -70,5 +78,14 @@ RSpec.describe ArtistsHelper, :type => :helper do
 			@artist = create(:artist)
 			expect(favourites_link_or_icon(favourites_style,favourite,@artist)).to include("Invalid Favourites Style[#{favourites_style}]")
 		end
+	end
+	describe "link_to_favourites_or_artists" do
+		it "returns artist path when style is for artists page" do
+			expect(link_to_favourites_or_artists(:page_artists, "j")).to eq "/artists/bypage/j"
+		end
+		it "returns favourites path when style is for favourites page" do
+			expect(link_to_favourites_or_artists(:page_favourites, "j")).to eq "/favourites/add/j"
+		end
+
 	end
 end

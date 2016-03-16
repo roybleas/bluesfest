@@ -73,7 +73,7 @@
 		
 	end
 	
-	scenario 'and not be remembered' do
+	scenario 'and to be remembered' do
 		user = @user
 		
 		visit root_path

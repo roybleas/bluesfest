@@ -1,2 +1,19 @@
-<h1>Favourites#add</h1>
-<p>Find me in app/views/favourites/add.html.erb</p>
+<div class="container">
+<h2>Favourite Artists</h2>
+<% if @artists.length == 0 %>
+	<p> No artists added for this festival yet</p>
+<% else %>
+	
+	<%= render partial: "artists/artistpages",  locals: {pages: @pages, active_page: @page, page_style: :page_favourites}  %>
+	<div class="well well-sm">
+	<%= link_to "Clear", favclearall_path, method: :delete,  class: "btn btn-danger btn-xs", "role" => "button" %>
+	all artists from favourites list
+	<span class="badge"><%= @favouritescount %></span>
+	</div>
+	<ul class="list-group">
+		<%= render partial: "artists/artist", collection: @artists, locals: { favourites_style: @favourites_style}  %>
+	</ul>
+	
+	
+<% end %>
+</div>

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
 
+	delete 'favourites/clearall/', to: 'favourites#clearall', as: :favclearall
 	resources :favourites, only: [:index, :destroy, :create]
-  get 'favourites/add/:letter', to: 'favourites#add', as: :favadd
+  get 'favourites/add/:letter', 	to: 'favourites#add', as: :favadd
   get 'favourites/day/:dayindex', to: 'favourites#day', as: :favday
   patch 'favourites/performanceupdate/:id',  to: 'favourites#performanceupdate'
   

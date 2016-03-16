@@ -3,19 +3,11 @@
 <% if @artists.length == 0 %>
 	<p> No artists added for this festival yet</p>
 <% else %>
-	<% if not @pages.nil? %>
-		<ul class="pagination">
-		
-			<% @pages.each do |page| %> 
-			
-  		<li <%= is_active_page(page,@page) %> > <%= link_to page.title, artistsbypage_path(page.letterstart) %> </li>
-  		
-  		<% end %>
-  	</ul>
-	<% end %>
+	
+	<%= render partial: "artists/artistpages",  locals: {pages: @pages, active_page: @page, page_style: :page_artists}  %>
 	
 	<ul class="list-group">
-		<%= render partial: "artist", collection: @artists, locals: { favourites_style: @favourites_style}  %>
+		<%= render partial: "artists/artist", collection: @artists, locals: { favourites_style: @favourites_style}  %>
 	</ul>
 	
 	

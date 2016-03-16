@@ -40,31 +40,6 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
 	  	assert_select "span.glyphicon-music", {count: 1}
 	  end
 	end
-  context "style for favourites.bypage" do
-  	
-  	before(:example) do
-  		assign(:favourites_style, :as_link)
-  		@artist = create(:artist)
-  	end
-	  it "shows Add link when not linked to favourite artist " do
-	 		favourite = nil
-	 		artist = Artist.select("artists.*,null as fav_id").take
-	  	artists = [artist]
-	  	assign(:artists,artists)
-	  	render
-	  	assert_select "a[href=?]", "/favourites?id=#{@artist.id}" 
-			assert_select "a[data-method=?]", "post"
-	  end
-	  it "shows Remove link when linked to artist" do
-	 		favourite = create(:favourite, artist_id: @artist.id)
-	 		artist = Artist.select("artists.*,#{favourite.id} as fav_id").take
-	  	artists = [artist]
-	  	assign(:artists,artists)
-	  	render
-  		assert_select "a[href=?]", "/favourites/#{favourite.id}" 
-			assert_select "a[data-method=?]", "delete"
-	  end
-	end
 
   it "shows a link to artist web page" do
   	artist = create(:artist,linkid: "755")
@@ -93,6 +68,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   	page = build(:artistpage)
   	pages = [page]
   	assign(:pages, pages)
+  	assign(:page_style,:page_artists)
   	render
   	assert_select "a[href=?]", "/artists/bypage/a"
   end

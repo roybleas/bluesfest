@@ -46,6 +46,7 @@ class ArtistsController < ApplicationController
   	create_artists_list_by_page(letter,user_id)
 		
 		@favourites_style = :as_glypicon
+		
 	end
 	
 	private

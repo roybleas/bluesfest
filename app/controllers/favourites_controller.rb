@@ -14,10 +14,13 @@ class FavouritesController < ApplicationController
 	include Artistpages
 	include Validations
 	
-  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate ]
+  before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate, :clearall ]
 
   def index
   	@favourites = Favourite.for_user(@current_user).includes(:artist).order("artists.name").all
+  	if @favourites.empty?
+  		redirect_to favadd_url('a')
+  	end
   	festival = Festival.current_active.take
   	@festivaldays = festival.days unless festival.nil?
   end
@@ -25,12 +28,19 @@ class FavouritesController < ApplicationController
   def destroy
   	favourite = Favourite.find_by_id(params[:id])
   	if favourite.nil? 
-  		flash[:error] = "Favourite record not found [id: #{params[:id]}"
+  		flash[:error] = "Favourite record not found [id: #{params[:id]}]"
   	else
   		favourite.destroy
   	end
   	redirect_to :back
   end
+  
+  def clearall
+  	user_id = @current_user.id 
+   	Favourite.where('user_id = ?',user_id).destroy_all
+
+  	redirect_to :back
+	end
   
   def create
   	artist_id = params[:id].to_i
@@ -71,7 +81,10 @@ class FavouritesController < ApplicationController
 
   	create_artists_list_by_page(letter,user_id)
   	
+  	@favouritescount = Favourite.where("user_id = ?",@current_user.id).count
   	@favourites_style = :as_link
+  	@page_style = :page_favourites
+  	
   end
 
   def day

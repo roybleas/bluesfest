@@ -30,6 +30,11 @@ RSpec.describe FavouritesController, :type => :controller do
 		      delete :destroy, id: 1
 		      expect(response).to redirect_to (login_url)
 		   end
+		   it "has redirect for clearall" do
+		      delete :clearall, id: 1
+		      expect(response).to redirect_to (login_url)
+		   end
+
 		   it "has redirect for create" do
 		      post :create, id: 1
 		      expect(response).to redirect_to (login_url)
@@ -40,14 +45,19 @@ RSpec.describe FavouritesController, :type => :controller do
 		   end
 
 		end
-		context "with user logged in it response" do
+		context "with user logged in it has response" do
 			before(:example) do
-				user = create(:user)
-				session[:user_id] = user.id
+				@logged_in_user =  create(:user)
+				session[:user_id] = @logged_in_user.id
 			end	  	
 	    it "has success for index" do
+	    	favourite = create(:favourite, user_id: @logged_in_user.id )
 	      get :index
 	      expect(response).to have_http_status(:success)
+	    end
+	    it "redirects index when no favourites" do
+	      get :index
+	      expect(response).to have_http_status(:redirect)
 	    end
 	    context "with return address" do
 	    	before(:example) do
@@ -55,6 +65,10 @@ RSpec.describe FavouritesController, :type => :controller do
 	    	end
 		    it "has redirect for destroy" do
 		      delete :destroy, id: 1
+		      expect(response).to have_http_status(:redirect)
+		    end
+		    it "has redirect for clearall" do
+		      delete :clearall
 		      expect(response).to have_http_status(:redirect)
 		    end
 		   	it "has redirect for create" do
@@ -299,4 +313,20 @@ RSpec.describe FavouritesController, :type => :controller do
 		end
 		
 	end
+	describe "DELETE all my favourites" do
+		before(:example) do
+			@logged_in_user = create(:user_for_favourites_with_desc_artist_list_name, artist_count:  3)
+			session[:user_id] = @logged_in_user.id
+			request.env["HTTP_REFERER"] = "where_i_came_from"
+		end
+		it "deletes multiple favourites" do
+			expect{ delete :clearall}.to change(Favourite,:count).by(-3)
+		end
+		it "deletes favourite perfomances as well as favourite" do
+			user = create(:user_for_favourites_with_performances)
+			session[:user_id] = user.id
+			expect{ delete :clearall}.to change(Favouriteperformance,:count).by(-3)
+		end
+	end
+	
 end

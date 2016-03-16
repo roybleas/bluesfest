@@ -1,0 +1,9 @@
+<% if not pages.nil? %>
+	<ul class="pagination">
+	
+		<% pages.each do |page| %> 
+		<li <%= is_active_page(page,active_page) %> > <%= link_to page.title, link_to_favourites_or_artists(page_style,page.letterstart) %> </li>
+		
+		<% end %>
+	</ul>
+<% end %>

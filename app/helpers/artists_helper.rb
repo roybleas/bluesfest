@@ -23,19 +23,24 @@ module ArtistsHelper
 	end
 	
 	def link_to_artist_artistpage(artist)
-
 		first_letter =  artist.nil? ? 'a' : artist.code.first
+		#this is a bit of a hack to find where it was called from
+		# but default to Artists
+		
+		referer = request.env["HTTP_REFERER"] unless request.nil?
+		return (link_to "Artists", favadd_path(first_letter)).html_safe if referer =~ /favourites\/add/
+		
 		return (link_to "Artists", artistsbypage_path(first_letter)).html_safe
-
+		
 	end
 	
 	def add_or_remove(favourite,artist)
 		if favourite.nil?
-			return link_to "Add", favourites_path(:id => artist.id), :method => :post, class: "btn btn-info btn-sm", "role" => "button"
+			return link_to "Add", favourites_path(:id => artist.id), :method => :post, class: "btn btn-info btn-xs", "role" => "button"
 		else
 			#depends if called with favourite or artist.fav_id
 			favourite_id =  favourite.kind_of?(Favourite) ? favourite.id : favourite
-			return link_to "Remove", favourite_path(:id => favourite_id), method: :delete,  class: "btn btn-danger btn-sm", "role" => "button"
+			return link_to "Remove", favourite_path(:id => favourite_id), method: :delete,  class: "btn btn-danger btn-xs", "role" => "button"
 		end
 	end
 	
@@ -56,5 +61,11 @@ module ArtistsHelper
 	def favourite_icon(favourite_id)
 		return '<span class="glyphicon glyphicon-music"></span>'.html_safe unless favourite_id.nil?
 		return ""
+	end
+	
+	def link_to_favourites_or_artists(page_style,letterstart)
+		return artistsbypage_path(letterstart) if page_style == :page_artists
+		return favadd_path(letterstart) if page_style == :page_favourites
+		return "Unknown style"
 	end
 end
