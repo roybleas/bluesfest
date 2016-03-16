@@ -1,0 +1,5 @@
+<li class="list-group-item">	
+	<%= favourites_link_or_icon(favourites_style,artist.fav_id,artist)  %>
+	<%= link_to artist.name, favartist_path(artist.id) %>
+	<%= render partial: "shared/bluelink", locals: {artist_code: artist.linkid} %>
+</li>

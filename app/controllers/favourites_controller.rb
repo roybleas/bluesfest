@@ -13,6 +13,7 @@ class FavouritesController < ApplicationController
 	include Userlogin
 	include Artistpages
 	include Validations
+	include Showartist
 	
   before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate, :clearall ]
 
@@ -104,5 +105,15 @@ class FavouritesController < ApplicationController
   	end
   		
   end
-  
+  def artist
+    artist_id = params[:id].to_i
+  	
+  	@artist = Artist.find_by_id(artist_id)  	
+  	
+  	if @artist.nil?
+  		redirect_to favadd_path("a") 
+  	else
+  		get_artist_performances(@artist)
+		end
+  end
 end

@@ -1,14 +1,13 @@
 <div class="container" >
-<h3><%= link_to_artist_artistpage(@artist) %><h3>
+<h3><%= link_to_favourite_artist_artistpage(@artist) %><h3>
 <% if @artist.nil? %>
 	<h2> Unknown Artist</h2>
 <% else %>
 	<%= render partial: "artists/artistshow", locals: {artist: @artist, performances: @performances, startdate_minus_one: @startdate_minus_one}  %>
-	
-	<% if logged_in? %>
-		<p> <%= add_or_remove(@favourite_artist,@artist) %>
+		
+	<p> <%= add_or_remove(@favourite_artist,@artist) %>
 		<%= add_or_remove_caption(@favourite_artist, @artist) %>
-		</p>
-		<% end %>
+	</p>
+		
 <% end %>
 </div>

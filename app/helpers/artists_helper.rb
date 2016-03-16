@@ -24,14 +24,13 @@ module ArtistsHelper
 	
 	def link_to_artist_artistpage(artist)
 		first_letter =  artist.nil? ? 'a' : artist.code.first
-		#this is a bit of a hack to find where it was called from
-		# but default to Artists
-		
-		referer = request.env["HTTP_REFERER"] unless request.nil?
-		return (link_to "Artists", favadd_path(first_letter)).html_safe if referer =~ /favourites\/add/
-		
 		return (link_to "Artists", artistsbypage_path(first_letter)).html_safe
 		
+	end
+	
+	def link_to_favourite_artist_artistpage(artist)
+		first_letter =  artist.nil? ? 'a' : artist.code.first
+		return (link_to "Artists", favadd_path(first_letter)).html_safe 
 	end
 	
 	def add_or_remove(favourite,artist)

@@ -11,7 +11,7 @@
 	<span class="badge"><%= @favouritescount %></span>
 	</div>
 	<ul class="list-group">
-		<%= render partial: "artists/artist", collection: @artists, locals: { favourites_style: @favourites_style}  %>
+		<%= render partial: "favourites/artist", collection: @artists, locals: { favourites_style: @favourites_style}  %>
 	</ul>
 	
 	

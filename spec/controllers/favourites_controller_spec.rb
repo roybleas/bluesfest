@@ -328,5 +328,25 @@ RSpec.describe FavouritesController, :type => :controller do
 			expect{ delete :clearall}.to change(Favouriteperformance,:count).by(-3)
 		end
 	end
-	
+	describe "GET artist" do
+    context "show artist" do
+    	before(:each) do
+    		@artist = create(:artist_with_festival)
+    		get :artist, id: @artist
+    	end
+    	it "returns http success" do
+      	get :artist, id:@artist
+      	expect(response).to have_http_status(:success)
+    	end
+    	it "renders the show template" do
+    		expect(response).to render_template :artist
+    	end
+    	it "assigns requested artist" do
+    		expect(assigns(:artist)).to eq @artist
+    	end
+    end
+    it "shows nil when no artist" do
+    	expect(assigns(:artist)).to be_nil
+    end
+	end
 end
