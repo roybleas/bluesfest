@@ -1,0 +1,7 @@
+<nav>
+	<ul class="pagination" >
+		<% (1..festivaldays).each do |day| %>
+			<li > <%= link_to "Day #{day}", showbyday_path(day) %> </li>
+		<% end %>
+	</ul>		
+</nav>

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "favourites/add.html.erb", :type => :view do
+	
   context "style for favourites.bypage" do
   	before(:example) do
   		assign(:favourites_style, :as_link)

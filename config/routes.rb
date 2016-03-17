@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'favourites/add/:letter', 	to: 'favourites#add', as: :favadd
   get 'favourites/day/:dayindex', to: 'favourites#day', as: :favday
   get 'favourites/artist/:id', to: 'favourites#artist', as: :favartist
-  patch 'favourites/performanceupdate/:id',  to: 'favourites#performanceupdate'
+  patch 'favourites/performanceupdate/:id',  to: 'favourites#performanceupdate', as: :favperformupdate
   
 	
 	

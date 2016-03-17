@@ -1,0 +1,7 @@
+<% if @favperform_active == false %>
+  $("#<%= @favperform_id %>_span").removeClass('glyphicon-ok').addClass('glyphicon-remove');
+  $("#<%= @favperform_id %>_td").removeClass('btn-primary').addClass('btn-warning');
+<% else %>
+  $("#<%= @favperform_id %>_span").removeClass('glyphicon-remove').addClass('glyphicon-ok');
+  $("#<%= @favperform_id %>_td").removeClass('btn-warning').addClass('btn-primary');
+<% end %>

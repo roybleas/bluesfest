@@ -81,8 +81,8 @@ RSpec.describe FavouritesController, :type => :controller do
 		    end
 		    it "has redirect for patch" do
 		    	favperform = create(:favouriteperformance)
-		      patch :performanceupdate, id: favperform.id
-		      expect(response).to have_http_status(:redirect)
+		     	xhr :patch, :performanceupdate, id: favperform.id
+		      expect(response.content_type).to eq Mime::JS
 		    end
 
 			end
@@ -304,14 +304,14 @@ RSpec.describe FavouritesController, :type => :controller do
 
 		it "changes active status from true to false" do
 			favperform = create(:favouriteperformance, active: true)
-			patch :performanceupdate, id: favperform.id
+			xhr :patch, :performanceupdate, id: favperform.id
 			expect(Favouriteperformance.find(favperform.id).active).to be_falsey
 		end
 
 	
 		it "changes active status from false to true" do
 			favperform = create(:favouriteperformance, active: false)
-			patch :performanceupdate, id: favperform.id
+			xhr :patch, :performanceupdate, id: favperform.id
 			expect(Favouriteperformance.find(favperform.id).active).to be_truthy
 		end
 		

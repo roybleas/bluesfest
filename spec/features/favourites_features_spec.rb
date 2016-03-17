@@ -7,14 +7,14 @@ end
 
 feature 'show index' do
  	background do 
- 		@user = create(:user)	
+ 		
  	end
 	
 	scenario 'with active festival but no favourites' do
-		
+		user = create(:user)
 		festival = create(:festival, major: 3, minor: 4, scheduledate: "2016-1-12")
 				
-		do_login(@user.name,@user.password)
+		do_login(user.name,user.password)
 	
 		visit root_path
 		click_link 'Favourites'
@@ -24,11 +24,12 @@ feature 'show index' do
 	end
 
 	scenario 'with active festival and favourites' do
-		create(:favourite, user_id: @user.id)
+		
+		user = create(:user_for_favourites_with_performances_and_stage)
 		
 		festival = create(:festival, major: 3, minor: 4, scheduledate: "2016-1-12")
 				
-		do_login(@user.name,@user.password)
+		do_login(user.name,user.password)
 	
 		visit root_path
 		click_link 'Favourites'

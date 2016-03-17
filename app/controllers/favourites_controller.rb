@@ -18,7 +18,9 @@ class FavouritesController < ApplicationController
   before_action :logged_in_user, only: [:add, :index, :day, :destroy, :create, :performanceupdate, :clearall, :artist ]
 
   def index
-  	@favourites = Favourite.for_user(@current_user).includes(:artist).order("artists.name").all
+  	
+  	@favourites = Favourite.for_user(@current_user).includes(:artist, favouriteperformances: { performance: :stage } ).order("artists.name, performances.daynumber asc").all
+		
   	if @favourites.empty?
   		redirect_to favadd_url('a')
   	end
@@ -66,14 +68,19 @@ class FavouritesController < ApplicationController
   end
 	
 	def performanceupdate  
-		favperform_id = params[:id].to_i
+		@favperform_id = params[:id].to_i
 		
-		favouriteperformance = Favouriteperformance.find(favperform_id)
+		favouriteperformance = Favouriteperformance.find(@favperform_id)
 		
 		favouriteperformance.active = !favouriteperformance.active
 		favouriteperformance.save
 		
-		redirect_to :back
+		@favperform_active = favouriteperformance.active
+		
+		respond_to do |format| 
+			format.js
+		end
+
 	end
 
   def add

@@ -1,0 +1,22 @@
+<tr> 
+	<td><%= favourite.artist.name %> </td>
+	<% dayindex =  0 %>
+	<% favourite.favouriteperformances.each do |favperform| %>
+	
+		<% dayindex += 1 %>
+		
+		<% if favperform.performance.daynumber > dayindex %>
+			<%= preceding_day_cells(dayindex,favperform) %>
+			<% dayindex = favperform.performance.daynumber %>
+		<% end %>
+		
+		<td id="color-<%=favperform.performance.stage.code %>" > <%= favperform.performance.starttime.strftime("%H:%M") %></td>
+		
+		<td class="text-center">
+			<%= fav_perform_tick_link(favperform) %>
+		</td>
+	<% end %>
+	<% if dayindex < @festivaldays %>
+		<%= following_day_cells(dayindex,festivaldays) %>	
+	<% end %>
+</tr>

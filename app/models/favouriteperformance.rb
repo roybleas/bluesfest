@@ -12,4 +12,5 @@
 
 class Favouriteperformance < ActiveRecord::Base
   belongs_to :favourite
+  belongs_to :performance
 end
