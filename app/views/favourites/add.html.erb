@@ -1,5 +1,5 @@
 <div class="container">
-<h2>Favourite Artists</h2>
+<h2><%= link_to "Favourite ", favourites_path %> Artists</h2>
 <% if @artists.length == 0 %>
 	<p> No artists added for this festival yet</p>
 <% else %>

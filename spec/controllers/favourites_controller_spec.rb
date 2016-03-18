@@ -215,7 +215,7 @@ RSpec.describe FavouritesController, :type => :controller do
 				festival = create(:festival, active: false)
 				get :day, dayindex: 2
 				expect(assigns(:festivaldays)).to eq 0
-				expect(assigns(:performancedate)).to eq ""
+				expect(assigns(:dayindex_as_date)).to eq ""
 				expect(assigns(:performances)).to be_empty
 			end
 		end
@@ -239,7 +239,31 @@ RSpec.describe FavouritesController, :type => :controller do
 			end
 			it "returns formatted performance date" do
 			 get :day, dayindex: 2
-			 expect(assigns(:performancedate)).to eq "( Fri 25 March 2016 )"
+			 expect(assigns(:dayindex_as_date)).to eq "( Fri 25 March 2016 )"
+			end
+			
+		end
+		context "favourite performances" do
+			before(:example) do
+				@logged_in_user = create(:user_for_favourites_with_performances_and_stage)
+				session[:user_id] = @logged_in_user.id
+				festival = create(:festival)
+			end
+			it "returns a list of favourite performances by day" do
+				p1 = Performance.where('daynumber = 1').take
+				get :day, dayindex: 1
+				expect(assigns(:performances)).to match_array(p1)
+			end
+		
+			it "excludes non active favourite performances by day" do
+				fp = Favouriteperformance.eager_load(:performance).where('performances.daynumber = 2').first
+				p2 = Performance.where('daynumber = 2').take
+				get :day, dayindex: 2
+				expect(assigns(:performances)).to match_array(p2)
+				fp.update(active:  false)
+				get :day, dayindex: 2
+				expect(assigns(:performances)).to be_empty
+				
 			end
 		end
 	end

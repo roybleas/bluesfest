@@ -23,8 +23,6 @@ module FavouritesHelper
 		return ("<td colspan='2'></td>" * cell_count).html_safe unless cell_count < 0 
 	end
 
-
-
 	def fav_perform_tick_link(favperform)
 		
 		this_link_id = "#{favperform.id}_td"
@@ -40,7 +38,11 @@ module FavouritesHelper
 		
 		this_span = "<span id='#{this_span_id}' class='glyphicon glyphicon-#{this_glyphicon}'></span>".html_safe
 		
-		return link_to this_span, favperformupdate_path(:id => favperform.id), :method => :patch, id: this_link_id , class: this_class, "role" => "button", :remote => true 
-					
+		return link_to this_span, favperformupdate_path(:id => favperform.id), :method => :patch, id: this_link_id , class: this_class, "role" => "button", :remote => true 				
 	end	
+	
+	def is_day_button_current_index(day, dayindex)
+		return "btn btn-info btn-sm" unless day == dayindex
+		return "btn btn-primary btn-sm" 
+	end
 end

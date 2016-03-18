@@ -1,2 +1,27 @@
-<h1>Favourites#day</h1>
-<p>Find me in app/views/favourites/day.html.erb</p>
+<div class="container" >
+	<h2><%= link_to "Favourites", favourites_path %> </h2>
+	<div class="panel panel-default" >
+		<div class="panel-heading" >
+			<div class="row">
+				<div class="col-md-4">
+					<%= render partial: "nav_days", locals: { festivaldays: @festivaldays, dayindex: @dayindex}  %>		
+				</div>
+				<div class="col-md-4">
+					My schedule for Day: <%= @dayindex %> <%= @dayindex_as_date %>
+				</div>
+				<div class="col-md-4">,</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<% if @performances.count == 0 %>
+				No performances selected
+			<% else %>
+				<table class="table">
+					<tbody>
+						<%= render partial: "day_performances", locals: {performances: @performances} %>		
+					</tbody>
+				</table>
+			<% end %> 
+		</div>
+	</div>
+</div>

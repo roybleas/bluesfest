@@ -45,7 +45,6 @@ RSpec.describe "favourites/index.html.erb", :type => :view do
 
 		it "shows artist" do
 			render
-			
 			assert_select "tr td", 'Tom Jones'
 			assert_select "tbody", 1 do |body|
 				body.each do |row|

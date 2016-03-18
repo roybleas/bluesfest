@@ -6,9 +6,7 @@
 		<span>Show my schedule for: </span>			
 	</div>
 	<div class="col-md-5" >
-		<% (1..@festivaldays).each do |day| %>
-			<%= link_to "Day #{day}", favday_path(day), class: "btn btn-info btn-sm", role: "button"  %>
-		<% end %>
+		<%= render partial: "nav_days", locals: { festivaldays: festivaldays , dayindex: dayindex}  %>		
 	</div>				
 	<div class="col-md-3" ></div>
 </div>

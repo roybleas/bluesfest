@@ -100,15 +100,15 @@ class FavouritesController < ApplicationController
   	
 		festival = Festival.current_active.first
   	@dayindex = valid_dayindex(festival,dayindex)
-  	
+  
   	if festival.nil?
   		@festivaldays = 0
   		@performances = []
-  		@performancedate = ""
+  		@dayindex_as_date = ""
   	else
   		@festivaldays = festival.days
-  		#@performances = ?
-  		@performancedate = (festival.startdate + @dayindex - 1).strftime("( %a %d %B %Y )")
+  		@performances  = Performance.where("performances.daynumber = ? and favourites.user_id = ? ", @dayindex,@current_user.id).where("favouriteperformances.active = true").eager_load(:stage, favouriteperformances: :favourite ).order("performances.starttime asc").all
+  		@dayindex_as_date = (festival.startdate + @dayindex - 1).strftime("( %a %d %B %Y )")
   	end
   		
   end

@@ -7,6 +7,11 @@ RSpec.describe "favourites/add.html.erb", :type => :view do
   		assign(:favourites_style, :as_link)
   		@artist = create(:artist)
   	end
+  	it "shows a link to Favourites in title" do
+  		assign(:artists,[])
+  		render
+  		assert_select "a[href=?]","/favourites"
+  	end
 	  it "shows Add link when not linked to favourite artist " do
 	 		favourite = nil
 	 		artist = Artist.select("artists.*,null as fav_id").take

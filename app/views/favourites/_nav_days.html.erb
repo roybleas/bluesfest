@@ -1,0 +1,4 @@
+<% (1..festivaldays).each do |day| %>
+	<%	btn_class = is_day_button_current_index(day, dayindex) %>
+	<%= link_to "Day #{day}", favday_path(day), class: btn_class, role: "button"  %>
+<% end %>
