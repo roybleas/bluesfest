@@ -33,5 +33,12 @@ RSpec.describe StaticPagesController, :type => :controller do
 
 		end		
   end
+  
+  describe "Get Help" do
+    it "returns http success" do
+      get :help
+      expect(response).to have_http_status(:success)
+  	end
+  end
 
 end

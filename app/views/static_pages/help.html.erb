@@ -1,0 +1,25 @@
+<div class="container" >
+<h2>Help</h2>
+<p> So many artists and stages how do you select who you are going to see? 
+This little web site is here to help.</p>
+<h3>Navigation</h3>
+<p>To view who is performing on any stage on a particular day just click on <%= link_to "Stages", stages_path %> and select one of the Day buttons.</p>
+<p>To view all the artists performing on all stages choose for example the <%= link_to "Day 1", stage_path(2,1)%> button</p>  
+<p>To browse through all the artists click on <%= link_to "Artists", artists_path %> button. The artists are listed alphabetically. Click on an artist's name to see when they are playing. If you do not recognise the artist Archie Roach for example, clicking the <%= link_to "i", "http://www.bluesfest.com.au/schedule/detail.aspx?ArtistID=793", class: "bluelink" %> button next to their name takes you to their page on the official Bluesfest web site.</p>
+<h3>Planning your personal schedule</h3>
+<h4>Account</h4>
+<p>To plan your visit to Bluesfest you need to first create an account and login. Click on <%= link_to "Sign up" , signup_path %> and create a unique name for yourself, which you use when you are logging in. The screen name can be anything you like, but should be short as it appears at the top of screen. This name is to remind you who you are logged in as, should you wish to save multiple schedules.</p>
+<p>To log back in you need to click on <%= link_to "Log in", login_path %> and enter your name and password. It is recommended to check the remember me on the this computer box so you don't need to log back in again next time you visit.</p>
+<h4>Creating your schedule</h4>
+<p>Browse though the list of <%= link_to "Artists", artists_path %> and decide who you think you might want to see. Now when you click on the artist's name you will have the extra option to Add or Remove the artist from your list of favourites. When you view the list of artists your favourites will be marked by a span note.</p>
+<p>When you have a selection of favourite artists click on "Favourites". You now see your favourite artists listed and the times they are playing on each day. To update your list of favourite artists use the "Select Artists" button. To view your schedule for a particular day click on its Day button. You will quickly realise that some artist's performance times clash. As you cannot be at two stages at the same time go back to the Favourites page. You can choose to include or exclude an artist's performance from your schedule by clicking on the
+<%= link_to "<span class='glyphicon glyphicon-ok'></span>".html_safe , href="#", class: "btn btn-primary btn-xs", "role" => "button" %>
+. This will change to a 
+<%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe , href="#", class: "btn btn-warning btn-xs", "role" => "button" %>
+ and no longer be included in your schedule. </p>
+<p> 
+<h3>Attending the Bluesfest</h3>
+<p>During the Bluesfest selecting the home screen by clicking on <%= link_to "Bluesfest" , root_path %>  in the top left corner will show you your personal schedule for the day. You can also select to see who is on stage Now and who is coming up Next.</p>
+</div>
+	
+	
