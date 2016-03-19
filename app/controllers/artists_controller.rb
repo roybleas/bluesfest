@@ -30,12 +30,6 @@ class ArtistsController < ApplicationController
   		redirect_to artistsbypage_path("a") 
   	else
   		get_artist_performances(@artist)
-#	  	@performances = Performance.for_artist(artist_id).includes(:stage).all 
-#	  	festival = Festival.find_by_id(@artist.festival_id)
-#	  	@startdate_minus_one = (festival.startdate - 1) unless festival.nil?
-#	  	if logged_in?
-#	  		@favourite_artist = Favourite.find_by(artist_id: @artist.id, user_id: current_user.id)
-#	  	end
  		end
   end
   

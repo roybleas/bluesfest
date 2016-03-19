@@ -36,4 +36,10 @@ class Performance < ActiveRecord::Base
 	def self.by_artist_stage_day_starttime_and_festival(artist_id, stage_id, daynumber, starttime, festival_id)
 		where('artist_id = ? and stage_id = ? and daynumber = ? and starttime = ? and festival_id = ?',artist_id, stage_id, daynumber, starttime, festival_id)
 	end
+	def self.by_day_and_favourite_user_id(dayindex,user_id)
+		where("performances.daynumber = ? and favourites.user_id = ? ", dayindex,user_id)
+	end
+	def self.active_favourite_performance
+		where("favouriteperformances.active = true")
+	end
 end

@@ -3,7 +3,7 @@ require 'date'
 
 RSpec.describe HomePagesController, :type => :controller do
 
-    describe "GET home" do
+	describe "GET home" do
     it "returns http success" do
       get :home
       expect(response).to have_http_status(:success)
@@ -39,10 +39,16 @@ RSpec.describe HomePagesController, :type => :controller do
 		before (:each) do
 			@festival = create(:festival)
 		end
-		it "redirects to plan for tody " do
+		it "redirects to now for today and not logged in" do
 			travel_to(@festival.startdate)
 			get :home
-			expect(response).to redirect_to plan4today_url
+			expect(subject).to redirect_to now_path
+		end
+		it "renders plan when today and loged in" do
+			@logged_in_user = create(:user)
+			session["user_id"] = @logged_in_user
+			get :home
+			expect(subject).to render_template(:plan)
 		end
 		it "returns start tomorrow" do
 			test_date = @festival.startdate.prev_day(1)
@@ -73,14 +79,37 @@ RSpec.describe HomePagesController, :type => :controller do
 			get :home
 			expect(assigns(:days2go)).to eq("")
 		end
-	end
+	
+		context "logged in" do
+			before(:example) do
+				@logged_in_user = create(:user)
+				session["user_id"] = @logged_in_user.id
+			end
+			it "has dayindex of one when startdate = today" do
+				travel_to(@festival.startdate)
+				get :home
+				expect(assigns(:dayindex)).to eq 1
+			end
+			it "has dayindex of 3 when 2 days after start day" do
+				travel_to(@festival.startdate + 2)
+				get :home
+				expect(assigns(:dayindex)).to eq 3
+			end
 
-  describe "GET plan" do
-    it "returns http success" do
-      get :plan
-      expect(response).to have_http_status(:success)
-    end
-  end
+			it "has no personal schedule" do
+				travel_to(@festival.startdate)
+				get :home
+				expect(assigns(:performances)).to be_empty
+			end
+			it "has a personal schedule" do
+				user = create(:user_for_favourites_with_performances_and_stage)
+				session["user_id"] = user.id
+				p = Performance.first
+				get :home
+				expect(assigns(:performances)).to match_array([p])				
+			end
+		end
+	end
 
   describe "GET now" do
     it "returns http success" do

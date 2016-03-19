@@ -91,3 +91,5 @@ g model favouriteperformance performance_id:integer active:boolean favourite:ref
 
 to view schemas (on heroku) 
 	heroku run "bundle exec rake db:schema:dump && cat db/schema.rb"
+	
+	generate controller testpages settime show

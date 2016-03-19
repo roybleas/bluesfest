@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   
 
   root 'home_pages#home'
-  get 'plan4today' => 'home_pages#plan'
   get 'now'  			 => 'home_pages#now'
   get 'next' 			 => 'home_pages#next'
   

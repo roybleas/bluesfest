@@ -107,7 +107,7 @@ class FavouritesController < ApplicationController
   		@dayindex_as_date = ""
   	else
   		@festivaldays = festival.days
-  		@performances  = Performance.where("performances.daynumber = ? and favourites.user_id = ? ", @dayindex,@current_user.id).where("favouriteperformances.active = true").eager_load(:stage, favouriteperformances: :favourite ).order("performances.starttime asc").all
+  		@performances  = Performance.by_day_and_favourite_user_id(@dayindex,@current_user.id).active_favourite_performance.eager_load(:stage, favouriteperformances: :favourite ).order("performances.starttime asc").all
   		@dayindex_as_date = (festival.startdate + @dayindex - 1).strftime("( %a %d %B %Y )")
   	end
   		
