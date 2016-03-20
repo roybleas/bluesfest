@@ -94,5 +94,28 @@ FactoryGirl.define do
 
 			end
 		end
+		factory :festival_with_stage_artist_multiple_performances_same_day do
+			ignore do
+				performance_count 5
+				start_performance_time Time.new(2016,3,14,14,0)
+				day_number 2
+			end
+			after(:create) do |festival, evaluator|
+	    	stage = create(:stage, festival_id: festival.id, title: 'Mojo', code: 'mo', seq: 2)
+	    	artist = create(:artist,festival_id: festival.id, name: 'Kendrick Lamar', code: 'kendricklamar')
+	    	this_starttime = evaluator.start_performance_time
+	    	(1..evaluator.performance_count).each do |index|
+	    		performance = create(:performance,festival_id: festival.id, starttime: this_starttime.strftime("%H:%M"), daynumber: evaluator.day_number, title: "KENDRICK LAMAR #{index}", artist_id: artist.id, stage_id: stage.id)
+	    		this_starttime = this_starttime + 20.minutes
+	    	end
+	    	stage2 = create(:stage, festival_id: festival.id, title: 'Delta', code: 'de', seq: 1)
+	    	artist2 = create(:artist,festival_id: festival.id, name: 'Tom Jones', code: 'tomjones')
+	    	this_starttime = evaluator.start_performance_time
+	    	(1..evaluator.performance_count).each do |index|
+	    		performance = create(:performance,festival_id: festival.id, starttime: this_starttime.strftime("%H:%M"), daynumber: evaluator.day_number, title: "Tom Jones #{index}", artist_id: artist2.id, stage_id: stage2.id)
+	    		this_starttime = this_starttime + 30.minutes
+	    	end
+			end
+		end
 	end
 end

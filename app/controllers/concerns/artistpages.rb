@@ -55,6 +55,6 @@ module Artistpages
 		main_query = main_query.order(name: :asc).all
 		
 		return main_query
-end	
+	end	
 
 end

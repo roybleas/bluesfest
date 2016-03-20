@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'settime/:day/:hr/:min', to: 'testpages#settime', as: :settime
+	get 'reset', to: 'testpages#reset'
+  get 'showtime', to: 'testpages#showtime'
+
 	delete 'favourites/clearall/', to: 'favourites#clearall', as: :favclearall
 	resources :favourites, only: [:index, :destroy, :create]
   get 'favourites/add/:letter', 	to: 'favourites#add', as: :favadd

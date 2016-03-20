@@ -1,0 +1,11 @@
+<div class="container">
+<h1>Test Time Settings</h1>
+<p> Local Time: <%= @localTime_caption %> </p>
+<p>
+<% if @test_time.nil? %>
+	No test time set 
+<% else %>
+	Test Time: <%= @test_time_caption %>
+<% end %>
+</p>	
+</div>

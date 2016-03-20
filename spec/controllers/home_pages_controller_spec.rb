@@ -116,6 +116,66 @@ RSpec.describe HomePagesController, :type => :controller do
       get :now
       expect(response).to have_http_status(:success)
     end
+    context "local time" do
+    	it "returns the current localtime" do
+    		Time.zone ="Sydney"
+	    	get :now
+	    	expect(assigns(:localTime_caption)).to eq Time.current.strftime("%a %d %b %Y %I:%M %p")
+    	end
+		end
+		context "performances" do
+			include ActiveSupport::Testing::TimeHelpers
+			before(:example) do
+				@festival = create(:festival_with_stage_artist_multiple_performances_same_day)
+=begin				
+				Tom Jones 5 2000-01-01 16:00:00 UTC 
+				Tom Jones 4 2000-01-01 15:30:00 UTC 
+				Tom Jones 3 2000-01-01 15:00:00 UTC 
+				Tom Jones 2 2000-01-01 14:30:00 UTC 
+				Tom Jones 1 2000-01-01 14:00:00 UTC 
+				KENDRICK LAMAR 5 2000-01-01 15:20:00 UTC 
+				KENDRICK LAMAR 4 2000-01-01 15:00:00 UTC 
+				KENDRICK LAMAR 3 2000-01-01 14:40:00 UTC 
+				KENDRICK LAMAR 2 2000-01-01 14:20:00 UTC 
+				KENDRICK LAMAR 1 2000-01-01 14:00:00 UTC 
+=end
+			end
+			it "returns performances at 15:00" do
+				today_date = @festival.startdate + 1
+				today_date += 15.hours
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:00" 
+			end
+			it "returns performances at 14:41" do
+				today_date = @festival.startdate + 1
+				today_date += 14.hours
+				today_date += 41.minutes
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "14:30" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "14:40" 
+			end
+			it "returns performances at 23:59" do
+				today_date = @festival.startdate + 1
+				today_date += 23.hours
+				today_date += 59.minutes
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "16:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:20" 
+			end
+			it "returns performances at 13:59" do
+				today_date = @festival.startdate + 1
+				today_date += 13.hours
+				today_date += 59.minutes
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)).to be_empty
+			end
+
+		end
   end
 
   describe "GET next" do
@@ -124,5 +184,53 @@ RSpec.describe HomePagesController, :type => :controller do
       expect(response).to have_http_status(:success)
     end
   end
+    context "local time" do
+    	it "returns the current localtime" do
+    		Time.zone ="Sydney"
+	    	get :now
+	    	expect(assigns(:localTime_caption)).to eq Time.current.strftime("%a %d %b %Y %I:%M %p")
+    	end
+		end
+		context "performances" do
+			include ActiveSupport::Testing::TimeHelpers
+			before(:example) do
+				@festival = create(:festival_with_stage_artist_multiple_performances_same_day)
+			end
+			it "returns performances after 15:00" do
+				today_date = @festival.startdate + 1
+				today_date += 15.hours
+				travel_to(today_date)
+				get :next
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:30" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:20" 
+			end
+			it "returns performances at 14:41" do
+				today_date = @festival.startdate + 1
+				today_date += 14.hours
+				today_date += 41.minutes
+				travel_to(today_date)
+				get :next
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:00" 
+			end
+			it "returns performances at 13:59" do
+				today_date = @festival.startdate + 1
+				today_date += 13.hours
+				today_date += 59.minutes
+				travel_to(today_date)
+				get :next
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "14:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "14:00" 
+			end
+			it "returns performances at 23:59" do
+				today_date = @festival.startdate + 1
+				today_date += 23.hours
+				today_date += 59.minutes
+				travel_to(today_date)
+				get :next
+				expect(assigns(:performances)).to be_empty
+			end
+
+		end
 
 end

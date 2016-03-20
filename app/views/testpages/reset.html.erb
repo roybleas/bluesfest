@@ -1,0 +1,7 @@
+<div class="container">
+<h1>Test Time Settings</h1>
+<p> Local Time: <%= @localTime_caption %> </p>
+
+<% if session[:test_time].nil? %>
+	<p>Test time reset.</p>
+<% end %> 

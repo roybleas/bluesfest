@@ -1,2 +1,21 @@
-<h1>HomePages#plan</h1>
-<p>Find me in app/views/home_pages/plan.html.erb</p>
+<div class="container">
+	<p><%= @localTime_caption %> </p>
+	<div class="panel panel-default" >
+		<div class="panel-heading" >
+			<%= render partial: "favourites/nav_days", locals: { festivaldays: @festivaldays, dayindex: @dayindex}  %>
+		</div>
+		
+		<% if @performances.count == 0 %>
+			<div class="panel-body" >
+				<p>	No performances selected </p>
+			</div>
+		<% else %>
+	
+			<table class="table table-condensed">
+				<tbody>
+					<%= render partial: "favourites/day_performances", locals: {performances: @performances} %>		
+				</tbody>
+			</table>
+		<% end %> 
+	</div>
+</div>
