@@ -46,7 +46,7 @@ class HomePagesController < ApplicationController
   	
   	@localTime = getTestTime unless session[:test_time].nil?
   	
-  	@localTime_caption = @localTime.strftime("%a %d %b %Y %I:%M %p")
+  	@localTime_caption = @localTime.strftime("%a %d %b %Y %H:%M")
 
 		today = @localTime.to_date
 		
@@ -54,10 +54,15 @@ class HomePagesController < ApplicationController
 		if festival.nil?
 			@performances = []
 		else 
-			dayindex = get_dayindex(festival,today)
-			maxstarttime = @localTime.strftime("%H:%M")
+			@dayindex = get_dayindex(festival,today)
+			if @dayindex > 0 and  @dayindex <  festival.days
+				maxstarttime = @localTime.strftime("%H:%M")
 			
-			@performances = get_now_performances(dayindex,maxstarttime,festival)
+				@performances = get_now_performances(@dayindex,maxstarttime,festival)
+			else
+				@dayindex = 0
+				@performances = []
+			end
 		end
   end
 
@@ -68,7 +73,7 @@ class HomePagesController < ApplicationController
   	
   	@localTime = getTestTime unless session[:test_time].nil?
   	
-  	@localTime_caption = @localTime.strftime("%a %d %b %Y %I:%M %p")
+  	@localTime_caption = @localTime.strftime("%a %d %b %Y %H:%M")
 
 		today = @localTime.to_date
 		
@@ -76,10 +81,14 @@ class HomePagesController < ApplicationController
 		if festival.nil?
 			@performances = []
 		else 
-			dayindex = get_dayindex(festival,today)
-			minstarttime = @localTime.strftime("%H:%M")
-			
-			@performances = get_next_performances(dayindex,minstarttime,festival)
+			@dayindex = get_dayindex(festival,today)
+			if @dayindex > 0 and  @dayindex <  festival.days
+				minstarttime = @localTime.strftime("%H:%M")
+				@performances = get_next_performances(@dayindex,minstarttime,festival)
+			else
+				@dayindex = 0
+				@performances = []
+			end
 		end
 
   end
@@ -102,8 +111,8 @@ class HomePagesController < ApplicationController
  		
 		sub_query = Performance.select("stage_id, max(starttime) as start_time").where("daynumber = ? and starttime  <= ?",dayindex, maxstarttime ).group("stage_id")
 
-		main_query = Performance.select("performances.duration,performances.starttime,performances.title as caption, stages.code,stages.title").from(sub_query,:p1).joins(" inner join performances on p1.stage_id = performances.stage_id and p1.start_time = performances.starttime inner join stages on stages.id = performances.stage_id").where("performances.daynumber = ? and performances.festival_id = ?", dayindex, festival.id).order("stages.seq")
-	
+		main_query = Performance.select("performances.duration,performances.starttime,performances.title as caption, artist_id, stages.id, stages.code,stages.title").from(sub_query,:p1).joins(" inner join performances on p1.stage_id = performances.stage_id and p1.start_time = performances.starttime inner join stages on stages.id = performances.stage_id").joins( " inner join artists on artists.id = performances.artist_id" ).where("performances.daynumber = ? and performances.festival_id = ?", dayindex, festival.id).order("stages.seq")
+
 		return main_query
 	end
 	
@@ -111,7 +120,7 @@ class HomePagesController < ApplicationController
  		
 		sub_query = Performance.select("stage_id, min(starttime) as start_time").where("daynumber = ? and starttime  > ?",dayindex, minstarttime ).group("stage_id")
 
-		main_query = Performance.select("performances.duration,performances.starttime,performances.title as caption, stages.code,stages.title").from(sub_query,:p1).joins(" inner join performances on p1.stage_id = performances.stage_id and p1.start_time = performances.starttime inner join stages on stages.id = performances.stage_id").where("performances.daynumber = ? and performances.festival_id = ?", dayindex, festival.id).order("stages.seq")
+		main_query = Performance.select("performances.duration,performances.starttime,performances.title as caption, artist_id, stages.code,stages.title").from(sub_query,:p1).joins(" inner join performances on p1.stage_id = performances.stage_id and p1.start_time = performances.starttime inner join stages on stages.id = performances.stage_id").where("performances.daynumber = ? and performances.festival_id = ?", dayindex, festival.id).order("stages.seq")
 	
 		return main_query
 	end

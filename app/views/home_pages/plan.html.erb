@@ -1,10 +1,13 @@
 <div class="container">
 	<p><%= @localTime_caption %> </p>
+			<ul class="list-inline">
+ 			<li><%= link_to "Now", now_path, class: "btn btn-primary btn-sm", "role" => "button" %></li>
+ 			<li><%= link_to "Next", next_path, class: "btn btn-primary btn-sm", "role" => "button" %></li>
+ 			</ul>
+
 	<div class="panel panel-default" >
-		<div class="panel-heading" >
-			<%= render partial: "favourites/nav_days", locals: { festivaldays: @festivaldays, dayindex: @dayindex}  %>
-		</div>
 		
+				
 		<% if @performances.count == 0 %>
 			<div class="panel-body" >
 				<p>	No performances selected </p>
@@ -17,5 +20,8 @@
 				</tbody>
 			</table>
 		<% end %> 
+		<div class="panel-footer">
+		<%= render partial: "favourites/nav_days", locals: { festivaldays: @festivaldays, dayindex: @dayindex}  %>
+		</div>
 	</div>
 </div>

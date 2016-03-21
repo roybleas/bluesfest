@@ -120,7 +120,7 @@ RSpec.describe HomePagesController, :type => :controller do
     	it "returns the current localtime" do
     		Time.zone ="Sydney"
 	    	get :now
-	    	expect(assigns(:localTime_caption)).to eq Time.current.strftime("%a %d %b %Y %I:%M %p")
+	    	expect(assigns(:localTime_caption)).to eq Time.current.strftime("%a %d %b %Y %H:%M")
     	end
 		end
 		context "performances" do
@@ -188,7 +188,7 @@ RSpec.describe HomePagesController, :type => :controller do
     	it "returns the current localtime" do
     		Time.zone ="Sydney"
 	    	get :now
-	    	expect(assigns(:localTime_caption)).to eq Time.current.strftime("%a %d %b %Y %I:%M %p")
+	    	expect(assigns(:localTime_caption)).to eq Time.current.strftime("%a %d %b %Y %H:%M")
     	end
 		end
 		context "performances" do

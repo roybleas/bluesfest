@@ -1,2 +1,23 @@
-<h1>HomePages#next</h1>
-<p>Find me in app/views/home_pages/next.html.erb</p>
+<div class="container">
+<h5 class="text-center"><strong>Coming Up Next</strong> </h5>
+	<p> <% if @dayindex > 0  %> Day: <%= @dayindex %><% end %> 
+	<%= @localTime_caption %> 
+	<p> 
+	<ul class="list-inline">
+	<li><%= link_to "Refresh", next_path, class: "btn btn-primary btn-sm", "role" => "button" %></li>
+	<li><%= link_to "Now", now_path, class: "btn btn-primary btn-sm", "role" => "button" %></li>
+	</ul>
+ 	<div class="panel panel-default">
+ 		<% if @performances.size == 0 %>
+ 			<div class="panel-body">
+ 				<h4>That is all for today.</h4>
+ 			</div>
+ 		<% else %>
+			<table class="table table-condensed">
+				<tbody>
+					<%= render partial: "today_performances", locals: {performances: @performances} %>		
+				</tbody>
+			</table>
+ 		<% end %>
+ 	</div>
+</div>
