@@ -4,8 +4,8 @@
 		  stage_path(id: previousstage.id, dayindex: dayindex ),
 		   class: "btn btn-lg", "role" => "button" %> 
 	</div>
-	<div class="col-xs-4 col-sm-2" class"text-center"> 
-		<div class="well-sm lead text-center" id="color-<%= @stage.code %>" ><%=  stage.title  %></div>
+	<div class="col-xs-6 col-sm-2" class"text-center"> 
+		<div class="well-sm  text-center" id="color-<%= @stage.code %>" ><%=  stage.title  %></div>
 		
 	</div>
 	<div class="col-xs-2 col-sm-1">
@@ -13,5 +13,5 @@
 		  stage_path(id: nextstage.id, dayindex:dayindex ),
 		   class: "btn btn-lg", "role" => "button" %> 
 	</div>
-	<div class="col-xs-4 col-sm-8"> </div>
+	<div class="col-xs-2 col-sm-8"> </div>
 </div>

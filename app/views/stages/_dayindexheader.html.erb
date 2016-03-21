@@ -6,15 +6,15 @@
 			  						stage_path(id: stage.id, dayindex: previousdayindex),
 			   						class: "btn btn-lg", "role" => "button" %>
 		</div>
-		<div class="col-xs-4 col-sm-2"> 
-			<p class="vcentre lead" ><%= "Day: #{dayindex} ( #{dayofweek} ) " %></p>
+		<div class="col-xs-6 col-sm-2"> 
+			<h5 class="vcentre text-center" ><strong><%= "Day: #{dayindex} ( #{dayofweek} ) " %></strong></h5>
 		</div>
 		<div class="col-xs-2 col-sm-1">
 			 <%= link_to '<span class="glyphicon glyphicon-circle-arrow-right" ></span>'.html_safe,
 			  						stage_path(id: stage.id, dayindex: nextdayindex),
 			   						class: "btn btn-lg", "role" => "button" %> 
 		</div>
-		<div class="col-xs-4 col-sm-8"> </div>
+		<div class="col-xs-2 col-sm-8"> </div>
 	</div>
 			
 <% end %> 
