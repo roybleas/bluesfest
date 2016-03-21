@@ -9,17 +9,14 @@ li.navbarlarger {
 
 /* forms */
 
+/* Form login */
 
-/* error messges */
-#error_explanation {
-	color: red;
-	ul {
-		color: red;
-		margin: 0 0 30px 0;
-	}
+
+.loginback {
+	background-color: #008080;
+	color: #fff;
 }
 
-/* Form login */
 .login fieldset, .login div {
 	background-color: #f1f1f1;
 	border: none;
@@ -81,12 +78,24 @@ p.login_footer {
 }
 
 
+
 .login h2 {
 	background-color: #008080;
 	color: #fff;
 	padding: 10px 15px;
 	margin: 0;
 }
+
+
+/* error messges */
+#error_explanation {
+	color: red;
+	ul {
+		color: red;
+		margin: 0 0 30px 0;
+	}
+}
+
 
 .field_with_errors label {
   display: inline-block;
