@@ -174,6 +174,44 @@ RSpec.describe HomePagesController, :type => :controller do
 				get :now
 				expect(assigns(:performances)).to be_empty
 			end
+		end
+		context "performances on other days" do
+			include ActiveSupport::Testing::TimeHelpers
+
+			it "returns performances at 15:00 on day 1" do
+				festival = create(:festival_with_stage_artist_multiple_performances_same_day, day_number: 1)
+				today_date = festival.startdate 
+				today_date += 15.hours
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:00" 
+			end
+			it "returns performances at 15:00 on day 5" do
+				festival = create(:festival_with_stage_artist_multiple_performances_same_day, day_number: 4)
+				today_date = festival.startdate + 3
+				today_date += 15.hours
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:00" 
+			end
+			it "returns empty on day 6" do
+				festival = create(:festival_with_stage_artist_multiple_performances_same_day, day_number: 6)
+				today_date = festival.startdate + 5
+				today_date += 15.hours
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)).to be_empty				
+			end
+			it "returns empty on day 0" do
+				festival = create(:festival)
+				today_date = festival.startdate - 1
+				today_date += 15.hours
+				travel_to(today_date)
+				get :now
+				expect(assigns(:performances)).to be_empty				
+			end
 
 		end
   end
@@ -230,7 +268,35 @@ RSpec.describe HomePagesController, :type => :controller do
 				get :next
 				expect(assigns(:performances)).to be_empty
 			end
+		end
+		context "performances other days" do
+			include ActiveSupport::Testing::TimeHelpers
+			before(:example) do
+				
+			end
 
+			it "returns performances at 14:41 on day 3" do
+				festival = create(:festival_with_stage_artist_multiple_performances_same_day,day_number: 3)
+				today_date = festival.startdate + 2
+				#Note 3/4/2016 is daylight saving so clocks went back an hour so add 15 hours to get 14:41 as current time
+				today_date += 15.hours
+				today_date += 41.minutes
+				travel_to(today_date)
+				get :next
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:00" 
+			end
+			it "returns performances at 14:41 on day 5" do
+				festival = create(:festival_with_stage_artist_multiple_performances_same_day,day_number: 5)
+				today_date = festival.startdate + 4
+				today_date += 14.hours
+				today_date += 41.minutes
+				travel_to(today_date)
+				get :next
+				expect(assigns(:performances)[0].starttime.strftime("%H:%M")).to eq "15:00" 
+				expect(assigns(:performances)[1].starttime.strftime("%H:%M")).to eq "15:00" 
+			end
+			
 		end
 
 end

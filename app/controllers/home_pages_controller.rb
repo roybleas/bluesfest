@@ -55,7 +55,7 @@ class HomePagesController < ApplicationController
 			@performances = []
 		else 
 			@dayindex = get_dayindex(festival,today)
-			if @dayindex > 0 and  @dayindex <  festival.days
+			if @dayindex > 0 and  @dayindex <=  festival.days
 				maxstarttime = @localTime.strftime("%H:%M")
 			
 				@performances = get_now_performances(@dayindex,maxstarttime,festival)
@@ -82,7 +82,7 @@ class HomePagesController < ApplicationController
 			@performances = []
 		else 
 			@dayindex = get_dayindex(festival,today)
-			if @dayindex > 0 and  @dayindex <  festival.days
+			if @dayindex > 0 and  @dayindex <=  festival.days
 				minstarttime = @localTime.strftime("%H:%M")
 				@performances = get_next_performances(@dayindex,minstarttime,festival)
 			else

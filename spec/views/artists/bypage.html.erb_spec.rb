@@ -13,7 +13,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   end
   it "shows an artist " do
   	a = create(:artist)
-  	artist = Artist.select("artists.*,null as fav_id").take
+  	artist = Artist.select("artists.*,null::integer as fav_id").take
   	artists = [artist]
   	assign(:artists,artists)
   	render
@@ -25,7 +25,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   	end
 	  it "hide a music icon when not a favourite artist " do
 	  	a = create(:artist)
-	 		artist = Artist.select("artists.*,null as fav_id").take
+	 		artist = Artist.select("artists.*,null::integer as fav_id").take
 	  	artists = [artist]
 	  	assign(:artists,artists)
 	  	render
@@ -43,7 +43,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
 
   it "shows a link to artist web page" do
   	artist = create(:artist,linkid: "755")
-  	artist = Artist.select("artists.*,null as fav_id").take
+  	artist = Artist.select("artists.*,null::integer as fav_id").take
   	artists = [artist]
   	assign(:artists,artists)
   	render
@@ -51,7 +51,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   end
   it "shows artist pagination" do
   	artist = create(:artist)
-  	artist = Artist.select("artists.*,null as fav_id").take
+  	artist = Artist.select("artists.*,null::integer as fav_id").take
   	artists = [artist]
   	assign(:artists,artists)
   	page = build(:artistpage)
@@ -62,7 +62,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   end
   it "shows a link for artist page" do
   	artist = create(:artist)
-  	artist = Artist.select("artists.*,null as fav_id").take
+  	artist = Artist.select("artists.*,null::integer as fav_id").take
   	artists = [artist]
   	assign(:artists,artists)
   	page = build(:artistpage)
@@ -74,7 +74,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   end
   it "does not show artist pagination when no range" do
   	artist = create(:artist)
-  	artist = Artist.select("artists.*,null as fav_id").take
+  	artist = Artist.select("artists.*,null::integer as fav_id").take
   	artists = [artist]
   	assign(:pages, nil)
   	assign(:artists,artists)
@@ -83,7 +83,7 @@ RSpec.describe "artists/bypage.html.erb", :type => :view do
   end
   it "shows the passed page as the active page" do
   	artist = create(:artist)
-  	artist = Artist.select("artists.*,null as fav_id").take
+  	artist = Artist.select("artists.*,null::integer as fav_id").take
   	artists = [artist]
   	assign(:artists,artists)
   	page = create(:artistpage)

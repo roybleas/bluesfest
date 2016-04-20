@@ -14,7 +14,7 @@ RSpec.describe "favourites/add.html.erb", :type => :view do
   	end
 	  it "shows Add link when not linked to favourite artist " do
 	 		favourite = nil
-	 		artist = Artist.select("artists.*,null as fav_id").take
+	 		artist = Artist.select("artists.*, null::integer as fav_id").take
 	  	artists = [artist]
 	  	assign(:artists,artists)
 	  	render
@@ -49,7 +49,7 @@ RSpec.describe "favourites/add.html.erb", :type => :view do
 		it "shows a badge with current total of favourites" do
 			artist = create(:artist)
 	 		favourite = nil
-	 		artist = Artist.select("artists.*,null as fav_id").take
+	 		artist = Artist.select("artists.*,null::integer as fav_id").take
 	  	artists = [artist]
 	  	assign(:artists,artists)
 	  	assign(:favouritescount,6)
