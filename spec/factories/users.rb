@@ -45,5 +45,14 @@ FactoryGirl.define do
     admin false
     tester true
   end
+
+  factory :other_user, class: User do
+    name "Mrs Rubble"
+    screen_name "Betty"
+    password "password"
+    password_confirmation "password"
+    admin false
+    tester false
+  end
   
 end

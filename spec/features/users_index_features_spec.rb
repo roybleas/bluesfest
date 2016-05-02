@@ -19,9 +19,7 @@ feature 'show users' do
 		fill_in "Password",					with:	user.password 
 		click_button 'Log in'
 		expect(current_path).to eq user_path(user.id)
-		
-	
-		
+				
 		click_link 'Log out'
 		
 	end
@@ -42,6 +40,9 @@ feature 'show users' do
 		expect(page).to have_link("Delete", :href=>"/users/#{user.id}" )
 		expect(page).to_not have_link("Delete", :href=>"/users/#{admin.id}" )
 		
+		expect(page).to have_link("Reset Password", :href=>"/users/reset/#{user.id}" )
+		expect(page).to_not have_link("Reset Password", :href=>"/users/reset/#{admin.id}" )
+		
 		click_link 'All Users'
 		expect(current_path).to eq users_path
 		
@@ -51,5 +52,64 @@ feature 'show users' do
 		
 		click_link 'Log out'
 	end 
+	scenario 'delete user' do
+		user = @user
+		admin = FactoryGirl.create(:admin_user)
+		
+		visit login_path
+		fill_in "Name",							with: admin.name
+		fill_in "Password",					with:	admin.password 
+		click_button 'Log in'
+		expect(current_path).to eq user_path(admin.id)
+		
+		visit users_path
+		
+		expect(page).to have_content(admin.screen_name)
+		
+		click_link 'All Users'
+		expect(current_path).to eq users_path
+
+		expect(page).to have_content(user.name)
+		expect(page).to have_link("Delete", :href=>"/users/#{user.id}" )
+		expect(page).to have_link("Reset Password", :href=>"/users/reset/#{user.id}" )
+
+		click_link 'Delete'
+		expect(page).to_not have_content(user.name)
+		expect(page).to_not have_link("Delete", :href=>"/users/#{user.id}" )
+		expect(page).to_not have_link("Reset Password", :href=>"/users/reset/#{user.id}" )
+		
+		click_link 'Log out'
+	end 
+	scenario 'reset user password' do
+		user = @user
+		admin = FactoryGirl.create(:admin_user)
+		
+		visit login_path
+		fill_in "Name",							with: admin.name
+		fill_in "Password",					with:	admin.password 
+		click_button 'Log in'
+		expect(current_path).to eq user_path(admin.id)
+				
+		click_link 'All Users'
+		expect(current_path).to eq users_path
+
+		expect(page).to have_content(user.name)
+		expect(page).to have_link("Delete", :href=>"/users/#{user.id}" )
+		expect(page).to have_link("Reset Password", :href=>"/users/reset/#{user.id}" )
+
+		click_link 'Reset Password'
+		expect(page).to have_content("Password Reset")
+		expect(page).to have_content(user.name)
+		expect(page).to have_link("Delete", :href=>"/users/#{user.id}" )
+		expect(page).to have_link("Reset Password", :href=>"/users/reset/#{user.id}" )
+		
+		visit login_path
+		fill_in "Name",							with: user.name
+		fill_in "Password",					with:	"newpassword" 
+		click_button 'Log in'
+		expect(current_path).to eq user_path(user.id)
+		
+	end
 end
+
 	

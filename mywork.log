@@ -93,3 +93,6 @@ to view schemas (on heroku)
 	heroku run "bundle exec rake db:schema:dump && cat db/schema.rb"
 	
 	generate controller testpages settime show
+	
+unknown OID 705: failed to recognize type of 'fav_id'. It will be treated as String.
+	fixed by defining the type of field eg null::interger as fav_id

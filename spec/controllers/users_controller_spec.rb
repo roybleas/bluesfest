@@ -57,11 +57,10 @@ RSpec.describe UsersController, :type => :controller do
  end
 
  describe "Show user" do
-		fixtures :users
-
+		
   	context "unsuccessful when not logged in" do
   		it "redirects to login" do
-  			user = users(:roy)
+  			user = create(:admin_user)
   			get :show, id: user
   			expect(response).to redirect_to(login_url)
   		end
@@ -69,26 +68,35 @@ RSpec.describe UsersController, :type => :controller do
 
   	context "successfull when logged in as current user" do
   		it "renders user page" do
-				user = users(:roy)
+				user = create(:admin_user)
 				session[:user_id] = user.id
 				get :show, id: user
 				expect(response).to render_template :show
   		end
   	end
 
+  	context "successful when logged in as admin user" do
+  		it "redirects to root" do
+				user = create(:admin_user)
+				session[:user_id] = user.id
+				other_user = create(:user)
+				get :show, id: other_user
+				expect(response).to render_template :show
+  		end
+  	end
   	context "unsuccessful when logged in as different user" do
   		it "redirects to root" do
-				user = users(:roy)
+				user = create(:user)
 				session[:user_id] = user.id
-				other_user = users(:archer)
+				other_user = create(:other_user)
 				get :show, id: other_user
 				expect(response).to redirect_to(root_url)
   		end
   	end
+
 	end
 
 	describe "Index of users" do
-		fixtures :users
 
   	context "unsuccessful when not logged in" do
   		it "redirects to login" do
@@ -98,12 +106,34 @@ RSpec.describe UsersController, :type => :controller do
   	end
   	context "successful when logged in" do
   		it "shows index list" do
-  			user = users(:roy)
+  			
+  			user = create(:admin_user)
 				session[:user_id] = user.id
   			get :index
   			expect(response).to render_template :index
   		end
   	end
   end
+	describe "reset password" do
+		before(:example) do
+			@logged_in_admin_user =  create(:admin_user)
+			session[:user_id] = @logged_in_admin_user.id
+		end	  	
+		
+		context "passes user to be reset" do
+			it "redirects to index" do
+				edit_user = create(:user)
+				get :reset, id: edit_user.id
+				expect(response).to redirect_to(users_url)
+			end
+			it "updates the password" do
+				edit_user = create(:user)
+				get :reset, id: edit_user.id
+				updated_user = User.find(edit_user.id)
+				expect(updated_user.authenticate("newpassword")).to eq edit_user
+			end
 
+	
+		end
+	end
 end

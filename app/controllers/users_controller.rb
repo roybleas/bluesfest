@@ -65,7 +65,18 @@ class UsersController < ApplicationController
   		render 'edit'
   	end
   end
-  
+
+	def reset
+		user = User.find(params[:id])
+		user.password = "newpassword"
+		user.password_confirmation = "newpassword"
+		if user.save
+			flash[:success] = "Password Reset"
+		end
+		redirect_to users_path
+	end  
+	
+	
   private 
   
   	def user_params

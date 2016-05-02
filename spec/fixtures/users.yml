@@ -12,15 +12,15 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-
-roy:
-  name: Roy Example
-  screen_name: Roy 1
-  password_digest: <%= User.digest('password') %>
+#roy:
+#  name: Roy Example
+#  screen_name: Roy 1
+#  password_digest: <%= User.digest('password') %>
   
-archer:
-  name: Joe Grundy
-  screen_name: Joe
-  password_digest: <%= User.digest('password') %>
+#archer:
+#  name: Joe Grundy
+#  screen_name: Joe
+#  password_digest: <%= User.digest('password') %>
+
 
 
