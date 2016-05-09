@@ -1,6 +1,6 @@
-= Bluesfest planner
+== Bluesfest planner
 
-== [Bluesfest](http://www.bluesfest.com.au/) is a Blues & Roots Musice Festival held each year near Byron Bay
+=== Bluesfest[http://www.bluesfest.com.au/] is a Blues & Roots Music Festival held each year near Byron Bay
 
 
 
