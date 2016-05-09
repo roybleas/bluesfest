@@ -1,9 +1,8 @@
-== README
+= Bluesfest planner
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== [Bluesfest](http://www.bluesfest.com.au/) is a Blues & Roots Musice Festival held each year near Byron Bay
 
-Things you may want to cover:
+
 
 * Ruby version
 
