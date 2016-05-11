@@ -1,28 +1,67 @@
-== README
+## Bluesfest planner
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Bluesfest[http://www.bluesfest.com.au] is a Blues & Roots Music Festival held each year near Byron Bay
 
-Things you may want to cover:
+#### Background
+The music festival has over 80 musicians/bands on 5 stages over 5 days. With so many performances, choosing which artists to see on which days requires some planning. The phone app provided by Bluesfest allows you to create a wish list by performance, but not by artist. This is a typical feature amongst other similar festival applications. It is a lot easier to associate the user with a performance. Yet most artists at the Bluesfest play on more than one day and sometimes on 3 or 4 days.So rather than create a list of individual performances, I first want to create a list of artists. Then juggle the performance times so I can see as many of them as possible.  
 
-* Ruby version
+While at the festival I want to be able to keep track of my personal schedule on my phone. So I can be at the correct stage at the correct time. It is also important to be able to easily look up the musicians currently on stage. There will be numerous times when you are passing a stage and hear something you like from an artist you do not recognise.  
 
-* System dependencies
+#### Features
+* View the Bluesfest schedule by
+  * performances by time on all stages for a particular day - not suitable for small device 
+  * performances by stage for a particular day - suitable for small device
+* Artists  
+  * as a list
+  * as single artist with performances
+  * link to artist web page at Bluesfest web site 
+* From Home Page view
+  * Prior to festival starting, a countdown in days to it commencing
+  * During festival view:
+    * Who is currently on stage
+    * Who will appearing on stage next
+    * Users personal schedule for the day when logged on
+* Create a user and sign on
+* When logged in
+  * Create a list of favourite artists
+  * Select favourite performances to see
+  * View personal daily schedule
+* Admin user
+  * View all users
+  * Delete user
+  * Reset user password  
+  
+### Seed Data
+The seeds.rb file contains data to create some users. The important one is the user with admin attribute set to true. 
+ 
+### Data 
+There are 2 sources of data taken from the festival website
 
-* Configuration
+* The Playing Schedule[http://www.bluesfest.com.au/pages/?ParentPageID=90&PageID=177]
+* Line up 2016[http://www.bluesfest.com.au/schedule/?DayID=89] 
 
-* Database creation
+Other data used to populate the database is extrapolated from these sources. the files are located in db/dbloadfiles
 
-* Database initialization
+Table:	festivals
+File:		festivals.csv
+Header row has 8 columns:
 
-* How to run the test suite
+ | column  | description |
+ | ------  | ----------- |
+ |startdate| First day of the festival formatted  yyyy-mm-dd |
+  		
+	days,
+	scheduledate,
+	year,
+	title,
+	major,
+	minor,
+	active
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+	startdate,days,scheduledate,year,title,major,minor,active
+2016-03-24, 5, 2016-03-04, 2016, Bluesfest, 1, 0, true
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+
+
