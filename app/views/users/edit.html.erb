@@ -1,17 +1,17 @@
 <div class="container">
-<div class="login ">
 	<% @action_header = "Update Profile" %>
 	<% @button_title = "Update Account" %>
-	<%= render "layouts/user" , locals: {user: @user, action_header: @action_header, button_title: @button_title} %>
-	<div class="login_footer">
-	<p class="login_footer">
-	User Login:
-   <%=
-   link_to("Delete", @user, class:"btn btn-info", method: :delete, data: { confirm: "You sure?" } )
-   %>
-
-   </p>
+	<%= render "user" , locals: {user: @user, action_header: @action_header, button_title: @button_title} %>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="well">
+				<p class="login_footer">
+				User Login:
+   			<%=
+   				link_to("Delete", @user, class:"btn btn-info", method: :delete, data: { confirm: "Are you sure?" } )
+   			%>
+   		</p>
    </div>
-</div>
+  </div>
 </div>
 
