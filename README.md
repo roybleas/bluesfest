@@ -148,7 +148,9 @@ Example data from the beginning of the first 2 columns:
                                                                                                          
                                                                                                          
 * Cut each daily column and append under the previous.   
+
 #### Add a header record and a Day number against each date.
+
 * On the same row as the day of the week and calendar number insert the day number at the beginning of the line
 
  eg.   
