@@ -80,6 +80,7 @@ class ExtractPerformances
 	end
 	
 end
+
 class ExtractPerformancesMergeLinesError < StandardError
 end
 

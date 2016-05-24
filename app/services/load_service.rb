@@ -84,6 +84,7 @@ class RecordCounter
 end
 
 class ArtistCode
+# By removing punctuation and spaces and lowering case create a simple identifier from artist's name  
 	class << self
 		def extract(artistname)
 			artistname.gsub(/[ \&\'\,\"\.]/,"").downcase
@@ -114,11 +115,12 @@ class LoadArtists
 		CSV.foreach(@file_pathname, {col_sep: "\t", headers: :true}) do |row|
 			
 			artist_linkid = row["id"].strip unless row["id"].nil? 
-			artist_name = row["artist"].strip
-			artist_code = ArtistCode.extract(artist_name)
 			
 			#skip the first line info
 			next if artist_linkid == "ExtractDate"
+
+			artist_name = row["artist"].strip
+			artist_code = ArtistCode.extract(artist_name)
 	
 			artist = Artist.by_code_and_festival_id(artist_code,festival.id).take		
 			if artist.nil?
@@ -140,7 +142,6 @@ class LoadArtists
 		end
 		
 		puts record_counter.print_totals
-		#puts "Added: #{artist_add_count} and updated: #{artist_update_count} artists"
 		
 	end
 	 

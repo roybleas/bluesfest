@@ -98,7 +98,7 @@ namespace :uploads do
   	
   end
 	
-	desc "Upload artists data to database"
+	desc "Upload artists page ranges to database"
   task artistpages: :environment do
   	puts "upload artist pages"
   	filename = 'artistpages.csv'
