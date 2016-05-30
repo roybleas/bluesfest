@@ -9,8 +9,8 @@ While at the festival I also want to be able to keep track of my personal schedu
 
 #### Features
 * View the Bluesfest schedule by
-  * performances by time on all stages for a particular day - not suitable for small device 
-  * performances by stage for a particular day - suitable for small device
+  * performances by time on all stages for a particular day - (not suitable for small device) 
+  * performances by stage for a particular day (suitable for small device)
 * View Artists  
   * as a list
   * as single artist with performances
@@ -65,11 +65,10 @@ Other data used to populate the database is extrapolated from these sources.
 
 ### Artists Data
 The artists table data is extracted by parsing the artist 'Line Up' page from the Bluesfest webpage. 
-The web address is currently hard coded into the program and needs to be configured as a parameter.
-The extract program `parseids2.rb` extracts the name of the artist and the id used to access their page on the Bluesfest website, and writes to a CSV file extractArtists2.csv.
+The extract program `parseids.rb` extracts the name of the artist and the id used to access their page on the Bluesfest website, and writes to a CSV file extractArtists2.csv.
 
-* __Extract program__  extract/parseids2.rb
-* __Output File:__		extractArtists2.csv
+* __Extract program__  extract/parseids.rb
+* __Output File:__		extractArtists.csv
 * __Delimiter:__ tab
 * Header row has  columns:
 
@@ -104,7 +103,7 @@ ExtractDate	2016-03-04
 * To-do: 
   * Automatically insert todays date when creating output file.
   * Convert double quotes to single quotation mark
-  * Task to copy `extract/extractArtists2.csv` to `db/dbloadfiles/artists.csv`  
+  * Convert hard coded web address in parseids.rb to parameter
   
 ### Performance Data
 The performance data is extracted from the published schedule which is a pdf document. This is currently a manual process and needs some automating. Though some performance data will still need manual intervention to clean up some data.   
@@ -112,7 +111,8 @@ __Process__
 * Download the current schedule
 * Convert PDF file to text
 * Edit the text file so all the data is in one column
-* Add a header record and a Day number against each date.
+* Add a header record   
+* Add a Day number against each date.
 * Cleanse the data to make sure the titles of the performances match the ones stored in the artists table. 
 * Convert text file to csv for data uploading
 
@@ -123,10 +123,8 @@ eg using pdftotext utility with -layout option
  pdftotext bluesfest/extract/Bluesfest16SCHEDULE160302.PDF bluesfest/extract/Bluesfest16SCHEDULE160302.txt -layout  
 
 ##### Edit the text file so all the data is in one column
-Using a text editor Cut and Paste the columns of performance data into a single column of data.   
 
-Note the format of the data may change in later years.   
-(This data is from 2016)   
+Note the format of the data may change in later years. This data is from 2016   
 The schedule has five columns of data, one for each day of the festival. Each column has a date, followed by stage header and then performance times for that stage, with the start time, name of artist and duration of performance.  
 
 Example data from the beginning of the first 2 columns:
@@ -146,8 +144,8 @@ Example data from the beginning of the first 2 columns:
 |        |                                       |  12.45 |             KALEO 45 min                    |
 |        |                                       |  12.00 |   ARAKWAL OPENING CEREMONY 30 min           |
                                                                                                          
-                                                                                                         
-* Cut each daily column and append under the previous.   
+
+* Using a text editor Cut and Paste the columns of performance data into a single column of data.                 
 
 #### Add a header record and a Day number against each date.
 
@@ -158,7 +156,7 @@ Example data from the beginning of the first 2 columns:
 | DAY  3 | SATURDAY 26TH |                               
 | ---    | --- |
  
-* Insert a header row at the beginning of the file with the date the schedule was downloaded eg. `SCHEDULEDATE	20160302` where the date can be in any format as long as there are no spaces and unique to any currently in the performances table. eg The use of date is just a convience to remind the administrator which schedule is being loaded. It could include a version for example `20160302V2`.
+* Insert a header row at the beginning of the file with the date the schedule was downloaded eg. `SCHEDULEDATE	20160302` where the date can be in any format as long as there are no spaces and unique to any currently in the performances table. The use of date is just a convience to remind the administrator which schedule is being loaded. It could include a version for example `20160302V2`.
 
 #### Cleanse the data to make sure the titles of the performances match the ones stored in the artists table. 
 The description of the performance may not exactly match the name of an artist previously downloaded. In these cases the row of data will need to be amended by replacing the performance title with artist name and placing the performance title after the duration. Then the loading program can match the artist to the performance description.The loading rake task will reject artists not found in the artists table. In most cases they will be the same.   
@@ -228,7 +226,7 @@ Header row has 8 columns:
 
 #### Configuration file for tables linked to festival
 
-Where tables are linked to festival. The upload task looks up festival.yml to identify the correct festival record to join to based on title and startdate. This file is created manually.
+Where tables are linked to festival. The upload task looks up based on title and startdate in festival.yml to identify the correct festival record to create a link. This file is created manually.
 
 * File: 	db/dbloadfiles/festival.yml   
 
@@ -338,7 +336,7 @@ __File:__		stages.csv
 #### Table:	performances
    
 The suffix is currently hardcoded into task.
-When the upload task is run against a new file with a different schedule version date, the performance records which have the same artist,stage,starttime are updated with new starttime, performance title and duration. Otherwise a new record is created for each performance entry. At the end of uploading any artist records in artists table for the same festival record who do not have at least one performance record, are marked as inactive. Any performance records for the festival with a different schedule version are removed.
+When the upload task is run against a new file with a different schedule version date, the performance records which have the same artist,stage,starttime are updated with new starttime, performance title and duration. Otherwise a new record is created for each performance entry. At the end of uploading, any artist records in the artists table for the same festival record who do not have at least one performance record, are marked as inactive. Any performance records for the festival with a different schedule version are removed.
 
 __Task:__		rake uploads:performances   
 __File:__		schedule**yymmdd**.csv where the date of the schedue is used as a suffix in the format yymmdd.   

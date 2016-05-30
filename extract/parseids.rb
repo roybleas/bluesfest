@@ -4,7 +4,7 @@ require 'open-uri'
 # Extract artist ids from bluesfest website
 src_url = "http://www.bluesfest.com.au/schedule/?DayID=89"
 
-f = File.new("extractArtists2.csv",'w')
+f = File.new("extractArtists.csv",'w')
 
 	# create a csv header
 	f.puts "id\tartist"
