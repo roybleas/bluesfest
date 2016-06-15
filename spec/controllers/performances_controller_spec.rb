@@ -212,18 +212,34 @@ RSpec.describe PerformancesController, :type => :controller do
   				get :index
   				expect(assigns(:performances)).to eq performances
     		end
-				it "assigns by stage within daynumber" do
+				it "assigns by stage ascending" do
 					performance = create(:performance_with_festival)
+					stage3 = create(:stage, title: "Delta",	code: "de", seq: 3, festival_id: performance.festival_id)
 					stage2 = create(:stage, title: "Crossroads",	code: "cr", seq: 2, festival_id: performance.festival_id)
-					performance3 = performance
-  				performance2 = create(:performance, starttime: "9:16", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 2)
-  				performance1 = create(:performance, starttime: "20:00", stage_id: performance.stage_id, festival_id: performance.festival_id, daynumber: 1, )
-  				performance4 = create(:performance, starttime: "9:16", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 3)
+					performance2 = performance
+  				performance3 = create(:performance, stage_id: stage2.id, festival_id: performance.festival_id,daynumber: 3)
+  				performance1 = create(:performance, starttime: "11:00", stage_id: performance.stage_id, festival_id: performance.festival_id, daynumber: 3 )
+  				performance4 = create(:performance, starttime: "9:16", stage_id: stage3.id, festival_id: performance.festival_id, daynumber: 3)
     			performances = [performance1,performance2,performance3,performance4]
 
 					get :index
   				expect(assigns(:performances)).to eq performances
 				end 
+				it "assigns by starttime within stage within daynumber" do
+					performance = create(:performance_with_festival, starttime: "18:00")
+					stage2 = create(:stage, title: "Crossroads",	code: "cr", seq: 2, festival_id: performance.festival_id)
+					performance4 = performance
+					performance5 = create(:performance, starttime: "16:00", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 3)
+  				performance2 = create(:performance, starttime: "10:00", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 1)
+  				performance1 = create(:performance, starttime: "15:00", stage_id: performance.stage_id, festival_id: performance.festival_id, daynumber: 1, )
+  				performance3 = create(:performance, starttime: "18:00", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 1)
+    			performances = [performance1,performance2,performance3,performance4,performance5]
+
+					get :index
+  				expect(assigns(:performances)).to eq performances
+				end 
+
+
 			end
 	
 		end
