@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   patch 'favourites/performanceupdate/:id',  to: 'favourites#performanceupdate', as: :favperformupdate
   
 	
-	
+	resources :performances, only: [:index]
   get 'showbyday/:dayindex', to: 'performances#showbyday', as: :showbyday
 
   get 'stages/:id/:dayindex' => 'stages#show', as: :stage 

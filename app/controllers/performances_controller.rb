@@ -16,6 +16,10 @@
 #
 
 class PerformancesController < ApplicationController
+	include Userlogin
+  before_action :logged_in_user, only: [:index]
+  before_action :admin_user,     only: [:index]
+  
 	include Validations
   def showbyday
   	dayindex = params[:dayindex].to_i
@@ -35,4 +39,13 @@ class PerformancesController < ApplicationController
   		@performancedate = (festival.startdate + @dayindex - 1).strftime("( %a %d %B %Y )")
   	end
   end
+  
+  def index
+		festival = Festival.current_active.first
+		if festival.nil?
+  		@performances = []
+  	else
+  		@performances = Performance.for_festival(festival).includes(:artist, :stage).order(daynumber: :asc).order("stages.seq").order(starttime: :asc)
+		end
+	end
 end

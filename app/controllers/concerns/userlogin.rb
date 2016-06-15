@@ -9,4 +9,13 @@ module Userlogin
 		end
 	end
   
+  # Confirms the admin user.
+ def admin_user
+       
+    unless current_user.admin?
+    	flash[:danger] = "Please log in with the correct user name."
+    	redirect_to(root_url)
+    end
+ end
+
 end

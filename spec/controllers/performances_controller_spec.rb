@@ -149,4 +149,84 @@ RSpec.describe PerformancesController, :type => :controller do
 			expect(assigns(:performancedate)).to eq "( Sat 26 March 2016 )"
 		end
 	end
+	
+	describe "index" do
+ 		context "GET index" do
+    	it "returns http success" do
+      	get :index
+      	expect(response).to have_http_status(:redirect)
+    	end
+  	end
+ 		context "unsuccessful when not logged in" do
+  		it "redirects to login" do
+  			get :index
+  			expect(response).to redirect_to(login_url)
+  		end
+  	end
+  	context "unsuccessful when not logged in as admin user" do
+  		it "redirects to login" do
+  			user = create(:user)
+				session[:user_id] = user.id
+  			get :index
+  			expect(response).to redirect_to(root_url)
+  		end
+  	end
+  	context "successful when logged in" do
+  		it "shows index list" do	
+  			user = create(:admin_user)
+				session[:user_id] = user.id
+  			get :index
+  			expect(response).to render_template :index
+  		end
+  	end
+  	context "when logged in as admin" do
+  		before(:example) do
+				@logged_in_user =  create(:admin_user)
+				session[:user_id] = @logged_in_user.id
+			end
+  		it "returns empty array when no performances" do
+    		get :index
+    		expect(assigns(:performances)).to be_empty
+    	end
+    	it "assigns a performance to array" do
+    		performance = create(:performance_with_festival)
+    		performances = [performance]
+    		get :index
+				expect(assigns(:performances)).to match_array(performances)
+    	end
+			context "sort order" do
+    		it "assigns by startime ascending" do	
+					performance2 = create(:performance_with_festival)
+  				performance1 = create(:performance, starttime: "9:16", stage_id: performance2.stage_id, festival_id: performance2.festival_id)
+  				performance3 = create(:performance, starttime: "20:00", stage_id: performance2.stage_id, festival_id: performance2.festival_id)
+    			performances = [performance1,performance2,performance3]
+  				get :index
+  				expect(assigns(:performances)).to eq performances
+    		end
+    		it "assigns by daynumber ascending" do	
+					performance = create(:performance_with_festival)
+					performance3 = performance
+  				performance2 = create(:performance, starttime: "9:16", stage_id: performance.stage_id, festival_id: performance.festival_id, daynumber: 2)
+  				performance1 = create(:performance, starttime: "20:00", stage_id: performance.stage_id, festival_id: performance.festival_id, daynumber: 1)
+    			performances = [performance1,performance2,performance3]
+  				get :index
+  				expect(assigns(:performances)).to eq performances
+    		end
+				it "assigns by stage within daynumber" do
+					performance = create(:performance_with_festival)
+					stage2 = create(:stage, title: "Crossroads",	code: "cr", seq: 2, festival_id: performance.festival_id)
+					performance3 = performance
+  				performance2 = create(:performance, starttime: "9:16", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 2)
+  				performance1 = create(:performance, starttime: "20:00", stage_id: performance.stage_id, festival_id: performance.festival_id, daynumber: 1, )
+  				performance4 = create(:performance, starttime: "9:16", stage_id: stage2.id, festival_id: performance.festival_id, daynumber: 3)
+    			performances = [performance1,performance2,performance3,performance4]
+
+					get :index
+  				expect(assigns(:performances)).to eq performances
+				end 
+			end
+	
+		end
+
+	end
 end
