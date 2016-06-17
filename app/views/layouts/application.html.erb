@@ -50,8 +50,9 @@
 		    				</a>
 		    				<ul class="dropdown-menu" role="menu">
 		    					<li role="presentation"> <%= link_to "All Users", users_path %> </li>
-		  						</li>
+		  						<li role="presentation"> <%= link_to "Edit Performances", performances_path %> </li>
 								</ul>
+								</li>
 							<% end %>
 						<% else %>
 							<li role="presentation"> <%= link_to "<span class=\"glyphicon glyphicon-user\"></span> Sign up".html_safe , signup_path %> </li>

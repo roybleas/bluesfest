@@ -1,3 +1,28 @@
-<div class='container">
-<h2>Performances</h2>
+<div class="container">
+<h2><%= "Performance".pluralize(@performancecount) %></h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td></td>
+			<td>Day</td>
+			<td>Stage</td>
+			<td>Start Time</td>
+			<td>Performance</td>
+			<td>Duration</td>
+		</tr>
+	</thead>
+	<tbody>
+	  <% @performances.each do |performance| %>
+	    <tr>
+	    	<td><%= link_to "Edit", edit_performance_path(performance) %></td>
+	    	<td><%= performance.daynumber %></td>
+	    	<td><%= performance.stage.title %></td>
+	    	<td><%= performance.starttime.strftime("%H:%M") %></td>
+	      <td><%= performance.title %></td>
+	      <td><%= performance.duration %></td>
+	    </tr>
+	  <% end %>
+	</tbody>
+</table>
+
 </div>

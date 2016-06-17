@@ -16,11 +16,13 @@
 #
 
 class PerformancesController < ApplicationController
+	include Validations
 	include Userlogin
   before_action :logged_in_user, only: [:index]
   before_action :admin_user,     only: [:index]
   
-	include Validations
+	
+	
   def showbyday
   	dayindex = params[:dayindex].to_i
   	  	
@@ -44,8 +46,10 @@ class PerformancesController < ApplicationController
 		festival = Festival.current_active.first
 		if festival.nil?
   		@performances = []
+  		@performancecount = 0
   	else
   		@performances = Performance.for_festival(festival).includes(:artist, :stage).order(daynumber: :asc).order("stages.seq").order(starttime: :asc)
+  		@performancecount = Performance.for_festival(festival).count
 		end
 	end
 end
