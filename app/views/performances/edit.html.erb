@@ -1,0 +1,27 @@
+<div class="container">
+	<h2>Performance: <%=  @performance.title %>
+	</h2>
+  <%= form_for(@performance) do |f| %>
+    
+    <%= f.hidden_field :festival_id %>
+    
+    <p>
+      <%= f.label :daynumber %>
+      <%= f.text_field :daynumber %>
+    </p>
+    <p>
+      <%= f.label :starttime %>
+      <%= f.text_field :starttime %>
+    </p>
+    <p>
+    <%= f.label :duration %>
+    <%= f.text_field :duration %>
+    </p>
+    <p>
+    <%= f.label :stage %> 
+    <%= f.collection_select(:stage_id, @stages, :id, :title) %>
+    </p>
+    <%= f.submit %>
+  <% end %>    
+</div>
+
