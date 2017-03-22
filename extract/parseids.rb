@@ -1,8 +1,10 @@
 require 'nokogiri'
 require 'open-uri'
+require 'yaml'
 
 # Extract artist ids from bluesfest website
-src_url = "http://www.bluesfest.com.au/schedule/?DayID=89"
+artists = YAML.load(File.open('artists_src.yml'))
+src_url = artists[0]['src']
 
 f = File.new("extractArtists.csv",'w')
 
