@@ -11,5 +11,16 @@ namespace :delete do
 		
   end
 
+  desc "Deletes all favourite and favourite performance records"
+  task :favourites, [:dry] => :environment do |t, args|
+ 
+		dryrun = args[:dry].to_s
+		if dryrun.match(/dry/) 
+		  FavouritesShow.new().run
+		else
+		  FavouritesDelete.new().run
+		end
+		
+  end
 
 end
