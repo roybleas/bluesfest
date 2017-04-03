@@ -351,3 +351,13 @@ __File:__		schedule**yymmdd**.csv where the date of the schedue is used as a suf
 
 __Task:__		rake uploads:artistpages   
 __File:__		artistpages.csv   
+
+### Data Deletion
+
+#### Table: favourites, favouriteperformances
+
+The favourites data is transient and only applies to the current festival. Each year the current values need to be deleted. Before deleting the records the task can be run as a dry run and a count of the current records is shown instead. A dryrun is done by including the parameter 'dry'.
+
+__Task:__		rake delete:favourites['dry']   
+__Task:__		rake delete:favourites   
+
