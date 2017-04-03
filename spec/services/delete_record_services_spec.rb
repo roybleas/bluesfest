@@ -47,4 +47,34 @@ RSpec.describe "delete services" do
 			end
 		end
 	end
+	context "favourites" do
+		describe "show records to be deleted" do
+			it "counts favourite records to delete" do
+				favourite = create(:user_for_favourite)
+				cShow = FavouritesShow.new()
+				expect{cShow.run}.to output(/There is 1 favourite artist record to delete and there are 0 favourite performance records to delete/).to_stdout
+			end
+			it "counts favourite perfromance records to delete" do
+				favourite = create(:user_for_favourites_with_performances)
+				cShow = FavouritesShow.new()
+				expect{cShow.run}.to output(/There is 1 favourite artist record to delete and there are 3 favourite performance records to delete/).to_stdout
+			end
+			it "finds no records to delete" do
+				cShow = FavouritesShow.new()
+				expect{cShow.run}.to output(/There are 0 favourite artist records to delete and there are 0 favourite performance records to delete/).to_stdout
+			end
+		end
+		describe "delete selected records" do
+			it "finds and deletes record" do
+				favourite = create(:user_for_favourite)
+				cDelete = FavouritesDelete.new()
+				expect{cDelete.run}.to change(Favourite, :count).by(-1)
+			end
+			it "finds and deletes all favourite and favourite performance records" do
+				favourite = create(:user_for_favourites_with_performances)
+				cDelete = FavouritesDelete.new()
+				expect{cDelete.run}.to change(Favouriteperformance, :count).by(-3)
+			end
+		end
+	end
 end
