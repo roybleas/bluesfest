@@ -1,5 +1,6 @@
 require 'rails_helper'
 require './app/services/extract_performances_service.rb'
+require './app/services/load_service.rb'
 
 
 RSpec.describe "extract performances services" do
@@ -25,18 +26,39 @@ RSpec.describe "extract performances services" do
 				filename = './spec/files/performanceswithoutheader.txt'
 				expect {ExtractPerformances.new(@festival).process_file(filename)}.to raise_error("Input file #{filename} has invalid header record")
 			end
-			it "reads file wth valid header record and sample performances" do
-				festival = create(:festival)
-				s1 = create(:stage,festival_id: festival.id)
-				s2 = create(:stage,festival_id: festival.id, title: "Crossroads", code: "cr")
-				a1 = create(:artist, festival_id: festival.id, name: "KENDRICK LAMAR", code: "kendricklamar" )
-				a2 = create(:artist, festival_id: festival.id, name: "D'ANGELO", code: "dangelo" )
-				a3 = create(:artist, festival_id: festival.id, name: "KAMASI WASHINGTON", code: "kamasiwashington" )
-				a4 = create(:artist, festival_id: festival.id, name: "TEDESCHI TRUCKS BAND", code: "tedeschitrucksband" )
-				a5 = create(:artist, festival_id: festival.id, name: "TWEEDY", code: "tweedy" )
-				filename = './spec/files/validperformances1.txt'
-				expect {ExtractPerformances.new(festival).process_file(filename)}.to_not raise_error
-			end
+			context "reads file with valid header record and sample performances" do 
+		    before(:each) do			
+  				@festival = create(:festival)
+  				s1 = create(:stage,festival_id: @festival.id)
+  				s2 = create(:stage,festival_id: @festival.id, title: "Crossroads", code: "cr")
+  				a1 = create(:artist, festival_id: @festival.id, name: "KENDRICK LAMAR", code: "kendricklamar" )
+  				a2 = create(:artist, festival_id: @festival.id, name: "D'ANGELO", code: "dangelo" )
+  				a3 = create(:artist, festival_id: @festival.id, name: "KAMASI WASHINGTON", code: "kamasiwashington" )
+  				a4 = create(:artist, festival_id: @festival.id, name: "TEDESCHI TRUCKS BAND", code: "tedeschitrucksband" )
+  				a5 = create(:artist, festival_id: @festival.id, name: "TWEEDY", code: "tweedy" )
+  			end
+  			it 'with data format 1' do
+  				filename = './spec/files/validperformances1.txt'
+  				expect {ExtractPerformances.new(@festival).process_file(filename)}.to_not raise_error
+  			end
+  			it 'with data format 2' do
+  				filename = './spec/files/validperformances2.txt'
+  				extract_performances = ExtractPerformances.new(@festival)
+  				extract_performances.performance_data_format = 2
+  				expect {extract_performances.process_file(filename)}.to_not raise_error
+  			end
+
+  		end
+		end
+		context "optional performance data formats" do
+		  it "default performance format is nil" do
+		    expect(ExtractPerformances.new(@festival).performance_data_format).to be_nil
+		  end
+		  it "can be set to 2" do
+		    extract = ExtractPerformances.new(@festival)
+		    extract.performance_data_format = 2 
+		    expect(extract.performance_data_format).to eq(2)
+		  end
 		end
 		context "read array " do
 			it "ignores a blank line " do
@@ -107,45 +129,57 @@ RSpec.describe "extract performances services" do
 		end
 
 	end
+	context "Configuration class" do
+	  it "extracts file suffix from yaml" do
+	    config = ConfigurationForExtract.new('./spec/files/performance_config.yml')
+	    expect(config.file_suffix).to eq('20170310')
+	    expect(config.performance_data_format).to eq(2)
+    end
+	end
 	
 	context "InputLine class" do
-		it "has class method fromKeyword" do
-			expect( InputLine).to respond_to(:fromKeyword)
-		end
+		
 		it "returns Header Line object when passed valid header input line" do
 			inputline = "scheduledate somedata"
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(HeaderLine)
+			expect(InputLine.new().fromKeyword(inputline)).to be_kind_of(HeaderLine)
 		end
 		it "returns Invalid Line object when passed invalid header input line" do
 			inputline = "scheduledate"
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(InvalidLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(InvalidLine)
 		end
 		it "returns a skipline when input blank" do
 			inputline = " "
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(SkipLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(SkipLine)
 		end
 		it "returns a skipline when input starts with #" do
 			inputline = " # "
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(SkipLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(SkipLine)
 		end
 		it "returns a skipline when input starts with START" do
 			inputline = " Start "
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(SkipLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(SkipLine)
 		end
 
 		it "returns a dayline when input starts with Day " do
 			inputline = " DAY 2"
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(DayLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(DayLine)
 		end
 		it "returns a stageline when input starts with Time " do
 			inputline = " TIME stuff"
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(StageLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(StageLine)
 		end
 		it "returns a performanceline when input starts with a time value " do
 			inputline = " 12.34 stuff 12 min"
-			expect(InputLine.fromKeyword(inputline)).to be_kind_of(PerformLine)
+			expect(InputLine.new.fromKeyword(inputline)).to be_kind_of(PerformLine)
 		end
-
+		context "performance format 2" do
+      it "returns a performanceline when input starts with a time value but has no mins duration" do
+  			inputline = " 12.34 stuff "
+  			input_line = InputLine.new
+  			input_line.performance_data_format = 2
+  			expect(input_line.fromKeyword(inputline)).to be_kind_of(PerformLine_2)
+  		end
+    end
 	end
 
 	context "validate day line against festival" do

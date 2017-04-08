@@ -1,11 +1,13 @@
 
 require './app/services/performance_lines_service.rb'
 
+
 class ExtractPerformancesError < StandardError
 end
 
 class ExtractPerformances
-
+  attr_accessor :performance_data_format
+  
 	def initialize(festival)
 		@festival = festival		
 	end
@@ -27,7 +29,7 @@ class ExtractPerformances
 	
 	def has_header_record?(firstline)
 		
-		line = InputLine.fromKeyword(firstline)
+		line = InputLine.new.fromKeyword(firstline)
 		raise ExtractPerformancesError,  "Input file #{@inputfile} has invalid header record" unless line.content == :header
 		
 		return true
@@ -39,9 +41,12 @@ class ExtractPerformances
 		
 		linecount = 1
 		
+		input_line = InputLine.new
+		input_line.performance_data_format = @performance_data_format
+		
 		array.each do |row|
 			
-			line = InputLine.fromKeyword(row)
+			line = input_line.fromKeyword(row)
 			if line.valid?
 				line.line_number = linecount
 				performanceList << line unless line.content == :skip
@@ -137,49 +142,54 @@ class MergeLines
 end
 
 class InputLine
-	class << self
-	
-		def fromKeyword(input_line)
+  attr_accessor :performance_data_format
+  	  
+	def fromKeyword(input_line)
+		
+		keyword = getFirstWord(input_line)
+		
+		if SkipLine.has_keyword?(keyword)
+			thisline = SkipLine.new(input_line)
+
+		elsif PerformLineBase.has_keyword?(keyword)
+		  thisline = get_perform_line(input_line)
 			
-			keyword = getFirstWord(input_line)
+		elsif DayLine.has_keyword?(keyword)
+			thisline = DayLine.new(input_line)
+
+		elsif StageLine.has_keyword?(keyword)
+			thisline = StageLine.new(input_line)
+
+		elsif HeaderLine.has_keyword?(keyword)
+			thisline = HeaderLine.new(input_line)
 			
-			if SkipLine.has_keyword?(keyword)
-				thisline = SkipLine.new(input_line)
-
-			elsif PerformLine.has_keyword?(keyword)
-				thisline = PerformLine.new(input_line)
-
-			elsif DayLine.has_keyword?(keyword)
-				thisline = DayLine.new(input_line)
-
-			elsif StageLine.has_keyword?(keyword)
-				thisline = StageLine.new(input_line)
-
-			elsif HeaderLine.has_keyword?(keyword)
-				thisline = HeaderLine.new(input_line)
-				
-			else
-				thisline = InvalidLine.new(input_line)
-			end
-			
-			if thisline.valid?
-				return thisline
-			else
-				return InvalidLine.new(input_line)
-			end
+		else
+			thisline = InvalidLine.new(input_line)
 		end
 		
-		def getFirstWord(input_line)
-			line = input_line.strip.chomp
-			words = line.split
-			if words.count > 0 then
-				firstword = words[0]
-			else
-				firstword = ""
-			end
-			return firstword
+		if thisline.valid?
+			return thisline
+		else
+			return InvalidLine.new(input_line)
 		end
 	end
+	
+  def get_perform_line(input_line)
+    return PerformLine_2.new(input_line) if @performance_data_format == 2
+    return PerformLine.new(input_line)
+  end
+		
+	def getFirstWord(input_line)
+		line = input_line.strip.chomp
+		words = line.split
+		if words.count > 0 then
+			firstword = words[0]
+		else
+			firstword = ""
+		end
+		return firstword
+	end
+	
 end
 
 class DayData
@@ -229,4 +239,16 @@ class HeaderRow
 	def array
 		["day","stagecode","artistcode","starttime","duration","caption","headercode"]
 	end
+end
+
+class ConfigurationForExtract
+  attr_reader :file_suffix
+  attr_reader :performance_data_format
+  
+  def initialize(filename)
+    config = YAML.load(File.open(filename))
+    @file_suffix = config[0]['file_suffix']
+    @performance_data_format = config[1]['performance_data_format']
+  end
+ 
 end

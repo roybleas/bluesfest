@@ -2,4 +2,5 @@
  
  
  pdftotext /home/roy/projects/ruby/dev/bluesfest/extract/Bluesfest16SCHEDULE160302.PDF /home/roy/projects/ruby/dev/bluesfest/extract/Bluesfest16SCHEDULE160302.txt -layout
-           
+ 
+pdftotext /home/roy/projects/ruby/dev/bluesfest/extract/Bluesfest17SCHEDULE170403.PDF /home/roy/projects/ruby/dev/bluesfest/extract/Bluesfest17SCHEDULE170403.txt -layout

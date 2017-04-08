@@ -62,7 +62,7 @@ namespace :uploads do
   desc "Upload performances data to database"
   task performances: :environment do
   	puts "upload performances"
-  	suffix = "160304"
+  	suffix = "170403"
   	filename = "schedule#{suffix}.csv"
   	file = Rails.root.join('db','dbloadfiles',filename)
   	
