@@ -137,29 +137,17 @@ class StageLine
 
 end
 
-class PerformLine
+class PerformLineBase
 	attr_reader :inputline, :data, :content
 	attr_accessor :line_number
-		
-	class << self
-		def has_keyword?(word)
-			return true if word =~ /^(([0-1][0-9])|([2][0-3]))\.([0-5][0-9])$/
-		end
-	end
 
-
-	def initialize(input_line)
+  def initialize(input_line, line_match)
 		@line_number = 0
-		#time , artist, duration
-		@performance_line_match = /(\d{2}\.\d{2})([\s+\S+]+)(\s\d+\smin)([\s*\S*]*)/
-		
 		@inputline = input_line
 		@content = :perform
-		if self.valid?
-			@data = format_data(input_line)
-		end
+		@performance_line_match = line_match
 	end
-	
+
 	def valid?
 		words = @inputline.split
 		return false unless words.count > 1
@@ -168,16 +156,56 @@ class PerformLine
 		return true
 	end
 	
-	def format_data(line)
-		datamatch = @performance_line_match.match(@inputline.strip)
-		starttime = datamatch[1]
-		artist = datamatch[2].strip
-		duration = datamatch[3].strip
-		caption = datamatch[4].strip
-		caption = artist if caption == ""
-		starttime_formated = starttime.strip.sub(".",":")
-		
-		return {starttime: starttime_formated, artist: artist, duration: duration, caption: caption}
+	class << self
+		def has_keyword?(word)
+			return true if word =~ /^(([0-1][0-9])|([2][0-3]))\.([0-5][0-9])$/
+		end
 	end
+	
+	def format_data(datamatch)
+    starttime = datamatch[1]
+		artist = datamatch[2].strip
+	  starttime_formated = starttime.strip.sub(".",":")
+	  duration = ""
+	  caption = artist
+	  return {starttime: starttime_formated, artist: artist, duration: duration, caption: caption}
+  end
+	  
 
+end
+
+class PerformLine < PerformLineBase
+
+	def initialize(input_line)
+		#time , artist, duration
+		performance_line_match = /(\d{2}\.\d{2})([\s+\S+]+)(\s\d+\smin)([\s*\S*]*)/
+	  super(input_line, performance_line_match)	
+		if self.valid? 
+		  datamatch = performance_line_match.match(@inputline.strip)
+			@data = create_data(datamatch)
+		end
+	end
+	
+	def create_data(datamatch)
+	  data = format_data(datamatch)
+	  data[:duration] = datamatch[3].strip 
+	  caption = datamatch[4].strip
+	  data[:caption] = caption unless caption == ""
+	  return data
+  end
+	
+end
+
+class PerformLine_2 < PerformLineBase
+
+	def initialize(input_line)
+    #time , artist
+    @performance_line_match = /(\d{2}\.\d{2})([\s+\S+]+)/
+	  super(input_line,@performance_line_match)	
+		if self.valid?
+		  datamatch = @performance_line_match.match(@inputline.strip)
+			@data = format_data(datamatch)
+		end
+	end
+	
 end

@@ -1,9 +1,9 @@
 letterstart,letterend,title,seq
 "0","b","A-B",1
-"c","e","C-E",2 
-"f","i","F-I",3
-"j","l","J-L",4
-"m","p","M-P",5
+"c","F","C-F",2 
+"g","k","G-K",3
+"l","m","L-M",4
+"n","p","N-P",5
 "r","s","R-S",6
-"t","tm","T-Tm",7  			
-"tn","z","Tn-Z",8			
+"t","th","T-Th",7  			
+"to","z","To-Z",8			
