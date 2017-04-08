@@ -5,7 +5,7 @@
 				<%= render partial: "shared/bluelink", locals: {artist_code: performance.artist.linkid} %>		
 	</td>
 	<td>
-		(<%= performance.duration %>)
+   <%= render partial: "shared/duration", locals: {duration: performance.duration} %>
 	<td>
 </tr>
 <% end %>

@@ -3,6 +3,6 @@
 		<td class="<%= performance.stage.code %>" >  <%= performance.stage.title %> </td>
 		<td>  <%= performance.starttime.strftime("%H:%M") %> </td>
 		<td> 	<%= link_to performance.title, artist_path(performance.artist.id)%> 
-		<td> (<%= performance.duration %>) <td>
+		<td> <%= render partial: "shared/duration", locals: {duration: performance.duration} %> </td>
 	</tr>
 <% end %>

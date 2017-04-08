@@ -3,7 +3,7 @@
 	<td> Day: <%= performance.daynumber %> </td>
 	<td> <%=  (startdate_minus_one + performance.daynumber).strftime("%a") unless startdate_minus_one.nil? %></td>
 	<td> <%= performance.starttime.strftime("%H:%M") %> </td>
-	<td> (<%= performance.duration %>) </td>
+	<td> <%= render partial: "shared/duration", locals: {duration: performance.duration} %> </td>
 	<td id="color-<%= performance.stage.code %>" class="text-center">
 	<%= link_to performance.stage.title, stage_path(performance.stage_id,performance.daynumber) , class: "stagelink" %> </td>
 </tr>
