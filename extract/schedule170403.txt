@@ -45,7 +45,7 @@ Time      JUKE JOINT
 
                                                                
 
-Start                Friday 14th April           
+DAY 2           Friday 14th April           
 Time    MOJO                                     
 22.00   Mary J Blige                             
 20.30   Snarky Puppy                             
@@ -96,7 +96,7 @@ Time    BOOMERANG
                                                                
                                                                
                                                                
-Start               Saturday 15th April         
+DAY 3               Saturday 15th April         
 Time    MOJO                                    
 22.30   The Doobie Brothers                     
 21.00   Sir Rosevelt                            
@@ -145,7 +145,7 @@ Time    BOOMERANG
  
 
                           
-Start                   Sunday 16th April     
+DAY 4                   Sunday 16th April     
 Time    MOJO                                  
 22.00   Madness                               
 20.30   Michael Kiwanuka                      
@@ -195,7 +195,7 @@ Time    BOOMERANG
 12.00   OKA                                   
 
  
-Start                  Monday 17th April 
+DAY 5                  Monday 17th April 
 Time    MOJO                             
 20.15   Zac Brown Band                   
 18.30   Beth Hart                        
