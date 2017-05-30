@@ -176,6 +176,7 @@ class InputLine
 	
   def get_perform_line(input_line)
     return PerformLine_2.new(input_line) if @performance_data_format == 2
+    return PerformLine_3.new(input_line) if @performance_data_format == 3
     return PerformLine.new(input_line)
   end
 		
