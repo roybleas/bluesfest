@@ -59,7 +59,9 @@ The seeds.rb file contains data to create a user with admin attribute set to tru
 There are 2 sources of data taken from the festival website
 
 * [The Playing Schedule](http://www.bluesfest.com.au/pages/?ParentPageID=90&PageID=177)
-* [Line up 2016](http://www.bluesfest.com.au/schedule/?DayID=89)
+* The Line Up of artists
+  * [2016](http://www.bluesfest.com.au/schedule/?DayID=89)
+  *[2017](http://www.bluesfest.com.au/schedule/?DayID=96)
 
 Other data used to populate the database is extrapolated from these sources. 
 
