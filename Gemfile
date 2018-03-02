@@ -4,7 +4,7 @@ ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-  gem 'rails', '4.2'
+  gem 'rails', '4.2.7.1'
 	gem 'pg', '0.18.1'
 
 gem 'therubyracer', platforms: :ruby
@@ -12,27 +12,27 @@ gem 'therubyracer', platforms: :ruby
 group :development, :test do
 
 	gem 'byebug'
-	
+
 	#gem 'sqlite3'
-	
-	
+
+
 	gem 'guard'
   gem 'rspec-rails', "~> 3.1.0"
-  gem 'annotate' 
+  gem 'annotate'
   gem 'guard-rspec'
-  
+
   gem 'spork-rails'
   # gem 'guard-spork'
   gem 'childprocess'
-  
+
   gem 'factory_girl_rails', "~> 4.4.1"
-  
+
 	gem 'nokogiri'
-	
+
 	gem 'htmlentities'
-	  
+
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-	#gem 'tzinfo' 
+	#gem 'tzinfo'
 	#gem 'tzinfo-data', platforms: [:mingw, :mswin]
 end
 
@@ -41,20 +41,20 @@ end
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
-  
+
   gem 'database_cleaner',github: 'bmabey/database_cleaner'
   gem "launchy", "~> 2.4.2"
-  
+
   # Uncomment these lines on Windows.
   #gem 'rb-notifu', '0.0.4'
   #gem 'wdm', '0.1.0'
-  
+
 end
 
 group :production do
-	
+
   gem 'rails_12factor'
-  
+
 end
 
 group :production, :development do
@@ -64,7 +64,7 @@ end
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
-gem 'sprockets', '3.4' 
+gem 'sprockets', '3.4'
 # autoprefixer recommended for bootstrap
 gem 'autoprefixer-rails'
 
@@ -94,5 +94,4 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rdoc'
 
-
-
+gem 'rubyzip', '~>1.2.1'
