@@ -1,8 +1,8 @@
 letterstart,letterend,title,seq
 "0","b","A-B",1
 "c","d","C-D",2
-"e","h","E-H",3
-"i","l","I-L",4
+"e","i","E-I",3
+"j","l","J-L",4
 "m","r","M-R",5
 "s","t","S-T",6
 "w","z","W-Z",7
