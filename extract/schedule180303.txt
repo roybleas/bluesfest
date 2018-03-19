@@ -1,0 +1,212 @@
+ SCHEDULEDATE   20180303
+
+Day 1	Thursday 29th March
+Time	MOJO
+22.30	Leon Bridges
+20.45	Gomez
+19.15	Rag 'n' Bone Man
+17.30	Holy Holy
+15.30	TBC
+15.15	Welcome to Country
+Time	CROSSROADS
+22.30	The Original Blues Brothers Band
+20.30	Jason Isbell and The 400 Unit
+18.30	Gov't Mule
+16.30	Lukas Nelson & Promise of the Real
+15.00	TBC
+Time	JAMBALAYA
+22.30	The Wailers
+21.00	The New Power Generation
+19.30	Hurray for the Riff Raff
+18.00	All Our Exes Live in Texas
+16.30	Elephant Sessions
+15.00	Steve Smyth
+
+
+Time	DELTA
+22.00	Joe Louis Walker
+20.30	Newton Faulkner
+19.00	Ryan McMullan
+17.30	Shaun Kirk
+15.00	Busking 2018 Finalists
+
+
+
+Time	JUKE JOINT
+22.00	Dumpstaphunk
+20.30	The California Honeydrops
+19.00	William Crighton
+17.30	Caiti Baker
+16.00	 Narasirato
+14.30	TBC
+
+
+Day 2	Friday 30th March
+Time	MOJO
+22.00	Ms. Lauryn Hill
+20.00	The New Power Generation
+18.15	Gomez
+16.45	Asgeir
+15.15	Harts
+
+Time	CROSSROADS
+22.30	Robert Plant & The Sensational Space Shifters
+20.30	Jimmy Cliff
+18.30	Youssou N'Dour
+16.30	Juanes
+15.00	All Our Exes Live In Texas
+Time	JAMBALAYA
+23.00	The Wailers
+20.30	Gov't Mule
+19.00	Dumpstaphunk
+17.00	Con Brio
+15.30	Hanlon Brothers
+14.00	The Teskey Brothers
+12.30	TBC
+
+Time	DELTA
+22.15	Eric Gales
+20.45	Bobby Rush
+19.00	Canned Heat
+17.30	Hurray for the Riff Raff
+16.00	Newton Faulkner
+14.30	Andre Cymone
+13.15	Molly Millington
+12.15	Tay Oskee
+Time	JUKE JOINT
+22.30	The California Honeydrops
+21.00	Joe Louis Walker
+19.30	Elephant Sessions
+17.00	Double J Broadcast
+
+
+Time	BOOMERANG
+15.30	Narasirato
+14.00	The Strides
+12.30	Sorong Samarai
+
+Day 3	Saturday 31st March
+Time	MOJO
+22.15	Michael Franti & Spearhead
+20.15	The New Power Generation
+18.15	Juanes
+16.30	Seu Jorge
+15.00	Ryan McMullan
+
+Time	CROSSROADS
+22.00	The Original Blues Brothers Band
+20.00	Jackson Browne
+18.00	Jason Isbell and The 400 Unit
+16.30	Leon Bridges
+15.00	The Wailers
+Time	JAMBALAYA
+22.30	Lukas Nelson & Promise of the Real
+21.00	Dumpstaphunk
+19.30	Harts
+18.00	Con Brio
+16.30	Harry Manx
+15.00	Mia Dyson
+13.30	Steve Smyth
+
+Time	DELTA
+22.15	Afro Celt Sound System
+20.30	Canned Heat
+19.00	Chain
+17.30	Andre Cymone
+16.00	Caiti Baker
+14.30	TBC
+12.00	Busking 2018 Finalists
+
+Time	JUKE JOINT
+22.30	The California Honeydrops
+21.00	Rick Estrin & The Nightcats
+19.30	William Crighton
+18.00	Shaun Kirk
+
+
+Time	BOOMERANG
+16.30	Sorong Samarai
+15.00	Yirrmal
+13.45	Benny Walker
+12.30	 Narasirato
+
+
+Day 4	Sunday 1st April
+Time	MOJO
+22.15	John Butler Trio
+20.15	Tash Sultana
+18.15	Ziggy Alberts
+16.15	First Aid Kit
+14.45	Jose Gonzalez
+13.15	TBC
+Time	CROSSROADS
+21.45	Sheryl Crow
+19.45	Melissa Etheridge
+18.15	Seal
+16.30	Seu Jorge
+15.00	Mia Dyson
+Time	JAMBALAYA
+22.30	Morcheeba
+21.00	Rag 'n' Bone Man
+19.30	Lukas Nelson & Promise of the Real
+18.00	Eric Gales
+16.30	Walter Trout
+15.00	Afro Celt Sound System
+13.30	Dog Trumpet
+12.00	Ryan McMullan
+Time	DELTA
+22.30	The Wailers
+21.00	Dumpstaphunk
+19.30	Benjamin Booker
+18.00	Hanlon Brothers
+16.30	The Teskey Brothers
+15.00	Steve Smyth
+13.30	William Crighton
+12.15	2018 Busking Competition Winner
+Time	JUKE JOINT
+22.30	The California Honeydrops
+21.00	Bobby Rush
+19.30	Caiti Baker
+18.00	Clarence Bekker
+16.30	Bobby Rush
+
+Time	BOOMERANG
+15.00	Yirrmal
+13.45	Benny Walker
+12.30	The Strides
+Day 5	Monday 2nd April
+Time	MOJO
+20.00	Lionel Richie
+18.00	Chic featuring Nile Rodgers
+16.30	Dan Sultan
+15.00	Benny Walker
+Time	CROSSROADS
+20.00	Michael Franti & Spearhead
+18.00	Jimmy Cliff
+16.30	The Wailers
+15.00	Con Brio
+Time	JAMBALAYA
+21.00	Morcheeba
+19.30	Lukas Nelson & Promise of the Real
+18.00	Benjamin Booker
+16.30	Walter Trout
+15.00	Mia Dyson
+13.30	Shaun Kirk
+Time	DELTA
+22.30	Rick Estrin & The Nightcats
+21.00	Eric Gales
+19.30	Chain
+18.00	TBC
+16.30	Harry Manx
+15.00	Steve Smyth
+13.30	Caiti Baker
+12.15	2018 Busking Grommet Competition Winner
+Time	JUKE JOINT
+22.30	The California Honeydrops
+21.00	Dumpstaphunk
+19.30	Clarence Bekker
+18.00	Dog Trumpet
+16.30	William Crighton
+15.00	Ryan McMullan
+13.30	TBC
+12.00	Local Area High School Showcase

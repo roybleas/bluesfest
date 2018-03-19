@@ -5,16 +5,16 @@
 #### Background
 The music festival has over 80 musicians/bands on 5 stages over 5 days. With so many performances, choosing which artists to see on which days requires some planning. The phone app provided by Bluesfest allows you to create a wish list by performance, but not by artist. This is a typical feature amongst other similar festival applications. It is a lot easier to associate the user with a performance. Yet most artists at the Bluesfest play on more than one day and sometimes on 3 or 4 days. So rather than create a wish list of individual performances, I first want to create a list of artists. Then juggle the performance times so I can see as many of them as possible.  
 
-While at the festival I also want to be able to keep track of my personal schedule on my phone. So I can be at the correct stage at the correct time. It is also important to be able to easily look up a list of performances. 
+While at the festival I also want to be able to keep track of my personal schedule on my phone. So I can be at the correct stage at the correct time. It is also important to be able to easily look up a list of performances.
 
 #### Features
 * View the Bluesfest schedule by
-  * performances by time on all stages for a particular day - (not suitable for small device) 
+  * performances by time on all stages for a particular day - (not suitable for small device)
   * performances by stage for a particular day (suitable for small device)
 * View Artists  
   * as a list
   * as single artist with performances
-  * with a link to artist's web page at Bluesfest web site 
+  * with a link to artist's web page at Bluesfest web site
 * At the Home Page   
   * Prior to festival starting, view a countdown in days to it commencing
   * During festival view:
@@ -31,42 +31,44 @@ While at the festival I also want to be able to keep track of my personal schedu
   * View all users
   * Delete user
   * Reset user password  
-  
+
 ### Setting a day and time to simulate being at the festival for testing
 An important feature of the application is to be able to see your daily schedule during the festival, and also to show who is currently on stage and who is playing next. A set of routes exists to allow you to override the actual current time and date with a session time and festival date.   
 As this is designed for testing there are no validations on the data entered. Using invalid day, hours or miniutes will generate an error.
-   
+
 #### __settime__   
 * Sets the day (festival day number for the current festival) , hour (24) and minute using the route  
   `settime/:day/:hr/:min`    
-  
+
   eg 'settime/4/19/45' for the year 2016
   would create a test time of Sun 27 Mar 2016 07:45 PM   
-  
+
 #### __reset__
 * Cancels the test time and reverts to server time  
-	 `reset` 
-	
+	 `reset`
+
 #### __showtime__
 * Shows the current session test date and time if one is set and the current server date and time. 	
   `showtime`
 
-  
+
 ### Seed Data
-The seeds.rb file contains data to create a user with admin attribute set to true enabling access to Admin menu . 
- 
-### Data 
+The seeds.rb file contains data to create a user with admin attribute set to true enabling access to Admin menu .
+
+### Data
 There are 2 sources of data taken from the festival website
 
-* [The Playing Schedule](http://www.bluesfest.com.au/pages/?ParentPageID=90&PageID=177)
+* [The Playing Schedule](http://www.bluesfest.com.au/pages/?ParentPageID=90&PageID=289)
+
 * The Line Up of artists
   * [2016](http://www.bluesfest.com.au/schedule/?DayID=89)
-  *[2017](http://www.bluesfest.com.au/schedule/?DayID=96)
+  * [2017](http://www.bluesfest.com.au/schedule/?DayID=96)
+  * [2018](http://www.bluesfest.com.au/schedule/?DayID=115)
 
-Other data used to populate the database is extrapolated from these sources. 
+Other data used to populate the database is extrapolated from these sources.
 
 ### Artists Data
-The artists table data is extracted by parsing the artist 'Line Up' page from the Bluesfest webpage. 
+The artists table data is extracted by parsing the artist 'Line Up' page from the Bluesfest webpage.
 The extract program `parseids.rb` extracts the name of the artist and the id used to access their page on the Bluesfest website, and writes to a CSV file extractArtists2.csv.
 
 * __Extract program__  extract/parseids.rb
@@ -78,8 +80,8 @@ The extract program `parseids.rb` extracts the name of the artist and the id use
  | ------       | ----------- |
  | id     | The id used to identify artist web page bio on Bluesfest web site. If the artist does not have a link to a dedicated web page then the id value is left empty |
  | artist | Name of the artist |		
- 
- 
+
+
 ##### Manual Data Updates:
 
 * Replace double quotations with a single quote   
@@ -88,11 +90,11 @@ Replace `Eugene "Hideaway" Bridges` with `Eugene 'Hideaway' Bridges`
 * Insert the date the file data was extracted after the header, setting id = 'ExtractDate' and artist = date in format yyyy-mm-dd delimited with a tab.  
 eg.   
 
-`ExtractDate	2016-03-04` 
+`ExtractDate	2016-03-04`
 
 Example data
 
-```csv 
+```csv
 id	artist
 ExtractDate	2016-03-04
 	ABC Gold Coast FM National Broadcast
@@ -102,11 +104,11 @@ ExtractDate	2016-03-04
 816	Digging Roots
 644	Eugene 'Hideaway' Bridges
 ```
-* To-do: 
+* To-do:
   * Automatically insert todays date when creating output file.
   * Convert double quotes to single quotation mark
   * Convert hard coded web address in parseids.rb to parameter
-  
+
 ### Performance Data
 The performance data is extracted from the published schedule which is a pdf document. This is currently a manual process and needs some automating. Though some performance data will still need manual intervention to clean up some data.   
 __Process__   
@@ -115,12 +117,12 @@ __Process__
 * Edit the text file so all the data is in one column
 * Add a header record   
 * Add a Day number against each date.
-* Cleanse the data to make sure the titles of the performances match the ones stored in the artists table. 
+* Cleanse the data to make sure the titles of the performances match the ones stored in the artists table.
 * Convert text file to csv for data uploading
 
 ##### Download the current schedule
 The schedule is downloaded from the official Bluesfest web site and and the pdf document converted to text format.   
- 
+
 eg using pdftotext utility with -layout option   
  pdftotext bluesfest/extract/Bluesfest16SCHEDULE160302.PDF bluesfest/extract/Bluesfest16SCHEDULE160302.txt -layout  
 
@@ -131,7 +133,7 @@ The schedule has five columns of data, one for each day of the festival. Each co
 
 Example data from the beginning of the first 2 columns:
 
-| -      |  THURSDAY 24TH                        | -      |       FRIDAY 25TH                           | 
+| -      |  THURSDAY 24TH                        | -      |       FRIDAY 25TH                           |
 | ---    |  -------------                        | ----   |  -----                                      |
 | START  |                                       |        |                                             |
 | TIME   |                MOJO                   | START  |                                             |      
@@ -145,7 +147,7 @@ Example data from the beginning of the first 2 columns:
 | 15.50  |      WELCOME TO COUNTRY 10 min        |  14.00 |           LORD HURON 60 min                 |
 |        |                                       |  12.45 |             KALEO 45 min                    |
 |        |                                       |  12.00 |   ARAKWAL OPENING CEREMONY 30 min           |
-                                                                                                         
+
 
 * Using a text editor Cut and Paste the columns of performance data into a single column of data.                 
 
@@ -154,21 +156,21 @@ Example data from the beginning of the first 2 columns:
 * On the same row as the day of the week and calendar number insert the day number at the beginning of the line
 
  eg.   
- 
+
 | DAY  3 | SATURDAY 26TH |                               
 | ---    | --- |
- 
+
 * Insert a header row at the beginning of the file with the date the schedule was downloaded eg. `SCHEDULEDATE	20160302` where the date can be in any format as long as there are no spaces and unique to any currently in the performances table. The use of date is just a convience to remind the administrator which schedule is being loaded. It could include a version for example `20160302V2`.
 
-#### Cleanse the data to make sure the titles of the performances match the ones stored in the artists table. 
+#### Cleanse the data to make sure the titles of the performances match the ones stored in the artists table.
 The description of the performance may not exactly match the name of an artist previously downloaded. In these cases the row of data will need to be amended by replacing the performance title with artist name and placing the performance title after the duration. Then the loading program can match the artist to the performance description.The loading rake task will reject artists not found in the artists table. In most cases they will be the same.   
 eg.
-   
+
 **Replace**
-   
-| 23.00  | THE WAILERS PRESENT SURVIVAL 60 min | 
+
+| 23.00  | THE WAILERS PRESENT SURVIVAL 60 min |
 | ---    |  ---  |
-    
+
 **With**    
 
 | 23.00  | THE WAILERS   60 min | THE WAILERS PRESENT SURVIVAL |
@@ -196,13 +198,13 @@ An example from the beginning of a completed file:
 | 19.30 | JANIVA MAGNESS 60 min      |
 | 17.30 | LUKAS NELSON & PROMISE OF THE REAL 90 min   |
 | 16.00 | THE BROS. LANDRETH 60 min  |
-                                                     
+
 #### Convert text file to csv for data uploading
 
 The current task has the suffix date used in the input file hard coded.
-* To-do 
+* To-do
   * Convert task to use parameter
-                                                     
+
 __Task:__		rake extract:performances   
 __InputFile:__  extract/schedule160304.txt   
 __OutputFile:__ db/dbloadfiles/schedule160304.csv                                                         
@@ -213,7 +215,7 @@ The festival data is extracted from schedule and other items are up to the admin
 
 __File:__		dv/dbloadfiles/festivals.csv   
 
-Header row has 8 columns: 
+Header row has 8 columns:
 
 | column       | description |
 | ------       | ----------- |
@@ -224,7 +226,7 @@ Header row has 8 columns:
 | title        | Festival title as displayed on the screen |
 | major        | Version of the current festival release  |
 | minor        | Version of the current festival release  |
-| active       | A current festival. Once new festival data is entered then this is marked as archived by setting it to false. | 
+| active       | A current festival. Once new festival data is entered then this is marked as archived by setting it to false. |
 
 #### Configuration file for tables linked to festival
 
@@ -235,9 +237,9 @@ Where tables are linked to festival. The upload task looks up based on title and
 eg
 
 ```yml
---- 
+---
 - title: Bluesfest
-  startdate: 2016-03-24 
+  startdate: 2016-03-24
 ```
 
 #### Stage Data
@@ -245,9 +247,9 @@ eg
  The file `stages.csv` is created manually from data found in the The Playing Schedule.   
  Each stages record is linked to a festival record.
  The code value is a unique value used to match a CSS class/id to configure the background colour when displaying a stage.
- 
+
  eg.
- 
+
 ```css
  #color-ja {
 	color: white;
@@ -258,7 +260,7 @@ eg
 __File:__		db/dbloadfiles/stages.csv   
 __Delimiter:__ tab
 
-Header row has 3 columns: 
+Header row has 3 columns:
 
 | column       | description |
 | ------       | ----------- |
@@ -279,12 +281,12 @@ Juke Joint	ju	5
 
 #### Artist Pages Data
 
-The file `artistpages.csv` is created manually from the alphabetical list of artists. The administrator sets the range of artists so there are approximately a dozen artists listed per page. It is the responsiblity of the administrator to set up the data correctly. Even though the range displays 'A-B' the range is actually set to pick up and include artist titles that start with a number. 
-  
+The file `artistpages.csv` is created manually from the alphabetical list of artists. The administrator sets the range of artists so there are approximately a dozen artists listed per page. It is the responsiblity of the administrator to set up the data correctly. Even though the range displays 'A-B' the range is actually set to pick up and include artist titles that start with a number.
+
 __File:__		artistpages.csv   
 __Delimiter:__ comma
 
-Header row has 4 columns: 
+Header row has 4 columns:
 
 | column       | description |
 | ------       | ----------- |
@@ -292,13 +294,13 @@ Header row has 4 columns:
 | letterend    | The letter to end the range |
 | title        | The description to be displayed for this range |
 | seq          | Sequence the letter range is to be displayed |
- 
+
 eg.    
- 
+
  ```
  letterstart,letterend,title,seq
 "0","b","A-B",1
-"c","e","C-E",2 
+"c","e","C-E",2
 "f","i","F-I",3
 "j","l","J-L",4
 "m","p","M-P",5
@@ -306,7 +308,7 @@ eg.
 "t","tm","T-Tm",7  			
 "tn","z","Tn-Z",8			
 ```
-  
+
 ### Data Loading
 
 The data files to used to populate the database are located in db/dbloadfiles.   
@@ -321,12 +323,12 @@ __Task:__		rake uploads:festival
 __File:__		db/dbloadfiles/festivals.csv   
 
 #### Table:	__artists__
-   
+
 When creating an artist record the name is converted into an artist identifier by removing spaces, punctuation and making lower case. This is used by the performances table uploader to match performance to an artist.   
-  
+
 __Task:__		rake uploads:artists   
 __File:__		artists.csv   
-  
+
 * To-do:
   * Task to tidy table by removing non active artists
 
@@ -336,7 +338,7 @@ __Task:__		rake uploads:stages
 __File:__		stages.csv   
 
 #### Table:	performances
-   
+
 The suffix is currently hardcoded into task.
 When the upload task is run against a new file with a different schedule version date, the performance records which have the same artist,stage,starttime are updated with new starttime, performance title and duration. Otherwise a new record is created for each performance entry. At the end of uploading, any artist records in the artists table for the same festival record who do not have at least one performance record, are marked as inactive. Any performance records for the festival with a different schedule version are removed.
 
@@ -362,4 +364,3 @@ The favourites data is transient and only applies to the current festival. Each 
 
 __Task:__		rake delete:favourites['dry']   
 __Task:__		rake delete:favourites   
-
